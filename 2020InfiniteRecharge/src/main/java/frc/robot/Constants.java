@@ -12,7 +12,13 @@ package frc.robot;
  */
 public class Constants {
 
-    
+    /**
+     * Use inner classes to avoid fully importing Constants
+     * 
+     * class GenericInnerClass {
+     *      public static final MOTOR_PORT = 1;
+     * }
+     */
 
 }
 
