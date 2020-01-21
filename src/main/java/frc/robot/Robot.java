@@ -20,7 +20,7 @@ import frc.robot.subsystems.wofSubsystem;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  public wofSubsystem wof;
+  public static wofSubsystem wof;
   private RobotContainer m_robotContainer;
 
   

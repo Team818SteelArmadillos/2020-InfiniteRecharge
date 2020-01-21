@@ -22,4 +22,7 @@ public final class Constants {
     public class sensorPorts{
         public static final int WOF_LIGHT_SENSOR = 1;
     }
+    public class Numbers{
+        public static final int SPIN_TIMER = 10;
+    }
 }
