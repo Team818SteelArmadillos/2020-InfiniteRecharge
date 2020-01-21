@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.Numbers;
+import static frc.robot.Constants.Numbers.*;
 import frc.robot.Robot;
 
 public class WOFCommandSpin extends CommandBase{
@@ -40,6 +40,6 @@ public class WOFCommandSpin extends CommandBase{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasPeriodPassed(Numbers.SPIN_TIMER);
+    return timer.hasPeriodPassed(SPIN_TIMER);
   }
 }
