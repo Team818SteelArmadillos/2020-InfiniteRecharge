@@ -12,6 +12,8 @@ import frc.robot.Constants;
 import static frc.robot.Constants.motorPorts.*;
 import frc.robot.Constants.sensorPorts;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.ColorSensorV3;
 
@@ -23,12 +25,21 @@ public class wofSubsystem extends SubsystemBase {
   private TalonSRX wofSRX; 
   private final ColorSensorV3 wofColor;
   private final I2C.Port i2cPort;
+
   public wofSubsystem() {
     i2cPort = I2C.Port.kOnboard;
     wofSRX = new TalonSRX(WOF_MOTOR_PORT);
     wofColor = new ColorSensorV3(i2cPort);
   }
 
+  public void doSpin(){
+    wofSRX.set(ControlMode.PercentOutput, 0.75);
+  }
+
+  public void notSpin(){
+    wofSRX.set(ControlMode.PercentOutput, 0);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
