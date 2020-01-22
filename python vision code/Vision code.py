@@ -1,3 +1,5 @@
+#this is the vision code for tracking the high goal
+
 
 def VisionCode(frame):
     lower = (62,102,81)
@@ -35,38 +37,6 @@ def VisionCode(frame):
     return datadict
     pass
 
-
-def VisionCode2(frame):
-    lower = (62,102,81)
-    upper = (79,255,255)
-    fov = 61
-    hsvframe = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(hsvframe, lower, upper)
-    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    area = 1000
-    contour = False
-    for cnt in contours:
-        if cv2.contourArea(cnt) > area and cv2.contourArea(cnt) > 1000:
-            contour = cnt
-            area = cv2.contourArea(cnt)
-    if contour is not False:
-        x, y, w, h = cv2.boundingRect(contour)
-        z = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fov) * 0.5)
-        position = x + (w * 0.5) - (frame.shape[1] * 0.5)
-        angle = np.rad2deg(np.arctan(position / z))
-        distance = z * 9 / max(w, h)
-        datadict = {
-            "Angle 2": angle,
-            "Distnace": distance
-        }
-        frame = cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 2)
-    else:
-        datadict = {
-            "Angle": 180,
-            "Distance": -1
-        } 
-    return datadict
-    pass
 
 import cv2
 import numpy as np
