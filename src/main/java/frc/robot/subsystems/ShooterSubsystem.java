@@ -9,17 +9,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import com.ctre.phoenix.motorcontrol.cab.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 public class ShooterSubsystem extends SubsystemBase {
   
-  private TalonSRX shooterMotor;
+  public TalonSRX shooterMotor;
 
    public ShooterSubsystem() {
 
     shooterMotor = new TalonSRX(Constants.ShooterMotorType);
 
-    shooterMotor.configureFactoryDefault();
+    shooterMotor.configFactoryDefault();
 
   }
 
