@@ -8,54 +8,60 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+//import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import static frc.robot.Constants.DriveConstants.*;
 /**
  * Add your docs here.
  */
-public class DriveTrain extends Subsystem {
-private TalonSRX talonLeft, talonRight;
-private VictorSPX[] victorsLeft, victorsRight;
+
+ //As it stands, this *should* drive. 
+
+public class DriveTrain extends SubsystemBase{
+//private TalonSRX talonLeft, talonRight;
+private TalonFX[] talonsLeft, talonsRight;
+private TalonFX talonLeft, talonRight;
 
 private int leftOffset = 0;
 private int rightOffset = 0;
 
 private final double distancePerPulse = Math.PI * Constants.WHEEL_DIAMETER * Constants.ENCODER_PULSES_PER_REVOLUTION;
+  
+
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  public void periodic() {
+    // This method will be called once per scheduler run
   }
 
 public DriveTrain() {
-  talonLeft = new TalonSRX(Constants.MOTOR_PORTS_LEFT[0]);
-  talonRight = new TalonSRX(Constants.MOTOR_PORTS_RIGHT[0]);
-
+  talonLeft = new TalonFX(MOTOR_PORTS_LEFT[0]);
+  talonRight = new TalonFX(MOTOR_PORTS_RIGHT[0]);
+  
   talonLeft.configFactoryDefault();
   talonRight.configFactoryDefault();
 
-  talonLeft.setInverted(Constants.LEFT_INVERTED);
-  talonRight.setInverted(!Constants.LEFT_INVERTED);
+  talonLeft.setInverted(LEFT_INVERTED);
+  talonRight.setInverted(!LEFT_INVERTED);
 
-  talonLeft.configOpenloopRamp(Constants.RAMP_RATE);
-  talonRight.configOpenloopRamp(Constants.RAMP_RATE);
+  talonLeft.configOpenloopRamp(RAMP_RATE);
+  talonRight.configOpenloopRamp(RAMP_RATE);
 
-  victorsLeft = new VictorSPX[Constants.MOTOR_PORTS_LEFT.length - 1];
-  for (int i = 1; i < Constants.MOTOR_PORTS_LEFT.length; i++) {
-    victorsLeft[i-1] = new VictorSPX(Constants.MOTOR_PORTS_LEFT[i]);
-    victorsLeft[i-1].configFactoryDefault();
-    victorsLeft[i-1].follow(talonLeft);
-    victorsLeft[i-1].setInverted(Constants.LEFT_INVERTED);
+  talonsLeft = new TalonFX[MOTOR_PORTS_LEFT.length - 1];
+  for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
+    talonsLeft[i-1] = new TalonFX(MOTOR_PORTS_LEFT[i]);
+    talonsLeft[i-1].configFactoryDefault();
+    talonsLeft[i-1].follow(talonLeft);
+    talonsLeft[i-1].setInverted(LEFT_INVERTED);
   }
-  victorsRight = new VictorSPX[Constants.MOTOR_PORTS_RIGHT.length - 1];
-  for (int i = 1; i < Constants.MOTOR_PORTS_RIGHT.length; i++) {
-    victorsRight[i-1] = new VictorSPX(Constants.MOTOR_PORTS_RIGHT[i]);
-    victorsRight[i-1].configFactoryDefault();
-    victorsRight[i-1].follow(talonRight);
-    victorsRight[i-1].setInverted(!Constants.LEFT_INVERTED);
+  talonsRight = new TalonFX[MOTOR_PORTS_RIGHT.length - 1];
+  for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
+    talonsRight[i-1] = new TalonFX(MOTOR_PORTS_RIGHT[i]);
+    talonsRight[i-1].configFactoryDefault();
+    talonsRight[i-1].follow(talonRight);
+    talonsRight[i-1].setInverted(!LEFT_INVERTED);
     // Should the inverted be Left
   }
 }

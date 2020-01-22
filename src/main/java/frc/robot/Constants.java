@@ -16,12 +16,17 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static class DriveConstants{
+        
     //Drive Motors
-    public static final int[] MOTOR_PORTS_LEFT = {1, 2, 3};
-    public static final int[] MOTOR_PORTS_RIGHT = {4, 5, 6};
+    public static final int[] MOTOR_PORTS_LEFT = {1, 2};
+    public static final int[] MOTOR_PORTS_RIGHT = {3, 4};
     public static final boolean LEFT_INVERTED = false;
     public static final double RAMP_RATE = 0;
-    
+
+    }
+
     //Chassis constants
     public static final double WHEEL_DIAMETER = 8;
     public static final double ENCODER_GEAR_RATIO = 1;
