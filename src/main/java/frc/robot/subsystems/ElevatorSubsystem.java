@@ -1,36 +1,26 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import frc.robot.RobotLog;
+import frc.robot.Constants;
+//import frc.robot.RobotLog;
 
 public class ElevatorSubsystem extends SubsystemBase {
   static TalonSRX elevatorMotor;
-// change below later in season
-  static int tolerance = 1000;
-  static int ifOn = 0;
+  static DoubleSolenoid actuatorPiston;
 
-  public ElevatorSubsystem(int elevatorMotor) {
-    elevator = new DoubleSolenoid(elevatorMotor);
-// talonsrx motor 
-// 1 button 
-// double solenoid
-// anticpate 1 pnumatic actuator - ratcheting system
+  public ElevatorSubsystem(int elevatorMotorPort, int[] actuatorPistonPort) {
+    elevatorMotor = new TalonSRX(elevatorMotorPort);
+    actuatorPiston = new DoubleSolenoid(actuatorPistonPort[0], actuatorPistonPort[1]);
 
-  RobotLog.putMessage("Running ElevatorSubsystem");
-}
-
-public void setElevatorMotor(double Speed){
-  elevator.set(Speed);
-}
-
-  public void elevatorButton(int ifOn) {
-    if (buttonhit){
-      ifOn = ifOn + 1;
-    } else if (button active & the nhit){
-      ifOn = ifOn - 1;
-    } else {
-      // Nothing
-    }
+    // RobotLog.putMessage("Running ElevatorSubsystem");
   }
+
+  public void setElevatorMotor(double Speed) {
+    elevatorMotor.set(ControlMode.PercentOutput, Speed);
+  }
+
 }
