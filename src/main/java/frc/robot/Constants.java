@@ -2,7 +2,8 @@ package frc.robot;
 
 public final class Constants {
     // Motors
-    public static final int elevatorMotorPort = 1;
+    public static final int elevatorMotorPortOne = 1;
+    public static final int elevatorMotorPortTwo = 2;
     // Piston
     public static final int[] actuatorPistonPort = {6, 7};
     // Buttons

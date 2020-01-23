@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   static public OI m_oi = new OI();
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPort, Constants.actuatorPistonPort);
+  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
 
   /**
    * This function is run when the robot is first started up and should be used for any

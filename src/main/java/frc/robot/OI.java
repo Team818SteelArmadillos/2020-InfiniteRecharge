@@ -40,7 +40,7 @@ public class OI {
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
   }
-
+// set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
   }
