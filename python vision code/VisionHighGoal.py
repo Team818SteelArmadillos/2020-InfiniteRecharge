@@ -36,20 +36,6 @@ def VisionCode(frame):
     return datadict
     pass
 
-
-import cv2
-import numpy as np
-img = cv2.imread("python vision code\\2020SampleVisionImages\\WPILib Robot Vision Images\\BlueGoal-060in-Center.jpg")
-#img = cv2.imread("H:\\\\me.png")
-outputs = VisionCode(img)
-outputs = VisionCode(img)
-if outputs is not None:
-    print(outputs)
-cv2.imshow('res',img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-"""
 if __name__ == '__main__':
     global cap
     try:
@@ -74,4 +60,19 @@ if __name__ == '__main__':
                 break
     cap.release()
     cv2.destroyAllWindows()
-    """
+
+
+#the code belown is for when reding from an image
+"""
+import cv2
+import numpy as np
+img = cv2.imread("python vision code\\2020SampleVisionImages\\WPILib Robot Vision Images\\BlueGoal-060in-Center.jpg")
+#img = cv2.imread("H:\\\\me.png")
+outputs = VisionCode(img)
+outputs = VisionCode(img)
+if outputs is not None:
+    print(outputs)
+cv2.imshow('res',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+"""
