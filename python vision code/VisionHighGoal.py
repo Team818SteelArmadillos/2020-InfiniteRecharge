@@ -1,6 +1,5 @@
 #this is the vision code for tracking the high goal
 
-
 def VisionCode(frame):
     lower = (62,102,81)
     upper = (79,255,255)
