@@ -20,6 +20,7 @@ import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.DriverStation;
 
 
 public class wofSubsystem extends SubsystemBase {
@@ -61,6 +62,35 @@ public class wofSubsystem extends SubsystemBase {
     }
     else{
       return 'n';
+    }
+  }
+
+  public char getGameData(){
+    String gameData;
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+  if(gameData.length() > 0)
+  {
+  switch (gameData.charAt(0))
+  {
+    case 'B' :
+      return 'c';
+
+    case 'G' :
+      return 'g';
+      
+    case 'R' :
+      return 'r';
+      
+    case 'Y' :
+      return 'y';
+      
+    default :
+      return 'q';
+      
+      }
+    } 
+    else {
+      return 'w';
     }
   }
   @Override
