@@ -5,7 +5,7 @@ public final class Constants {
     public static final int elevatorMotorPortOne = 1;
     public static final int elevatorMotorPortTwo = 2;
     // Piston
-    public static final int[] actuatorPistonPort = {6, 7};
+    public static final int[] actuatorPistonPort = { 6, 7 };
     // Buttons
 
     public static class oi {

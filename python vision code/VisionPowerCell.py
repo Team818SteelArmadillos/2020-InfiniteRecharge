@@ -10,7 +10,7 @@ def VisionCode(frame):
     fovvert = 48.8
     hsvframe = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsvframe, lower, upper)
-    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE) #please fix
     area = 1000
     contour = False
     for cnt in contours:
