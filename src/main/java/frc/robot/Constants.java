@@ -17,5 +17,21 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static int ShooterMotorType = 1;
+    public static class ShooterConstants {
+    public static final int[] ShooterMotorArray = {0,1,2,3};
+
+    public static final double kP = .5;
+
+    public static final double kI = .01;
+
+    public static final double kD = .25;
+
+    public static final double kShooterToleranceRPS = .003;
+
+    public static final double encoderPulsesPerRevolution = 4096;
+
+    public static final double velocityCalculationsPerSecond = 10;
+
+    }
+
 }
