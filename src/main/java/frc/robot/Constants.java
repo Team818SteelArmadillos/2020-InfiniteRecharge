@@ -5,6 +5,7 @@ public final class Constants {
     
     // Piston
     
+    public static final int[] actuatorPistonPort = { 6, 7 };
     // Buttons
 
     public static class oi {
