@@ -20,14 +20,18 @@ def VisionCode(frame):
     if contour is not False:
         hasTarget = True
         x, y, w, h = cv2.boundingRect(contour)
-        zhor = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovhor) * 0.5)
+        px = Frame.shape[1] #not right?
+        py = Frame.shape[0]
+        nx = (1/160) * (px - 159.5) #resolution for limelight camera is 320x240- change values for our camera
+        ny = (1/120) * (119.5 - py) #(nx,ny) is normalized pixel coordinates (from center instead of top left)
+        zhoriz = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovhor) * 0.5)
         zvert = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovvert) * 0.5)
         position = x + (w * 0.5) - (frame.shape[1] * 0.5)
-        anglehor = np.rad2deg(np.arctan(position / zhor))
-        anglevert = np.rad2deg(np.arctan(position / zvert))
+        angleHoriz = np.rad2deg(np.arctan(position / zhoriz))
+        angleVert = np.rad2deg(np.arctan(position / zvert))
         datadict = {
-            "Horizontal Angle": anglehor,
-            "Vertical Angle": anglevert,
+            "Horizontal Angle": angleHoriz,
+            "Vertical Angle": angleVert,
             "Has Target": hasTarget
         }
         frame = cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 2)
