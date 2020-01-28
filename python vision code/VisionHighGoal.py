@@ -17,11 +17,23 @@ def VisionCode(frame):
     if contour is not False:
         hasTarget = True
         x, y, w, h = cv2.boundingRect(contour)
-        zhor = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovhor) * 0.5)
-        zvert = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovvert) * 0.5)
-        position = x + (w * 0.5) - (frame.shape[1] * 0.5)
-        anglehor = np.rad2deg(np.arctan(position / zhor))
-        anglevert = np.rad2deg(np.arctan(position / zvert))
+        px = Frame.shape[1] #not right?
+        py = Frame.shape[0]
+        nx = (1/160) * (px - 159.5) #resolution for limelight camera is 320x240- change values for our camera
+        ny = (1/120) * (119.5 - py) #(nx,ny) is normalized pixel coordinates (from center instead of top left)
+        vpw = 2.0*tan(fovhoriz/2) #view plane width + height
+        vph = 2.0*tan(fovvert/2)
+        x = vpw/2 * nx #x and y defined in line 22, should we change?
+        y = vph/2 * ny
+        tan(angleHoriz) = x / 1
+        tan(angleVert) = y / 1
+        angleHoriz = atan2(1,x)
+        angleVert = atan2(1,y)
+        #zhoriz = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovhoriz) * 0.5)
+        #zvert = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovvert) * 0.5)
+        #position = x + (w * 0.5) - (frame.shape[1] * 0.5)
+        #angleHoriz = np.rad2deg(np.arctan(position / zhoriz))
+        #angleVert = np.rad2deg(np.arctan(position / zvert))
         datadict = {
             "Horizontal Angle": anglehor,
             "Vertical Angle": anglevert,
