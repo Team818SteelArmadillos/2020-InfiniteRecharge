@@ -1,6 +1,5 @@
 #this is the vision code for tracking the high goal
 
-
 def VisionCode(frame):
     lower = (62,102,81)
     upper = (79,255,255)
@@ -18,11 +17,23 @@ def VisionCode(frame):
     if contour is not False:
         hasTarget = True
         x, y, w, h = cv2.boundingRect(contour)
-        zhor = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovhor) * 0.5)
-        zvert = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovvert) * 0.5)
-        position = x + (w * 0.5) - (frame.shape[1] * 0.5)
-        anglehor = np.rad2deg(np.arctan(position / zhor))
-        anglevert = np.rad2deg(np.arctan(position / zvert))
+        px = Frame.shape[1] #not right?
+        py = Frame.shape[0]
+        nx = (1/160) * (px - 159.5) #resolution for limelight camera is 320x240- change values for our camera
+        ny = (1/120) * (119.5 - py) #(nx,ny) is normalized pixel coordinates (from center instead of top left)
+        vpw = 2.0*tan(fovhoriz/2) #view plane width + height
+        vph = 2.0*tan(fovvert/2)
+        x = vpw/2 * nx #x and y defined in line 22, should we change?
+        y = vph/2 * ny
+        tan(angleHoriz) = x / 1
+        tan(angleVert) = y / 1
+        angleHoriz = atan2(1,x)
+        angleVert = atan2(1,y)
+        #zhoriz = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovhoriz) * 0.5)
+        #zvert = frame.shape[1] * 0.5 / np.tan(np.deg2rad(fovvert) * 0.5)
+        #position = x + (w * 0.5) - (frame.shape[1] * 0.5)
+        #angleHoriz = np.rad2deg(np.arctan(position / zhoriz))
+        #angleVert = np.rad2deg(np.arctan(position / zvert))
         datadict = {
             "Horizontal Angle": anglehor,
             "Vertical Angle": anglevert,
@@ -37,20 +48,10 @@ def VisionCode(frame):
     return datadict
     pass
 
+<<<<<<< HEAD:python vision code/VisionHighGoal.py
 
-import cv2
-import numpy as np
-img = cv2.imread("python vision code\\2020SampleVisionImages\\WPILib Robot Vision Images\\BlueGoal-060in-Center.jpg")
-#img = cv2.imread("H:\\\\me.png")
-outputs = VisionCode(img)
-outputs = VisionCode(img)
-if outputs is not None:
-    print(outputs)
-cv2.imshow('res',img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-"""
+=======
+>>>>>>> feature-vision:python vision code/VisionHighGoal.py
 if __name__ == '__main__':
     global cap
     try:
@@ -75,4 +76,19 @@ if __name__ == '__main__':
                 break
     cap.release()
     cv2.destroyAllWindows()
-    """
+
+
+#the code belown is for when reding from an image
+"""
+import cv2
+import numpy as np
+img = cv2.imread("python vision code\\2020SampleVisionImages\\WPILib Robot Vision Images\\BlueGoal-060in-Center.jpg")
+#img = cv2.imread("H:\\\\me.png")
+outputs = VisionCode(img)
+outputs = VisionCode(img)
+if outputs is not None:
+    print(outputs)
+cv2.imshow('res',img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+"""
