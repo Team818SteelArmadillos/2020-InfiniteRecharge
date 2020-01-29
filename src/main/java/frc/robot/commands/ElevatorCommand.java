@@ -1,11 +1,10 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-// import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-//import frc.robot.RobotLog;
+import frc.robot.RobotLog;
 
 public class ElevatorCommand extends CommandBase {
   Timer pistonTimer;
@@ -17,17 +16,19 @@ public class ElevatorCommand extends CommandBase {
     pistonTimer = new Timer();
   }
 
+  @Override
   public void initialize() {
     Robot.m_elevatorSubsystem.setPiston(0);
-    // RobotLog.putMessage("Running ElevatorCommand");
+    RobotLog.putMessage("Running ElevatorCommand");
   }
 
+  @Override
   public void execute() {
     if (Robot.m_oi.getElevatorUp()) {
       Robot.m_elevatorSubsystem.setPiston(0.5);
       pistonTimer.start();
       if (pistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_elevatorSubsystem.setElevatorMotors(.7);
+        Robot.m_elevatorSubsystem.setElevatorMotor(.7);
         pistonTimer.stop();
         pistonTimer.reset();
       }
@@ -35,13 +36,13 @@ public class ElevatorCommand extends CommandBase {
       Robot.m_elevatorSubsystem.setPiston(0.5);
       pistonTimer.start();
       if (pistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_elevatorSubsystem.setElevatorMotors(-.7);
+        Robot.m_elevatorSubsystem.setElevatorMotor(-.7);
         pistonTimer.stop();
         pistonTimer.reset();
       }
 
     } else if (driverStation.getMatchTime() <= 1.5) {
-      Robot.m_elevatorSubsystem.setElevatorMotors(0);
+      Robot.m_elevatorSubsystem.setElevatorMotor(0);
       pistonTimer.start();
       if (pistonTimer.hasPeriodPassed(0.5)) {
         Robot.m_elevatorSubsystem.setPiston(1);
@@ -50,7 +51,7 @@ public class ElevatorCommand extends CommandBase {
       }
       
     } else {
-      Robot.m_elevatorSubsystem.setElevatorMotors(0);
+      Robot.m_elevatorSubsystem.setElevatorMotor(0);
       pistonTimer.start();
       if (pistonTimer.hasPeriodPassed(0.5))
         Robot.m_elevatorSubsystem.setPiston(1);
@@ -61,14 +62,17 @@ public class ElevatorCommand extends CommandBase {
 
   // idk if it goes in finished or not but we need to get timer in feild so it
   // shuts off motors, half a
-  // sec passes, and piston is put in to be safe. Also the timer from the field goes DOWNWARDS
-
+  // sec passes, and piston is put in to be safe. Also the timer from the field
+  // goes DOWNWARDS
+  @Override
   public boolean isFinished() {
     return false;
   }
 
+  @Override
   public void end(boolean interrupted) {
-    Robot.m_elevatorSubsystem.setElevatorMotors(0);
+    RobotLog.putMessage("Interrupted Elevator Command");
+    Robot.m_elevatorSubsystem.setElevatorMotor(0);
     Robot.m_elevatorSubsystem.setPiston(1);
   }
 

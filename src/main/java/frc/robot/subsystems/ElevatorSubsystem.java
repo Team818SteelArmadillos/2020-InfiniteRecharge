@@ -1,29 +1,36 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-//import frc.robot.RobotLog;
+import frc.robot.RobotLog;
 
 public class ElevatorSubsystem extends SubsystemBase {
   static TalonFX elevatorMotorOne;
-  static TalonFX elevatorMotorTwo;
+  // static TalonFX elevatorMotorTwo;
   static DoubleSolenoid actuatorPiston;
   double pistonVal;
 
-  public ElevatorSubsystem(int elevatorMotorPortOne, int elevatorMotorPortTwo, int[] actuatorPistonPort) {
-    elevatorMotorOne = new TalonFX(elevatorMotorPortOne);
-    elevatorMotorTwo = new TalonFX(elevatorMotorPortTwo);
-    actuatorPiston = new DoubleSolenoid(actuatorPistonPort[0], actuatorPistonPort[1]);
+  public ElevatorSubsystem() {
+    elevatorMotorOne = new TalonFX(Constants.elevatorMotorPortOne);
+    // elevatorMotorTwo = new TalonFX(elevatorMotorPortTwo);
+    actuatorPiston = new DoubleSolenoid(Constants.actuatorPistonPort[0], Constants.actuatorPistonPort[1]);
 
-    // RobotLog.putMessage("Running ElevatorSubsystem");
+    elevatorMotorOne.configFactoryDefault();
+    elevatorMotorOne.setNeutralMode(NeutralMode.Brake);
+    elevatorMotorOne.configOpenloopRamp(0.2, 30);
+
+    RobotLog.putMessage("Running ElevatorSubsystem");
   }
 
-  public void setElevatorMotors(double Speed) {
+  public void setElevatorMotor(double Speed) {
     elevatorMotorOne.set(ControlMode.PercentOutput, Speed);
-    elevatorMotorTwo.set(ControlMode.PercentOutput, -Speed);
+    // elevatorMotorTwo.set(ControlMode.PercentOutput, -Speed);
   }
 
   public void setPiston(double pistonVal) {
@@ -34,6 +41,14 @@ public class ElevatorSubsystem extends SubsystemBase {
     } else if (pistonVal == 1){
       actuatorPiston.set(DoubleSolenoid.Value.kForward);
     }
+
+    
+  }
+  public void logDataElevator() {
+    SmartDashboard.putString("DB/String 1", elevatorMotorOne.getPower());
+    SmartDashboard.putString("DB/String 2", elevatorMotorOne.getCurrent());
+    SmartDashboard.putString("DB/String 3", elevatorMotorOne.getTemperature());
+    SmartDashboard.putString("DB/String 4", actuatorPiston.getPosition());
   }
 
 }
