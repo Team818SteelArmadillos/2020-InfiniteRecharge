@@ -36,19 +36,27 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void setPiston(double pistonVal) {
     if (pistonVal == 0) {
       actuatorPiston.set(DoubleSolenoid.Value.kOff);
-    } else if (pistonVal == 0.5){
+    } else if (pistonVal == 0.5) {
       actuatorPiston.set(DoubleSolenoid.Value.kReverse);
-    } else if (pistonVal == 1){
+    } else if (pistonVal == 1) {
       actuatorPiston.set(DoubleSolenoid.Value.kForward);
     }
 
-    
   }
+
   public void logDataElevator() {
-    SmartDashboard.putString("DB/String 1", elevatorMotorOne.getPower());
-    SmartDashboard.putString("DB/String 2", elevatorMotorOne.getCurrent());
-    SmartDashboard.putString("DB/String 3", elevatorMotorOne.getTemperature());
-    SmartDashboard.putString("DB/String 4", actuatorPiston.getPosition());
+    SmartDashboard.putNumber("Elevator Power:", elevatorMotorOne.getMotorOutputPercent());
+    SmartDashboard.putNumber("Elevator Current:", elevatorMotorOne.getSupplyCurrent());
+    SmartDashboard.putNumber("Elevator Temperature:", elevatorMotorOne.getTemperature());
+
+    if (pistonVal == 0) {
+      SmartDashboard.putString("Elev Piston Position:", "Off");
+    } else if (pistonVal == 0.5) {
+      SmartDashboard.putString("Elev Piston Position:", "Going in");
+    } else if (pistonVal == 1) {
+      SmartDashboard.putString("Elev Piston Position:", "Going out");
+    }
+
   }
 
 }
