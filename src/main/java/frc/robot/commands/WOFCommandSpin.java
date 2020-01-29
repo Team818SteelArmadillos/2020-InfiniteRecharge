@@ -22,6 +22,7 @@ public class WOFCommandSpin extends CommandBase{
   @Override
   public void initialize() {
     addRequirements(Robot.wof);
+    addRequirements();
     timer.start();
     Robot.wof.doSpin();
   }

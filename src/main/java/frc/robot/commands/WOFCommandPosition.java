@@ -21,7 +21,7 @@ public class WOFCommandPosition extends CommandBase {
   @Override
   public void initialize() {
     addRequirements(Robot.wof);
-    if(Robot.wof.getColor() != Robot.wof.getGameData()){
+    if(Robot.wof.getWofColor() != Robot.wof.getGameData()){
       Robot.wof.doSpin();
     }
   }
@@ -40,6 +40,6 @@ public class WOFCommandPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.wof.getColor() == Robot.wof.getGameData();
+    return Robot.wof.getWofColor() == Robot.wof.getGameData();
   }
 }
