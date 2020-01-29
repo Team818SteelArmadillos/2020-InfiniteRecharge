@@ -2,10 +2,20 @@ package frc.robot.auton;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-public class commandGroupAuton extends SequentialCommandGroup {
+public class AutonCommandGroup extends SequentialCommandGroup {
 
-  public commandGroupAuton() {
+  public AutonCommandGroup() {
+    // Auton 1 = Do nSothing
+    // Auton 2 =
+    // Auton 3 =
+    // Auton 4 =
+
     if (autonPosition == 1) {
+
+    } else if (autonPosition == 2) {
+      addSequential();
+
+    } if (autonPosition == 1) {
       addSequential();
       addSequential();
       addSequential();
@@ -19,8 +29,8 @@ public class commandGroupAuton extends SequentialCommandGroup {
       addSequential();
       addSequential();
       addSequential();
-      RobotLog.putMessage("Running Auton Position 3");
-    }
+        RobotLog.putMessage("Running Auton Position 3");
+      }
 
   }
 }
