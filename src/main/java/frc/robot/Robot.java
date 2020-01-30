@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.wofSubsystem;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,6 +23,7 @@ import frc.robot.subsystems.wofSubsystem;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static wofSubsystem wof;
+  public static DriveTrain drive;
   private RobotContainer m_robotContainer;
   static public OI m_oi = new OI();
   static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPort, Constants.actuatorPistonPort);

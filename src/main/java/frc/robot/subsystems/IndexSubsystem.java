@@ -9,7 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
+import static frc.robot.Constants.motorPorts.*;
 import frc.robot.commands.Command;
 
 public class indexSubsystem extends Subsystem {
@@ -24,8 +24,8 @@ public class indexSubsystem extends Subsystem {
   }
 
   public void setindexMotor(double Speed) {
-    if (Constants.indexEnabled){
-    indexMotor.set(ControlMode.PercentOutput, Speed);
+    if (indexEnabled){
+    indexMotor.set(Speed);
     }
   }
 
