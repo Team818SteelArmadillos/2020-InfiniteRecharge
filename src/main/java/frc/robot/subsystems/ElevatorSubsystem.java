@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
-//import frc.robot.RobotLog;
+import frc.robot.RobotLog;
 
 public class ElevatorSubsystem extends SubsystemBase {
   static TalonSRX elevatorMotor;
@@ -16,7 +16,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorMotor = new TalonSRX(elevatorMotorPort);
     actuatorPiston = new DoubleSolenoid(actuatorPistonPort[0], actuatorPistonPort[1]);
 
-    // RobotLog.putMessage("Running ElevatorSubsystem");
+    RobotLog.putMessage("Running ElevatorSubsystem");
   }
 
   public void setElevatorMotor(double Speed) {
