@@ -21,8 +21,8 @@ public class VisionSubsystem extends SubsystemBase {
   public VisionSubsystem() {
 
   NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-  NetworkTableEntry tx = table.getEntry("Vertical Angle");
-  NetworkTableEntry ty = table.getEntry("Horizontal Angle");
+  NetworkTableEntry tx = table.getEntry("Horizontal Angle");
+  NetworkTableEntry ty = table.getEntry("Vertical Angle");
   NetworkTableEntry ta = table.getEntry("Has Target");
 
   //read values periodically
@@ -34,7 +34,32 @@ public class VisionSubsystem extends SubsystemBase {
   SmartDashboard.putNumber("VisionX", x);
   SmartDashboard.putNumber("VisionY", y);
   SmartDashboard.putNumber("VisionArea", area);
+  }
+  
+  public void getX() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
+    NetworkTableEntry tx = table.getEntry("Horizontal Angle");
+    double x = tx.getDouble(0.0);
+    SmartDashboard.putNumber("VisionX", x);
+  }
 
+  public void getY() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
+    NetworkTableEntry ty = table.getEntry("Vertical Angle");
+    double y = ty.getDouble(0.0);
+    SmartDashboard.putNumber("VisionY", y);
+  }
+
+  public void getArea() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
+    NetworkTableEntry ta = table.getEntry("Has Target");
+    double area = ta.getDouble(0.0);
+    SmartDashboard.putNumber("VisionArea", area);
+  }
+
+  public void logData() {
+    //Logging Data
+    getX();
   }
 
   @Override
