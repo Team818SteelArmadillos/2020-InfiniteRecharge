@@ -60,6 +60,8 @@ public class VisionSubsystem extends SubsystemBase {
   public void logData() {
     //Logging Data
     getX();
+    getY();
+    getArea();
   }
 
   @Override
