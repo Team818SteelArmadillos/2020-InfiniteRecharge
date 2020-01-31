@@ -49,23 +49,19 @@ public class wofSubsystem extends SubsystemBase {
     logData();
     if(currentColor.red < RED[0][0] && currentColor.red > RED[1][0] && currentColor.green < RED[0][1]
       && currentColor.green > RED[1][1] && currentColor.blue < RED[0][2] && currentColor.blue > RED[1][2]){
-      SmartDashboard.putString("Current Color", "Red");
-      return 'r';
+      return 'c';
     }
     else if(currentColor.red < GREEN[0][0] && currentColor.red > GREEN[1][0] && currentColor.green < GREEN[0][1]
       && currentColor.green > GREEN[1][1] && currentColor.blue < GREEN[0][2] && currentColor.blue > GREEN[1][2]){
-      SmartDashboard.putString("Current Color", "Green");
-      return 'g';
+      return 'y';
     }
     else if(currentColor.red < CYAN[0][0] && currentColor.red > CYAN[1][0] && currentColor.green < CYAN[0][1]
       && currentColor.green > CYAN[1][1] && currentColor.blue < CYAN[0][2] && currentColor.blue > CYAN[1][2]){
-      SmartDashboard.putString("Current Color", "Cyan");
-      return 'c';
+      return 'r';
     }
     else if(currentColor.red < YELLOW[0][0] && currentColor.red > YELLOW[1][0] && currentColor.green < YELLOW[0][1]
       && currentColor.green > YELLOW[1][1] && currentColor.blue < YELLOW[0][2] && currentColor.blue > YELLOW[1][2]){
-      SmartDashboard.putString("Current Color", "Yellow");
-      return 'y';
+      return 'g';
     }
     else{
       SmartDashboard.putString("Current Color", "Null");
