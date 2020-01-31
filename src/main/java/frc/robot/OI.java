@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import static frc.robot.Constants.oi.*;
 import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShooterCommand.*;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class OI {
 
@@ -15,6 +18,9 @@ public class OI {
   // Drive Straight Button
   JoystickButton driveStraightButton;
   JoystickButton dynamicBraking;
+  // Shooter Buttons
+  JoystickButton shooterControlStateSwitch;
+  JoystickButton shooterManualFireButton;
 
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
@@ -28,6 +34,9 @@ public class OI {
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
 
+    // Shooter Method Set and Manual Fire Mode
+    shooterControlStateSwitch = new JoystickButton(gamePad, 6);
+    shooterManualFireButton = new JoystickButton(gamePad, 8);
   };
 
   /*
@@ -63,6 +72,14 @@ public class OI {
  public double getrightXAxis() {
     // return Math.pow(-rightJoyStick.getX(), 3.0);
     return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
+  }
+//Boolean sets the control mode
+  public boolean setShooterStateButton(ShooterSubsystem.controlShooterModeSet){
+    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet);
+  }
+
+  public boolean shooterManualFire(){
+    return shooterManualFireButton.whenPressed();
   }
 
 }

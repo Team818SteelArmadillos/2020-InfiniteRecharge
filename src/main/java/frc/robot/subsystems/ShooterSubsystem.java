@@ -15,15 +15,17 @@ import static frc.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 public class ShooterSubsystem extends SubsystemBase {
   
   public TalonSRX talonShooterMotor;
   public VictorSPX[] victorsShooterMotors;
   public int setShooterSpeed;
-  private PIDController shooterController;
-   public ShooterSubsystem() {
+  private PIDController controllerShooterSpeed;
+  public boolean shooterModeImput = true;
+
+  //Sets motors 
+  public ShooterSubsystem() {
 
     talonShooterMotor = new TalonSRX(ShooterMotorArray[0]);
 
@@ -35,39 +37,38 @@ public class ShooterSubsystem extends SubsystemBase {
       victorsShooterMotors[i - 1].configFactoryDefault();
       victorsShooterMotors[i - 1].follow(talonShooterMotor);
     }
-
-    shooterController = new PIDController(kP, kI, kD);
-    shooterController.setTolerance(kShooterToleranceRPS);
-    
+    controllerShooterSpeed = new PIDController(kP, kI, kD);
+    controllerShooterSpeed.setTolerance(kShooterToleranceRPS);
   }
 
+
+
+  //Current shooter speed
+  public double getCurrentShooterSpeed(){
+
+    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond / encoderPulsesPerRevolution / 60;
+
+  }
+  //"goal" shooter speed
   public void shooterSpeed(int shooterSpeed) {
     
     setShooterSpeed = shooterSpeed;
 
   }
 
-  public double getCurrentShooterSpeed(){
-
-    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond / encoderPulsesPerRevolution / 60;
-
-  }
-
-  @Override
-  public void periodic() {
+  public void shootingMethod() {
 
     if (setShooterSpeed == 0){ 
     talonShooterMotor.set(ControlMode.PercentOutput, 0);
 
   }else{
 
-    talonShooterMotor.set(ControlMode.PercentOutput, shooterController.calculate(setShooterSpeed));
+    talonShooterMotor.set(ControlMode.PercentOutput, controllerShooterSpeed.calculate(getCurrentShooterSpeed(), setShooterSpeed));
 
   }
 
-    super.periodic();
-
   }
+
   public void logData(){
     SmartDashboard.putNumber("shooter speed", getCurrentShooterSpeed());
     SmartDashboard.putNumber("target shooter speed", setShooterSpeed);
@@ -76,6 +77,12 @@ public class ShooterSubsystem extends SubsystemBase {
     //for (int i = 1; i < ShooterMotorArray.length; i++){
       //SmartDashboard.putNumber("shooter " + i + " motor current", victorsShooterMotors[i-1].getSupplyCurrent());
    // }
+  }
+
+  public void controlShooterModeSet(){
+    
+    shooterModeImput = !shooterModeImput;
+
   }
 
 }

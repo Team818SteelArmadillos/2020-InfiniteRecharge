@@ -34,7 +34,7 @@ public final class Constants {
     }
 
     public static class ShooterConstants {
-        
+        //PID loop values
         public static final int[] ShooterMotorArray = {0,1,2,3};
     
         public static final double kP = .5;
@@ -44,7 +44,7 @@ public final class Constants {
         public static final double kD = .25;
     
         public static final double kShooterToleranceRPS = .003;
-    
+        //ShooterConversionFactors
         public static final double encoderPulsesPerRevolution = 4096;
     
         public static final double velocityCalculationsPerSecond = 10;
