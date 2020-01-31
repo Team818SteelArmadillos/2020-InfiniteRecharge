@@ -33,6 +33,7 @@ public class OI {
     // Manual Motor Overide Button
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
+    shiftGear = new JoystickButton(gamePad, 8);
 
     // Shooter Method Set and Manual Fire Mode
     shooterControlStateSwitch = new JoystickButton(gamePad, 6);
@@ -46,10 +47,16 @@ public class OI {
    * dynamicBraking.whileHeld(new DynamicBrakingCommand());
    */
 
+  public boolean shiftGear(){
+
+    return (gamePad.getRawButtonPressed(8));
+
+  }
+
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
   }
-
+// set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
   }
