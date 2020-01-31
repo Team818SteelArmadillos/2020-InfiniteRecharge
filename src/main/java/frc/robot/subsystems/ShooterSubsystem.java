@@ -41,8 +41,6 @@ public class ShooterSubsystem extends SubsystemBase {
     controllerShooterSpeed.setTolerance(kShooterToleranceRPS);
   }
 
-
-
   //Current shooter speed
   public double getCurrentShooterSpeed(){
 

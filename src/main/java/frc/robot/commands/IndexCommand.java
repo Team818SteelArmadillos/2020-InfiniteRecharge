@@ -39,8 +39,7 @@ public class IndexCommand extends CommandBase {
     }
     if(jogBallUp) {
       index.setindexMotor(-0.40);
-    //Sends max power to index, to send a ball into the shooter, to shoot - Joseph
-    if()
+    
     }
   }
 
