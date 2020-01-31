@@ -55,6 +55,7 @@ public final class Constants {
     }
     public static class Pistons{
         public static final int[] actuatorPistonPort = {6, 7};
+        public static final int[] shiftPistonPorts = {8, 9};
     }
 }
     

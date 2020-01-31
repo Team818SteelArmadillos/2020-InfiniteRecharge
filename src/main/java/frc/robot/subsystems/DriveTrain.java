@@ -1,20 +1,17 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.Constants.oi;
+
 import static frc.robot.Constants.DriveConstants.*;
 /**
  * Add your docs here.
@@ -29,6 +26,10 @@ private int leftOffset = 0;
 private int rightOffset = 0;
 
 boolean brake = false;
+boolean highGear = false;
+
+double low = 21.67;
+double high = 8.41;
 
 private final double distancePerPulse = Constants.ENCODER_PULSES_PER_REVOLUTION;
   
@@ -65,6 +66,29 @@ public DriveTrain() {
     talonsRight[i-1].follow(talonRight);
     talonsRight[i-1].setInverted(!LEFT_INVERTED);
     // Should the inverted be Left
+  }
+}
+
+static DoubleSolenoid shiftPiston;
+
+public void shift(int[] shiftPistonPorts){
+
+  shiftPiston = new DoubleSolenoid(shiftPistonPorts[2], shiftPistonPorts[3]);
+  
+  
+  if(Robot.m_oi.shiftGear()){
+
+    if(highGear){
+
+      highGear = false;
+      shiftPiston.set(DoubleSolenoid.Value.kForward);
+
+    }else{
+
+      highGear = true;
+      shiftPiston.set(DoubleSolenoid.Value.kReverse);
+      
+    }
   }
 }
 

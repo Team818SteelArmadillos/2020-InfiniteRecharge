@@ -15,6 +15,7 @@ public class OI {
   // Drive Straight Button
   JoystickButton driveStraightButton;
   JoystickButton dynamicBraking;
+  JoystickButton shiftGear;
 
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
@@ -27,6 +28,7 @@ public class OI {
     // Manual Motor Overide Button
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
+    shiftGear = new JoystickButton(gamePad, 8);
 
   };
 
@@ -36,6 +38,12 @@ public class OI {
    * driveStraightButton.whileHeld(new DriveStraight());
    * dynamicBraking.whileHeld(new DynamicBrakingCommand());
    */
+
+  public boolean shiftGear(){
+
+    return (gamePad.getRawButtonPressed(8));
+
+  }
 
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
