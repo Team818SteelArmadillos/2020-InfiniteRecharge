@@ -143,6 +143,7 @@ public class DriveTrain extends SubsystemBase {
   public boolean distanceOnSetpoint() {
     return controllerDistance.atSetpoint();
   }
+  
 
   public double getLeftTemp(int leftTemp) {
     if (leftTemp == 0) {
@@ -152,8 +153,17 @@ public class DriveTrain extends SubsystemBase {
     } else {
       return 0;
     }
-  }
 
+  }
+  public double getMaxLeftTemp() {
+    double maxLeftTemp = talonLeft.getTemperature();
+    for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++){
+      if(talonsLeft[i].getTemperature()>maxLeftTemp) {
+        maxLeftTemp = talonsLeft[i].getTemperature();
+      }
+    }
+    return maxLeftTemp;
+  }
   public double getRightTemp(int rightTemp) {
     if (rightTemp == 0) {
       return talonRight.getTemperature();
@@ -163,10 +173,16 @@ public class DriveTrain extends SubsystemBase {
       return 0;
     }
   }
-
-  public double getRightTemp() {
-    return talonRight.getTemperature();
+  public double getMaxRightTemp() {
+    double maxRightTemp = talonRight.getTemperature();
+    for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++){
+      if(talonsRight[i].getTemperature()>maxRightTemp) {
+        maxRightTemp = talonsRight[i].getTemperature();
+      }
+    }
+    return maxRightTemp;
   }
+
 
   public void logData() {
     // Logging Data
