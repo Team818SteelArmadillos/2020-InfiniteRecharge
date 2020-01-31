@@ -8,11 +8,12 @@ public final class Constants {
     public static final int[] actuatorPistonPort = { 6, 7 };
     // Buttons
 
-    public static class oi {
-        // Joysticks
-        public static final int leftJoystickPort = 0;
-        public static final int rightJoystickPort = 1;
-        public static final int gamePadPort = 2;
+ public static class oi{
+    // Joysticks
+  public static final int leftJoystickPort = 0;
+  public static final int rightJoystickPort = 1;
+  public static final int gamePadPort = 2;
+  public static final int shiftGear = 3;
 
  }
 
@@ -56,5 +57,11 @@ public final class Constants {
     public static class Pistons{
         public static final int[] actuatorPistonPort = {6, 7};
     }
+
+    //Gear Ratios
+
+    double low = 21.67;
+    double high = 8.41;
+    
 }
     

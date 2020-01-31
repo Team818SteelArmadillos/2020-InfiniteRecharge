@@ -16,6 +16,8 @@ public class OI {
   JoystickButton driveStraightButton;
   JoystickButton dynamicBraking;
 
+  JoystickButton shiftGear;
+
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
     rightJoyStick = new Joystick(rightJoystickPort);
@@ -44,6 +46,10 @@ public class OI {
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
   }
+    //I don't know what number I'm meant to use
+    shiftGear = new JoystickButton(gamePad, 3);
+
+    };
 
   public double getleftYAxis() {
     // return Math.pow(-leftJoyStick.getY(), 3.0);

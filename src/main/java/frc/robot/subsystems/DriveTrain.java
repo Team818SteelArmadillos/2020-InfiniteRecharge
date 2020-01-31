@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.Constants.oi;
+
 import static frc.robot.Constants.DriveConstants.*;
 
 
@@ -20,6 +23,10 @@ private int leftOffset = 0;
 private int rightOffset = 0;
 
 boolean brake = false;
+boolean gear = false;
+
+double low = 21.67;
+double high = 8.41;
 
 private final double distancePerPulse = Constants.ENCODER_PULSES_PER_REVOLUTION;
   
@@ -57,6 +64,12 @@ public DriveTrain() {
     talonsRight[i-1].setInverted(!LEFT_INVERTED);
     // Should the inverted be Left
   }
+}
+
+public void shift(){
+
+  
+
 }
 
 public void setLeftMotors(double speed) {
