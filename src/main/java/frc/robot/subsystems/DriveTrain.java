@@ -1,15 +1,25 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import static frc.robot.Constants.DriveConstants.*;
-
+/**
+ * Add your docs here.
+ */
 
 public class DriveTrain extends SubsystemBase{
 //private FalconFX talonLeft, talonRight;
@@ -20,6 +30,8 @@ private int leftOffset = 0;
 private int rightOffset = 0;
 
 boolean brake = false;
+
+PIDController controllerDistance;
 
 private final double distancePerPulse = Constants.ENCODER_PULSES_PER_REVOLUTION;
   
@@ -57,6 +69,9 @@ public DriveTrain() {
     talonsRight[i-1].setInverted(!LEFT_INVERTED);
     // Should the inverted be Left
   }
+
+  controllerDistance = new PIDController(Kp, Ki, Kd);
+  controllerDistance.setTolerance(distanceTolerance);
 }
 
 public void setLeftMotors(double speed) {
@@ -70,6 +85,11 @@ public void setRightMotors(double speed) {
 public void setBothMotors(double speed) {
   setLeftMotors(speed);
   setRightMotors(speed);
+}
+
+public void setBothMotors(double speedLeft, double speedRight) {
+  setLeftMotors(speedLeft);
+  setRightMotors(speedRight);
 }
 
 public void resetEncoders() {
@@ -99,6 +119,18 @@ public double getRightVelocity() {
 
 public double getVelocity() {
   return (getLeftVelocity() + getRightVelocity()) * 0.5;
+}
+
+public double getDistancePIDOutput(double disVal){
+  return controllerDistance.calculate(disVal);
+}
+
+public void setDistanceSetPoint(double setpoint){
+  controllerDistance.setSetpoint(setpoint);
+}
+
+public boolean distanceOnSetpoint(){
+  return controllerDistance.atSetpoint();
 }
 
 public double getLeftTemp(int leftTemp) {
@@ -195,5 +227,4 @@ if (brakeMode){
 }
 
 }
-
 }

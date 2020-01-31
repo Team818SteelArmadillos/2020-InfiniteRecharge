@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.wofSubsystem;
 
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   static public OI m_oi = new OI();
   static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPort, Constants.actuatorPistonPort);
+  static public DriveTrain drive;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -37,6 +39,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     wof = new wofSubsystem();
     m_robotContainer = new RobotContainer();
+    drive = new DriveTrain();
   }
 
   /**
