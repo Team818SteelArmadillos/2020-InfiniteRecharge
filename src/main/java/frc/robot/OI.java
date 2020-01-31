@@ -6,7 +6,7 @@ import static frc.robot.Constants.oi.*;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.ShooterCommand.*;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterSubsystem.*;
 
 public class OI {
 
@@ -74,12 +74,12 @@ public class OI {
     return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
   }
 //Boolean sets the control mode
-  public boolean setShooterStateButton(ShooterSubsystem.controlShooterModeSet){
-    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet);
+  public boolean setShooterStateButton(){
+    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet());
   }
 
   public boolean shooterManualFire(){
-    return shooterManualFireButton.whenPressed();
+    return gamePad.getRawButtonPressed(8);
   }
 
 }
