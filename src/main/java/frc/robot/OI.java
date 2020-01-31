@@ -48,7 +48,7 @@ public class OI {
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
   }
-
+// set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
   }
@@ -74,10 +74,3 @@ public class OI {
   }
 
 }
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
