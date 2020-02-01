@@ -39,6 +39,7 @@ public class IndexCommand extends CommandBase {
     }
     if(jogBallUp) {
       index.setindexMotor(-0.40);
+    
     }
   }
 

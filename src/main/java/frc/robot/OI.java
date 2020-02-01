@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import static frc.robot.Constants.oi.*;
 import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShooterCommand.*;
+import frc.robot.subsystems.ShooterSubsystem.*;
 
 public class OI {
 
@@ -15,6 +18,9 @@ public class OI {
   // Drive Straight Button
   JoystickButton driveStraightButton;
   JoystickButton dynamicBraking;
+  // Shooter Buttons
+  JoystickButton shooterControlStateSwitch;
+  JoystickButton shooterManualFireButton;
 
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
@@ -27,7 +33,11 @@ public class OI {
     // Manual Motor Overide Button
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
+    shiftGear = new JoystickButton(gamePad, 8);
 
+    // Shooter Method Set and Manual Fire Mode
+    shooterControlStateSwitch = new JoystickButton(gamePad, 6);
+    shooterManualFireButton = new JoystickButton(gamePad, 8);
   };
 
   /*
@@ -37,10 +47,16 @@ public class OI {
    * dynamicBraking.whileHeld(new DynamicBrakingCommand());
    */
 
+  public boolean shiftGear(){
+
+    return (gamePad.getRawButtonPressed(8));
+
+  }
+
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
   }
-
+// set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
   }
@@ -64,12 +80,13 @@ public class OI {
     // return Math.pow(-rightJoyStick.getX(), 3.0);
     return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
   }
+//Boolean sets the control mode
+  public boolean setShooterStateButton(){
+    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet());
+  }
+
+  public boolean shooterManualFire(){
+    return gamePad.getRawButtonPressed(8);
+  }
 
 }
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
