@@ -29,6 +29,7 @@ public class OI {
     // Manual Motor Overide Button
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
+    shiftGear = new JoystickButton(gamePad, 8);
 
   };
 
@@ -47,9 +48,9 @@ public class OI {
     return (gamePad.getPOV() == 180);
   }
     //I don't know what number I'm meant to use
-    shiftGear = new JoystickButton(gamePad, 3);
-
-    };
+  public boolean shiftGears(){
+    return (gamePad.getRawButtonPressed(8));
+  }
 
   public double getleftYAxis() {
     // return Math.pow(-leftJoyStick.getY(), 3.0);

@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,7 @@ import frc.robot.Robot;
 import frc.robot.Constants.oi;
 
 import static frc.robot.Constants.DriveConstants.*;
+import static frc.robot.Constants.Pistons.*;
 
 /**
  * Add your docs here.
@@ -30,11 +32,13 @@ public class DriveTrain extends SubsystemBase {
   private TalonFX[] talonsLeft, talonsRight;
   private TalonFX talonLeft, talonRight;
 
+  private DoubleSolenoid shiftPistonLeft, shiftPistonRight;
+
   private int leftOffset = 0;
   private int rightOffset = 0;
 
   boolean brake = false;
-  boolean gear = false;
+  boolean isHighGear = false;
 
   double low = 21.67;
   double high = 8.41;
@@ -49,6 +53,9 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public DriveTrain() {
+    shiftPistonLeft = new DoubleSolenoid(shiftPistonPort[0], shiftPistonPort[1]);
+    shiftPistonRight = new DoubleSolenoid(shiftPistonPort[2], shiftPistonPort[3]);
+
     talonLeft = new TalonFX(MOTOR_PORTS_LEFT[0]);
     talonRight = new TalonFX(MOTOR_PORTS_RIGHT[0]);
 
@@ -77,12 +84,28 @@ public class DriveTrain extends SubsystemBase {
       // Should the inverted be Left
     }
 
+    int Kp = 0;
+    int Ki = 0;
+    int Kd = 0;
+    int distanceTolerance = 0;
+
     controllerDistance = new PIDController(Kp, Ki, Kd);
     controllerDistance.setTolerance(distanceTolerance);
   }
 
-  public void shift() {
+  public void shift(boolean highGear){
+    isHighGear = highGear;
+    if(highGear){
+      shiftPistonLeft.set(DoubleSolenoid.Value.kForward);
+      shiftPistonRight.set(DoubleSolenoid.Value.kForward);
+    }else{
+      shiftPistonLeft.set(DoubleSolenoid.Value.kReverse);
+      shiftPistonRight.set(DoubleSolenoid.Value.kReverse);
+    }
+  }
 
+  public boolean currentGear(){
+    return isHighGear;
   }
 
   public void setLeftMotors(double speed) {
@@ -109,11 +132,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftPosition() {
-    return (talonLeft.getSelectedSensorPosition() - leftOffset) * distancePerPulse;
+    return (talonLeft.getSelectedSensorPosition() - leftOffset) * distancePerPulse * Math.PI * wheelCircumference / (low);
   }
 
   public double getRightPosition() {
-    return (talonRight.getSelectedSensorPosition() - rightOffset) * distancePerPulse;
+    return (talonRight.getSelectedSensorPosition() - rightOffset) * distancePerPulse * Math.PI * wheelCircumference / (low);
   }
 
   public double getPosition() {
@@ -121,11 +144,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftVelocity() {
-    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND / 60;
+    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
   }
 
   public double getRightVelocity() {
-    return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND / 60;
+    return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
   }
 
   public double getVelocity() {
@@ -205,15 +228,11 @@ public class DriveTrain extends SubsystemBase {
       talonLeft.setNeutralMode(NeutralMode.Brake);
 
       for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
-
         talonsLeft[i - 1].setNeutralMode(NeutralMode.Brake);
-
       }
 
       for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
-
         talonsRight[i - 1].setNeutralMode(NeutralMode.Brake);
-
       }
 
     } else {
@@ -222,18 +241,12 @@ public class DriveTrain extends SubsystemBase {
       talonLeft.setNeutralMode(NeutralMode.Coast);
 
       for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
-
         talonsLeft[i - 1].setNeutralMode(NeutralMode.Coast);
-
       }
 
       for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
-
         talonsRight[i - 1].setNeutralMode(NeutralMode.Coast);
-
       }
-
     }
-
   }
 }

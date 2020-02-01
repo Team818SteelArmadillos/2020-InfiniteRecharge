@@ -24,6 +24,7 @@ public final class Constants {
     public static final int[] MOTOR_PORTS_RIGHT = {3, 4};
     public static final boolean LEFT_INVERTED = false;
     public static final double RAMP_RATE = 0;
+    public static final double wheelCircumference = 6;
 
     }
 
@@ -56,6 +57,7 @@ public final class Constants {
     }
     public static class Pistons{
         public static final int[] actuatorPistonPort = {6, 7};
+        public static final int[] shiftPistonPort = {8, 9, 10, 11};
     }
 
     //Gear Ratios
