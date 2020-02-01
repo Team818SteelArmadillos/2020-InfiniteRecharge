@@ -22,6 +22,8 @@ public class OI {
   JoystickButton shooterControlStateSwitch;
   JoystickButton shooterManualFireButton;
 
+  JoystickButton shiftGear;
+
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
     rightJoyStick = new Joystick(rightJoystickPort);
@@ -59,6 +61,10 @@ public class OI {
 // set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
+  }
+    //I don't know what number I'm meant to use
+  public boolean shiftGears(){
+    return (gamePad.getRawButtonPressed(8));
   }
 
   public double getleftYAxis() {
