@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.wofSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -24,6 +25,8 @@ public class Robot extends TimedRobot {
   static public DriveTrain drive;
 
   static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
+  static public IndexSubsystem m_indexSubsystem = new IndexSubsystem(Constants.subsystems.indexMotor);
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
