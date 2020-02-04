@@ -182,6 +182,9 @@ public class DriveTrain extends SubsystemBase {
     }
     return maxLeftTemp;
   }
+
+
+
   public double getRightTemp(int rightTemp) {
     if (rightTemp == 0) {
       return talonRight.getTemperature();
@@ -191,6 +194,7 @@ public class DriveTrain extends SubsystemBase {
       return 0;
     }
   }
+
   public double getMaxRightTemp() {
     double maxRightTemp = talonRight.getTemperature();
     for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++){
@@ -200,7 +204,6 @@ public class DriveTrain extends SubsystemBase {
     }
     return maxRightTemp;
   }
-
 
   public void logData() {
     // Logging Data
@@ -226,6 +229,9 @@ public class DriveTrain extends SubsystemBase {
 
     SmartDashboard.putNumber("Left Power", talonLeft.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Power", talonRight.getMotorOutputPercent());
+
+    SmartDashboard.putBoolean("High Gear", currentGear());
+    
 
   }
 
