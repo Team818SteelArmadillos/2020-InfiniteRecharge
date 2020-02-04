@@ -25,14 +25,17 @@ public final class Constants {
     public static final boolean LEFT_INVERTED = false;
     public static final double RAMP_RATE = 0;
     public static final double wheelCircumference = 6;
-
-    }
-
+    public static final int[] COOLING_PORTS = {5, 6};
     //Chassis constants
     public static final double WHEEL_DIAMETER = 8;
     public static final double ENCODER_GEAR_RATIO = 1;
     public static final int ENCODER_PULSES_PER_REVOLUTION = 4096;
     public static final int VELOCITY_CALCULATION_PER_SECOND = 10;
+
+    }
+
+
+
     
     public static final int JOYSTICK_PORT_LEFT = 0;
     public static final int JOYSTICK_PORT_RIGHT = 1;

@@ -84,11 +84,6 @@ public class DriveTrain extends SubsystemBase {
       // Should the inverted be Left
     }
 
-    int Kp = 0;
-    int Ki = 0;
-    int Kd = 0;
-    int distanceTolerance = 0;
-
     controllerDistance = new PIDController(Kp, Ki, Kd);
     controllerDistance.setTolerance(distanceTolerance);
   }
