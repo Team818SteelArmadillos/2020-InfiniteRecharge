@@ -14,6 +14,11 @@ public final class Constants {
   public static final int rightJoystickPort = 1;
   public static final int gamePadPort = 2;
   public static final int shiftGear = 3;
+    
+    public static final int JOYSTICK_PORT_LEFT = 0;
+    public static final int JOYSTICK_PORT_RIGHT = 1;
+    public static final double JOYSTICK_LEFT_DEADZONE_Y = 0.02;
+    public static final double JOYSTICK_RIGHT_DEADZONE_Y = 0.02;
 
  }
 
@@ -50,6 +55,7 @@ public final class Constants {
     }
     public static class sensorPorts{
         public static final int WOF_LIGHT_SENSOR = 1;
+        public static final int DRIVE_GYRO = 2;
     }
     public static class Numbers{
         public static final int SPIN_TIMER = 10;
