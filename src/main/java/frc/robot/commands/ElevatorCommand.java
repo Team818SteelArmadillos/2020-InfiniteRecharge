@@ -62,7 +62,7 @@ public class ElevatorCommand extends CommandBase {
 
   // idk if it goes in finished or not but we need to get timer in feild so it
   // shuts off motors, half a
-  // sec passes, and piston is put in to be safe. Also the timer from the field
+  // sec pas-ses, and piston is put in to be safe. Also the timer from the field
   // goes DOWNWARDS
   @Override
   public boolean isFinished() {
