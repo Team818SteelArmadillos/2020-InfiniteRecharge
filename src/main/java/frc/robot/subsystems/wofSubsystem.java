@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static frc.robot.Constants.motorPorts.*;
@@ -16,7 +15,7 @@ import static frc.robot.Constants.Numbers.*;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.I2C;
@@ -28,13 +27,14 @@ public class wofSubsystem extends SubsystemBase {
   private VictorSPX wofSPX; 
   private final ColorSensorV3 wofColor;
   private final I2C.Port i2cPort;
-  Color currentColor = wofColor.getColor();
+  Color currentColor;
 
 
   public wofSubsystem() {
     i2cPort = I2C.Port.kOnboard;
     wofSPX = new VictorSPX(WOF_MOTOR_PORT);
     wofColor = new ColorSensorV3(i2cPort);
+    currentColor = wofColor.getColor();
   }
 
   public void doSpin(){
