@@ -11,15 +11,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.Constants.oi;
 
 import static frc.robot.Constants.DriveConstants.*;
+import static frc.robot.Constants.sensorPorts.*;
 
 /**
  * Add your docs here.
@@ -41,14 +42,17 @@ public class DriveTrain extends SubsystemBase {
 
   PIDController controllerDistance;
 
-  private final double distancePerPulse = Constants.ENCODER_PULSES_PER_REVOLUTION;
+  private final double distancePerPulse = ENCODER_PULSES_PER_REVOLUTION;
 
+  private AnalogGyro gyro;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
 
   public DriveTrain() {
+    gyro = new AnalogGyro(DRIVE_GYRO);
+
     talonLeft = new TalonFX(MOTOR_PORTS_LEFT[0]);
     talonRight = new TalonFX(MOTOR_PORTS_RIGHT[0]);
 
@@ -121,11 +125,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftVelocity() {
-    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND / 60;
+    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND / 60;
   }
 
   public double getRightVelocity() {
-    return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND / 60;
+    return talonRight.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND / 60;
   }
 
   public double getVelocity() {
@@ -182,7 +186,13 @@ public class DriveTrain extends SubsystemBase {
     }
     return maxRightTemp;
   }
+  public double getAngle(){
+    return gyro.getAngle();
+  }
 
+  public void resetGyro(){
+    gyro.reset();
+  }
 
   public void logData() {
     // Logging Data
