@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,7 +5,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-
 
 public class VisionSubsystem extends SubsystemBase {
   /**
@@ -29,13 +21,14 @@ public class VisionSubsystem extends SubsystemBase {
   double x = tx.getDouble(0.0);
   double y = ty.getDouble(0.0);
   double area = ta.getDouble(0.0);
+  boolean target =  ta.getBoolean(false);
 
   //post to smart dashboard periodically
   SmartDashboard.putNumber("VisionX", x);
   SmartDashboard.putNumber("VisionY", y);
   SmartDashboard.putNumber("VisionArea", area);
   }
-  
+
   public void getX() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
     NetworkTableEntry tx = table.getEntry("Horizontal Angle");
@@ -45,23 +38,26 @@ public class VisionSubsystem extends SubsystemBase {
 
   public void getY() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-    NetworkTableEntry ty = table.getEntry("Vertical Angle");
-    double y = ty.getDouble(0.0);
     SmartDashboard.putNumber("VisionY", y);
   }
 
-  public void getArea() {
+  public void getTarget() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-    NetworkTableEntry ta = table.getEntry("Has Target");
-    double area = ta.getDouble(0.0);
-    SmartDashboard.putNumber("VisionArea", area);
+    SmartDashboard.putBoolean("Target", target);
+  }
+
+  public void setPowerCell() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
+    NetworkTableEntry powerCell = table.getEntry("Camera Mode");
+    
+    
   }
 
   public void logData() {
     //Logging Data
     getX();
     getY();
-    getArea();
+    getTarget();
   }
 
   @Override
