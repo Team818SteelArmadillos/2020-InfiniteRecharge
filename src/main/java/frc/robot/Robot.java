@@ -10,6 +10,7 @@ import frc.robot.subsystems.wofSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.wofSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,12 +23,12 @@ public class Robot extends TimedRobot {
   public static wofSubsystem wof;
   private RobotContainer m_robotContainer;
   static public OI m_oi = new OI();
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
   static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  static public VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   static public DriveTrain drive;
 
-  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
