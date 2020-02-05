@@ -69,19 +69,32 @@ public final class Constants {
     public static class ShooterConstants {
         //PID loop values
         public static final int[] ShooterMotorArray = {0,1,2,3};
-    
+        //Shooter speed PID variables
         public static final double kP = .5;
     
         public static final double kI = .01;
     
         public static final double kD = .25;
-    
+
         public static final double kShooterToleranceRPS = .003;
+
         //ShooterConversionFactors
         public static final double encoderPulsesPerRevolution = 4096;
     
         public static final double velocityCalculationsPerSecond = 10;
-    
+        //ShooterSpecs
+        public static final double targetHeight = 8.1875;
+
+        public static final double shooterHeight = 1.4167;
+
+        public static final double cameraHeight = 2.9167;
+
+        public static final double relativeTargetHeight = targetHeight - (shooterHeight - cameraHeight);
+
+        public static final double maxShooterDistance = ;
+
+        public static final double maxShooterMotorSpeed = 2400;
+
         }
 
         public static final int[] shiftPistonPort = {8, 9, 10, 11};

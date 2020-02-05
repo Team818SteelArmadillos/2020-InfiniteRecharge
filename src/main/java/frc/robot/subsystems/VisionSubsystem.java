@@ -19,6 +19,7 @@ public class VisionSubsystem extends SubsystemBase {
   ta = table.getEntry("Has Target");
   mode = table.getEntry("Camera Mode");
   }
+<<<<<<< HEAD
 
   public double getX() {
     return tx.getDouble(0.0);
@@ -26,6 +27,22 @@ public class VisionSubsystem extends SubsystemBase {
 
   public double getY() {
     return ty.getDouble(0.0);
+=======
+  
+  public double getX() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
+    NetworkTableEntry tx = table.getEntry("Horizontal Angle");
+    double x = tx.getDouble(0.0);
+    return x;
+  }
+
+  public double getY() {
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
+    SmartDashboard.putNumber("VisionY", y);
+    NetworkTableEntry ty = table.getEntry("Vertical Angle");
+    double y = ty.getDouble(0.0);
+    return y;
+>>>>>>> 307f89b64a6ccb430e17c3c6d7506d2970f68964
   }
 
   public Boolean getTarget() {
