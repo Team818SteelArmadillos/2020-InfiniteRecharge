@@ -1,15 +1,16 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.wofSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.wofSubsystem;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,18 +20,28 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  public static wofSubsystem wof;
+  public static DriveTrain drive;
   private RobotContainer m_robotContainer;
+  static public OI m_oi = new OI();
+  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  static public DriveTrain drive;
 
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+  
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    wof = new wofSubsystem();
     m_robotContainer = new RobotContainer();
+    drive = new DriveTrain();
   }
 
   /**
