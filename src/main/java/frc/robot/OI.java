@@ -21,6 +21,7 @@ public class OI {
   // Shooter Buttons
   JoystickButton shooterControlStateSwitch;
   JoystickButton shooterManualFireButton;
+  JoystickButton spoolShooterManual;
 
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
@@ -80,9 +81,9 @@ public class OI {
     // return Math.pow(-rightJoyStick.getX(), 3.0);
     return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
   }
-//Boolean sets the control mode
-  public boolean setShooterStateButton(){
-    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet());
+
+  public boolean spoolShooterMotorManual(){
+    return gamePad.getRawButtonPressed(7);
   }
 
   public boolean shooterManualFire(){

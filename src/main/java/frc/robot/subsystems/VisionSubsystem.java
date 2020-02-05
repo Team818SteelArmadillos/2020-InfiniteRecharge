@@ -36,18 +36,18 @@ public class VisionSubsystem extends SubsystemBase {
   SmartDashboard.putNumber("VisionArea", area);
   }
   
-  public void getX() {
+  public double getX() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
     NetworkTableEntry tx = table.getEntry("Horizontal Angle");
     double x = tx.getDouble(0.0);
-    SmartDashboard.putNumber("VisionX", x);
+    return x;
   }
 
-  public void getY() {
+  public double getY() {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
     NetworkTableEntry ty = table.getEntry("Vertical Angle");
     double y = ty.getDouble(0.0);
-    SmartDashboard.putNumber("VisionY", y);
+    return y;
   }
 
   public void getArea() {
