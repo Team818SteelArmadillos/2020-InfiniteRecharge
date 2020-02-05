@@ -3,7 +3,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import static frc.robot.Constants.Pistons.*;
+import static frc.robot.Constants.motorPorts.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -17,9 +18,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   double pistonVal;
 
   public ElevatorSubsystem() {
-    elevatorMotorOne = new TalonFX(Constants.elevatorMotorPortOne);
+    elevatorMotorOne = new TalonFX(elevatorMotorPortOne);
     // elevatorMotorTwo = new TalonFX(elevatorMotorPortTwo);
-    actuatorPiston = new DoubleSolenoid(Constants.actuatorPistonPort[0], Constants.actuatorPistonPort[1]);
+    actuatorPiston = new DoubleSolenoid(actuatorPistonPort[0], actuatorPistonPort[1]);
 
     elevatorMotorOne.configFactoryDefault();
     elevatorMotorOne.setNeutralMode(NeutralMode.Brake);

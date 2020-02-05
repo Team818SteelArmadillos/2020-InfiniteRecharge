@@ -12,6 +12,8 @@ public class OI {
   Joystick gamePad;
   // Elevator Buttons
   JoystickButton elevatorButton;
+  // Intake Buttons
+  JoystickButton intakeButton;
   // Drive Straight Button
   JoystickButton driveStraightButton;
   JoystickButton dynamicBraking;
@@ -24,6 +26,9 @@ public class OI {
 
     // Elevator Buttons
     elevatorButton = new JoystickButton(gamePad, 7);
+
+    // Intake Buttons
+    intakeButton = new JoystickButton(gamePad, 6);
 
     // Manual Motor Overide Button
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
@@ -51,6 +56,10 @@ public class OI {
 // set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
+  }
+
+  public boolean getIntake(){
+    return (gamePad.getRawButtonPressed(6));
   }
 
   public double getleftYAxis() {

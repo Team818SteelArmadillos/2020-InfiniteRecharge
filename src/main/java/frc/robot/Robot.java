@@ -4,7 +4,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.wofSubsystem;
+import static frc.robot.Constants.Pistons.*;
+import static frc.robot.Constants.motorPorts.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,7 +20,9 @@ public class Robot extends TimedRobot {
   public static wofSubsystem wof;
   private RobotContainer m_robotContainer;
   static public OI m_oi = new OI();
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
+  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+
 
   /**
    * This function is run when the robot is first started up and should be used for any

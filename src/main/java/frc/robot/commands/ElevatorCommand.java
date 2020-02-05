@@ -71,7 +71,7 @@ public class ElevatorCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    RobotLog.putMessage("Interrupted Elevator Command");
+    RobotLog.putMessage("Interrupted ElevatorCommand");
     Robot.m_elevatorSubsystem.setElevatorMotor(0);
     Robot.m_elevatorSubsystem.setPiston(1);
   }
