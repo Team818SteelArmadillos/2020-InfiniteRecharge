@@ -1,22 +1,14 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IndexCommand extends CommandBase {
 
-  boolean jogindexHatchUp, jogindexHatchDown, buttonReleased, shootindexBall;
-  Timer timer, ballTimer;
-  double time = 0.05;
-  double ballTime = 0.1;
-  public IndexCommand() {
-    requires(index);
-  }
+  boolean jogindexUp, buttonReleased;
 
-  protected void initialize() {
-    index.setindexMotor(0);
-    buttonReleased = true;
-    timer = new Timer();
+  public IndexCommand() {
+    addRequirements(Robot.m_indexSubsystem);
   }
 
   protected void execute() {
@@ -39,17 +31,21 @@ public class IndexCommand extends CommandBase {
     }
     if(jogBallUp) {
       index.setindexMotor(-0.40);
+    
     }
+  @Override
+  public void initialize() {
+    Robot.m_indexSubsystem.setIndexMotor(1);
+    jogindexUp = false;
   }
 
-  protected boolean isFinished() {
-    return false;
+  @Override
+  public void end(boolean interrupted) {
+    Robot.m_indexSubsystem.setIndexMotor(0);
   }
 
-  protected void end() {
-  }
-
-  protected void interrupted() {
-    index.setindexMotor(0);
+  @Override
+  public boolean isFinished() {
+    return Robot.m_indexSubsystem.indexSensor();
   }
 }

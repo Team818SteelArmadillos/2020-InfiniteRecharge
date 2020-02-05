@@ -3,7 +3,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import static frc.robot.Constants.oi.*;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShooterCommand.*;
+import frc.robot.subsystems.ShooterSubsystem.*;
 
 public class OI {
 
@@ -12,9 +17,18 @@ public class OI {
   Joystick gamePad;
   // Elevator Buttons
   JoystickButton elevatorButton;
+  // Intake Buttons
+  JoystickButton intakeButton;
   // Drive Straight Button
   JoystickButton driveStraightButton;
   JoystickButton dynamicBraking;
+  // Shooter Buttons
+  JoystickButton shooterControlStateSwitch;
+  JoystickButton shooterManualFireButton;
+
+  JoystickButton shiftGear;
+  JoystickButton indexButton;
+  Trigger jogindexUp;
 
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
@@ -24,11 +38,27 @@ public class OI {
     // Elevator Buttons
     elevatorButton = new JoystickButton(gamePad, 7);
 
+    // Intake Buttons
+    intakeButton = new JoystickButton(gamePad, 6);
+
     // Manual Motor Overide Button
     dynamicBraking = new JoystickButton(leftJoyStick, 1);
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
+    shiftGear = new JoystickButton(gamePad, 8);
 
-  };
+    // Shooter Method Set and Manual Fire Mode
+    shooterControlStateSwitch = new JoystickButton(gamePad, 6);
+    shooterManualFireButton = new JoystickButton(gamePad, 8);
+    jogindexUp = new Trigger();
+  }
+
+  public boolean get() {
+    return (gamePad.getPOV() == 0);
+  }
+
+  public boolean getIndexUp() {
+    return (gamePad.getPOV() == 0);
+  }
 
   /*
    * manualOverrideButton.whileHeld(new ManualCommand());
@@ -37,12 +67,26 @@ public class OI {
    * dynamicBraking.whileHeld(new DynamicBrakingCommand());
    */
 
+  public boolean shiftGear(){
+
+    return (gamePad.getRawButtonPressed(8));
+
+  }
+
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
   }
-
+// set a tolerance for above and below?
   public boolean getElevatorDown() {
     return (gamePad.getPOV() == 180);
+  }
+    //I don't know what number I'm meant to use
+  public boolean shiftGears(){
+    return (gamePad.getRawButtonPressed(8));
+  }
+
+  public boolean getIntake(){
+    return (gamePad.getRawButtonPressed(6));
   }
 
   public double getleftYAxis() {
@@ -50,26 +94,17 @@ public class OI {
     return -leftJoyStick.getY() * Math.abs(leftJoyStick.getY());
   }
 
-  public double getrightYAxis() {
-    // return -Math.pow(-rightJoyStick.getY(), 3.0);
-    return -rightJoyStick.getY() * Math.abs(rightJoyStick.getY());
-  }
-
-  public double getleftXAxis() {
-    // return Math.pow(-leftJoyStick.getX(), 3.0);
-    return -leftJoyStick.getX() * Math.abs(leftJoyStick.getX());
-  }
-
- public double getrightXAxis() {
+  public double getrightXAxis() {
     // return Math.pow(-rightJoyStick.getX(), 3.0);
     return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
   }
+//Boolean sets the control mode
+  public boolean setShooterStateButton(){
+    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet());
+  }
+
+  public boolean shooterManualFire(){
+    return gamePad.getRawButtonPressed(8);
+  }
 
 }
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
