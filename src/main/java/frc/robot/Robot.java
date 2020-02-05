@@ -3,11 +3,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.wofSubsystem;
-import static frc.robot.Constants.Pistons.*;
-import static frc.robot.Constants.motorPorts.*;
+import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.wofSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,8 +24,10 @@ public class Robot extends TimedRobot {
   static public OI m_oi = new OI();
   static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  static public DriveTrain drive;
 
-
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -35,6 +39,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     wof = new wofSubsystem();
     m_robotContainer = new RobotContainer();
+    drive = new DriveTrain();
   }
 
   /**
