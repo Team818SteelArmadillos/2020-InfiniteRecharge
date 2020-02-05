@@ -240,7 +240,7 @@ public class DriveTrain extends SubsystemBase {
     SmartDashboard.putNumber("Left Power", talonLeft.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Power", talonRight.getMotorOutputPercent());
 
-    SmartDashboard.putBoolean("High Gear", currentGear());
+    SmartDashboard.putNumber("Gyro Angle", getAngle());
     
 
   }
