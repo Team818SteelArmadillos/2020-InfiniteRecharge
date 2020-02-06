@@ -142,11 +142,19 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftVelocity() {
-    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND / 60;
+    if(isHighGear){
+      return talonLeft.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * high);
+    } else {
+      return talonLeft.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
+    }
   }
 
   public double getRightVelocity() {
-    return talonRight.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND / 60;
+    if(isHighGear){
+      return talonRight.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * high);
+    } else {
+      return talonRight.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
+    }
   }
 
   public double getVelocity() {
