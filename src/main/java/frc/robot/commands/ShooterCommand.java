@@ -21,6 +21,7 @@ public class ShooterCommand extends CommandBase {
   public ShooterCommand() {
     addRequirements(Robot.m_shooterSubsystem);
     addRequirements(Robot.m_visionSubsystem);
+    addRequirements(Robot.m_indexSubsystem);
     timer = new Timer();
   }
 
@@ -46,13 +47,13 @@ public class ShooterCommand extends CommandBase {
 
       timer.reset();
       timer.start();
-      Robot.index.setindexMotor(1);
+      Robot.m_indexSubsystem.setIndexMotor(1.0);
 
      }
 
-     if(timer.hasPeriodPassed(2)){
+     if(timer.hasPeriodPassed(1)){
 
-      Robot.index.setindexMotor(0);
+      Robot.m_indexSubsystem.setIndexMotor(0);
       timer.stop();
   
     }
@@ -67,11 +68,11 @@ public class ShooterCommand extends CommandBase {
 
     timer.reset();
     timer.start();
-    Robot.index.setindexMotor(1);
+    Robot.m_indexSubsystem.setIndexMotor(1);
 
   }  
-  if(timer.hasPeriodPassed(2)){
-    Robot.index.setindexMotor(0);
+  if(timer.hasPeriodPassed(1)){
+    Robot.m_indexSubsystem.setIndexMotor(0);
     timer.stop();
 
   }
