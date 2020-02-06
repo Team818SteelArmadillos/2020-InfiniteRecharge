@@ -11,32 +11,19 @@ public class IndexCommand extends CommandBase {
     addRequirements(Robot.m_indexSubsystem);
   }
 
-  protected void execute() {
-    if(oi.getindexUp() && buttonReleased) {
-      jogindexHatchUp = true;
-    } 
-
-    if(oi.getIndexButton() && buttonReleased) {
-      shootindexBall = true;
-      ballTimer.start();
-      buttonReleased = false;
-    }
-
-    if (oi.getindexButtonIn()) {
-      index.setindexMotor(-1.00);
-    } else if (oi.getindexButtonOut()) {
-      index.setindexMotor(1.00);
-    } else {
-      index.setindexMotor(0);
-    }
-    if(jogBallUp) {
-      index.setindexMotor(-0.40);
-    
-    }
   @Override
   public void initialize() {
     Robot.m_indexSubsystem.setIndexMotor(1);
     jogindexUp = false;
+  }
+
+  @Override
+  public void execute() {
+    if (Robot.m_indexSubsystem.indexSensor()) {
+      Robot.m_indexSubsystem.setIndexMotor(1.00);
+    } else {
+      Robot.m_indexSubsystem.setIndexMotor(0);
+    }
   }
 
   @Override

@@ -28,7 +28,8 @@ public class Robot extends TimedRobot {
   static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   static public VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   static public DriveTrain drive;
-
+  static public IndexSubsystem m_indexSubsystem = new IndexSubsystem();
+  
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
