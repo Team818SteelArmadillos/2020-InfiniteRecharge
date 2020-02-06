@@ -19,10 +19,10 @@ public class Robot extends TimedRobot {
   public static wofSubsystem wof;
   private RobotContainer m_robotContainer;
   static public OI m_oi = new OI();
-  static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-
   static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
-  static public IndexSubsystem m_indexSubsystem = new IndexSubsystem(Constants.subsystems.indexMotor);
+  static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  static public IndexSubsystem m_indexSubsystem = new IndexSubsystem();
   
   /**
    * This function is run when the robot is first started up and should be used for any
