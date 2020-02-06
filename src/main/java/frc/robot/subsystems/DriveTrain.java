@@ -12,16 +12,17 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.Constants.oi;
 
 import static frc.robot.Constants.DriveConstants.*;
 import static frc.robot.Constants.Pistons.*;
+import static frc.robot.Constants.sensorPorts.*;
 
 /**
  * Add your docs here.
@@ -52,8 +53,9 @@ double high = 8.41;
 
   PIDController controllerDistance;
 
-  private final double distancePerPulse = Constants.ENCODER_PULSES_PER_REVOLUTION;
+  private final double distancePerPulse = ENCODER_PULSES_PER_REVOLUTION;
 
+  private AnalogGyro gyro;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -62,6 +64,7 @@ double high = 8.41;
   public DriveTrain() {
     shiftPistonLeft = new DoubleSolenoid(shiftPistonPort[0], shiftPistonPort[1]);
     shiftPistonRight = new DoubleSolenoid(shiftPistonPort[2], shiftPistonPort[3]);
+    gyro = new AnalogGyro(DRIVE_GYRO);
 
     talonLeft = new TalonFX(MOTOR_PORTS_LEFT[0]);
     talonRight = new TalonFX(MOTOR_PORTS_RIGHT[0]);
@@ -172,11 +175,19 @@ public void setLeftMotors(double speed) {
   }
 
   public double getLeftVelocity() {
-    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
+    if(isHighGear){
+      return talonLeft.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * high);
+    } else {
+      return talonLeft.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
+    }
   }
 
   public double getRightVelocity() {
-    return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
+    if(isHighGear){
+      return talonRight.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * high);
+    } else {
+      return talonRight.getSelectedSensorVelocity() * distancePerPulse * VELOCITY_CALCULATION_PER_SECOND * Math.PI * wheelCircumference / (12 * low);
+    }
   }
 
   public double getVelocity() {
@@ -359,6 +370,7 @@ public void setLeftMotors(double speed) {
   public boolean distanceOnSetpoint() {
     return controllerDistance.atSetpoint();
   }
+  
 
   public double getLeftTemp(int leftTemp) {
     if (leftTemp == 0) {
@@ -368,7 +380,19 @@ public void setLeftMotors(double speed) {
     } else {
       return 0;
     }
+
   }
+  public double getMaxLeftTemp() {
+    double maxLeftTemp = talonLeft.getTemperature();
+    for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++){
+      if(talonsLeft[i].getTemperature()>maxLeftTemp) {
+        maxLeftTemp = talonsLeft[i].getTemperature();
+      }
+    }
+    return maxLeftTemp;
+  }
+
+
 
   public double getRightTemp(int rightTemp) {
     if (rightTemp == 0) {
@@ -380,8 +404,21 @@ public void setLeftMotors(double speed) {
     }
   }
 
-  public double getRightTemp() {
-    return talonRight.getTemperature();
+  public double getMaxRightTemp() {
+    double maxRightTemp = talonRight.getTemperature();
+    for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++){
+      if(talonsRight[i].getTemperature()>maxRightTemp) {
+        maxRightTemp = talonsRight[i].getTemperature();
+      }
+    }
+    return maxRightTemp;
+  }
+  public double getAngle(){
+    return gyro.getAngle();
+  }
+
+  public void resetGyro(){
+    gyro.reset();
   }
 
   public void logData() {
@@ -408,6 +445,9 @@ public void setLeftMotors(double speed) {
 
     SmartDashboard.putNumber("Left Power", talonLeft.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Power", talonRight.getMotorOutputPercent());
+
+    SmartDashboard.putNumber("Gyro Angle", getAngle());
+    
 
   }
 

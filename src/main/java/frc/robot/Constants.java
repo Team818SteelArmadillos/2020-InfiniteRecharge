@@ -2,12 +2,22 @@ package frc.robot;
 
 public final class Constants {
     
-    public static class oi {
-        // Joysticks
-        public static final int leftJoystickPort = 0;
-        public static final int rightJoystickPort = 1;
-        public static final int gamePadPort = 2;
-        public static final int shiftGear = 3;
+    // Piston
+    
+    public static final int[] actuatorPistonPort = { 6, 7 };
+    // Buttons
+
+ public static class oi{
+    // Joysticks
+  public static final int leftJoystickPort = 0;
+  public static final int rightJoystickPort = 1;
+  public static final int gamePadPort = 2;
+  public static final int shiftGear = 3;
+    
+    public static final int JOYSTICK_PORT_LEFT = 0;
+    public static final int JOYSTICK_PORT_RIGHT = 1;
+    public static final double JOYSTICK_LEFT_DEADZONE_Y = 0.02;
+    public static final double JOYSTICK_RIGHT_DEADZONE_Y = 0.02;
 
     }
 
@@ -19,15 +29,18 @@ public final class Constants {
     public static final boolean LEFT_INVERTED = false;
     public static final double RAMP_RATE = 0;
     public static final double wheelCircumference = 6;
-
-    }
-
-    // Chassis constants
+    public static final int[] COOLING_PORTS = {5, 6};
+    //Chassis constants
     public static final double WHEEL_DIAMETER = 8;
     public static final double ENCODER_GEAR_RATIO = 1;
     public static final int ENCODER_PULSES_PER_REVOLUTION = 4096;
     public static final int VELOCITY_CALCULATION_PER_SECOND = 10;
 
+    }
+
+
+
+    
     public static final int JOYSTICK_PORT_LEFT = 0;
     public static final int JOYSTICK_PORT_RIGHT = 1;
     public static final double JOYSTICK_LEFT_DEADZONE_Y = 0.02;
@@ -48,6 +61,7 @@ public final class Constants {
         public static final int indexSensor1 = 2;
         public static final int indexSensor2 = 3;
         public static final int indexSensor3 = 4;
+        public static final int DRIVE_GYRO = 2;
     }
     public static class Numbers{
         public static final boolean inverseIndex = false;
