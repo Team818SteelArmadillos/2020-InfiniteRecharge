@@ -10,10 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import jdk.jfr.Percentage;
 
 import static frc.robot.Constants.ShooterConstants.*;
-import frc.robot.subsystems.VisionSubsystem.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -109,5 +107,5 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     }
-  }
+  
 }
