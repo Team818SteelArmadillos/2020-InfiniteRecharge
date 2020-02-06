@@ -26,6 +26,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private PIDController controllerShooterSpeed;
   public boolean shooterModeImput = true;
   public double verticalAngle;
+  public boolean isPIDCorrect;
 
   //Sets motors 
   public ShooterSubsystem() {
@@ -70,6 +71,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   }
+
   public double getVerticalSin(){
     return Math.sin(verticalAngle);
   }
@@ -98,4 +100,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   }
 
+  public boolean isVerticalPIDRight(){
+
+    if(controllerShooterSpeed.atSetpoint()){
+      return true;
+    }else{
+      return false;
+    }
+
+    }
+  }
 }
