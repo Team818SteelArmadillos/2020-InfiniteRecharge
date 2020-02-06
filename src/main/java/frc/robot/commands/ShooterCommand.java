@@ -31,6 +31,7 @@ public class ShooterCommand extends CommandBase {
   @Override
   public void execute() {
     double verticalAngle = Robot.m_visionSubsystem.getY();
+    boolean isVerticalPIDRight = Robot.m_shooterSubsystem.isVerticalPIDRight();
     // Setting automatic or manual shooter; automatic = true, manual = false
     if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle
@@ -41,7 +42,7 @@ public class ShooterCommand extends CommandBase {
      Robot.m_shooterSubsystem.shooterSpeed(Robot.m_shooterSubsystem.autoShooterPower());
 
      //auto fire if conditions met
-     if(getShooterPIDError() < .001 && horizontalPIDAdjust future thing < .5){
+     if(isVerticalPIDRight = true && horizontalPIDAdjustFutureThing < .5){
 
       timer.reset();
       timer.start();

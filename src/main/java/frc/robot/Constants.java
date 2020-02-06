@@ -91,7 +91,7 @@ public final class Constants {
 
         public static final double relativeTargetHeight = targetHeight - (shooterHeight - cameraHeight);
 
-        public static final double maxShooterDistance = ;
+        public static final double maxShooterDistance = 3740;
 
         public static final double maxShooterMotorSpeed = 2400;
 
