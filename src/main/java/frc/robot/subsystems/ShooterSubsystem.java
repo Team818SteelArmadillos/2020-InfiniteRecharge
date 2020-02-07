@@ -10,8 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.ShooterConstants.*;
 
+import static frc.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -20,9 +20,10 @@ public class ShooterSubsystem extends SubsystemBase {
   
   public TalonSRX talonShooterMotor;
   public VictorSPX[] victorsShooterMotors;
-  public int setShooterSpeed;
+  public double setShooterSpeed;
   private PIDController controllerShooterSpeed;
-  public boolean shooterModeImput = true;
+  public boolean shooterModeImput = false;
+  public double verticalAngle;
 
   //Sets motors 
   public ShooterSubsystem() {
@@ -48,15 +49,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
   }
   //"goal" shooter speed
-  public void shooterSpeed(int shooterSpeed) {
+  public void shooterSpeed(double shooterSpeed) {
     
     setShooterSpeed = shooterSpeed;
 
   }
 
-  public void shootingMethod() {
+  public void shootingType() {
 
     if (setShooterSpeed == 0){ 
+      
     talonShooterMotor.set(ControlMode.PercentOutput, 0);
 
   }else{
@@ -65,6 +67,18 @@ public class ShooterSubsystem extends SubsystemBase {
 
   }
 
+  }
+
+  public double getVerticalSin(){
+    return Math.sin(verticalAngle);
+  }
+  //finds distance to target
+  public double getTargetDistance(){
+    return relativeTargetHeight * getVerticalSin();
+  }
+//divides distance by max possible distance to find the destired shooter power
+  public double autoShooterPower(){
+    return (getTargetDistance() / maxShooterDistance) * maxShooterMotorSpeed;
   }
 
   public void logData(){
@@ -82,5 +96,23 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterModeImput = !shooterModeImput;
 
   }
+
+  public boolean isVerticalPIDRight(){
+
+    if(controllerShooterSpeed.atSetpoint()){
+      return true;
+    }else{
+      return false;
+    }
+
+    }
+  
+    public boolean manualISAtSpeed(){
+      if(shooterModeImput == false && getCurrentShooterSpeed() == 1600){
+        return true;
+      }else{
+        return false;
+      }
+    }
 
 }

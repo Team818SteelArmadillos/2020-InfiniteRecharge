@@ -7,9 +7,9 @@ public class AutonCommandGroup extends SequentialCommandGroup {
 
   public AutonCommandGroup() {
     // Auton 1 = Do nothing
-    // Auton 2 =
-    // Auton 3 =
-    // Auton 4 =
+    // Auton 2 = 
+    // Auton 3 = 
+    // Auton 4 = 
 
     if(autonPosition==1) {
     
