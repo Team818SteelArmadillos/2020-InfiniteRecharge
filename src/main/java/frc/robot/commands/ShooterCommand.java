@@ -33,13 +33,13 @@ public class ShooterCommand extends CommandBase {
   public void execute() {
     double verticalAngle = Robot.m_visionSubsystem.getY();
     boolean isVerticalPIDRight = Robot.m_shooterSubsystem.isVerticalPIDRight();
+    boolean isManualShooterSpooled = Robot.m_shooterSubsystem.manualISAtSpeed();
     // Setting automatic or manual shooter; automatic = true, manual = false
     if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle
       
       //automatic mode
      
-     // auto horizontal value adjust
      Robot.m_shooterSubsystem.shooterSpeed(Robot.m_shooterSubsystem.autoShooterPower());
 
      //auto fire if conditions met
@@ -55,25 +55,35 @@ public class ShooterCommand extends CommandBase {
 
       Robot.m_indexSubsystem.setIndexMotor(0);
       timer.stop();
+      timer.reset();
   
     }
 
   }else{
+
       //manual mode
      if(Robot.m_oi.spoolShooterMotorManual()){
      Robot.m_shooterSubsystem.shooterSpeed(1600);
+     }else if(Robot.m_oi.shooterManualFire()){
+      Robot.m_shooterSubsystem.shooterSpeed(1600);
+     }else{
+      Robot.m_shooterSubsystem.shooterSpeed(0);
      }
 
-  if(Robot.m_oi.shooterManualFire()){
+    if(Robot.m_oi.shooterManualFire() && isManualShooterSpooled == true){
 
     timer.reset();
     timer.start();
     Robot.m_indexSubsystem.setIndexMotor(1);
 
-  }  
+    }else{
+      Robot.m_shooterSubsystem.shooterSpeed(1600);
+  }
+
   if(timer.hasPeriodPassed(1)){
     Robot.m_indexSubsystem.setIndexMotor(0);
     timer.stop();
+    timer.reset();
 
   }
   
