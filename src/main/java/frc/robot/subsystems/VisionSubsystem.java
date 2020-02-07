@@ -7,57 +7,41 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class VisionSubsystem extends SubsystemBase {
-  /**
-   * Creates a new VisionSubsystem.
-   */
+  
+  NetworkTable table;
+  NetworkTableEntry tx, ty, ta, mode;
+  
   public VisionSubsystem() {
 
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-  NetworkTableEntry tx = table.getEntry("Horizontal Angle");
-  NetworkTableEntry ty = table.getEntry("Vertical Angle");
-  NetworkTableEntry ta = table.getEntry("Has Target");
-
-  //read values periodically
-  double x = tx.getDouble(0.0);
-  double y = ty.getDouble(0.0);
-  double area = ta.getDouble(0.0);
-  boolean target =  ta.getBoolean(false);
-
-  //post to smart dashboard periodically
-  SmartDashboard.putNumber("VisionX", x);
-  SmartDashboard.putNumber("VisionY", y);
-  SmartDashboard.putNumber("VisionArea", area);
+  table = NetworkTableInstance.getDefault().getTable("Vision");
+  tx = table.getEntry("Horizontal Angle");
+  ty = table.getEntry("Vertical Angle");
+  ta = table.getEntry("Has Target");
+  mode = table.getEntry("Camera Mode");
   }
 
-  public void getX() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-    NetworkTableEntry tx = table.getEntry("Horizontal Angle");
-    double x = tx.getDouble(0.0);
-    SmartDashboard.putNumber("VisionX", x);
+  public double getX() {
+    return tx.getDouble(0.0);
   }
 
-  public void getY() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-    SmartDashboard.putNumber("VisionY", y);
+  public double getY() {
+    return ty.getDouble(0.0);
   }
 
-  public void getTarget() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-    SmartDashboard.putBoolean("Target", target);
+  public Boolean getTarget() {
+    return ta.getBoolean(false);
+
   }
 
-  public void setPowerCell() {
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("Vision");
-    NetworkTableEntry powerCell = table.getEntry("Camera Mode");
-    
-    
+  public void setPowerCell(boolean powerCellMode) {
+    mode.setBoolean(powerCellMode);
   }
 
   public void logData() {
     //Logging Data
-    getX();
-    getY();
-    getTarget();
+    SmartDashboard.putNumber("VisionX", getX());
+    SmartDashboard.putNumber("VisionY", getY());
+    SmartDashboard.putBoolean("Target", getTarget());
   }
 
   @Override

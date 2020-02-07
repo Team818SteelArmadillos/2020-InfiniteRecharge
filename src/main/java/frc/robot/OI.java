@@ -25,6 +25,7 @@ public class OI {
   // Shooter Buttons
   JoystickButton shooterControlStateSwitch;
   JoystickButton shooterManualFireButton;
+  JoystickButton spoolShooterManual;
 
   JoystickButton shiftGear;
   JoystickButton indexButton;
@@ -91,16 +92,28 @@ public class OI {
 
   public double getleftYAxis() {
     // return Math.pow(-leftJoyStick.getY(), 3.0);
-    return -leftJoyStick.getY() * Math.abs(leftJoyStick.getY());
+    return leftJoyStick.getY() ;
   }
 
+  public double getrightYAxis() {
+    // return Math.pow(rightJoyStick.getY(), 3.0);
+    return rightJoyStick.getY() ;
+  }
+
+  public double getleftXAxis() {
+    // return Math.pow(-rightJoyStick.getX(), 3.0);
+    return leftJoyStick.getX();
+  }
+  
   public double getrightXAxis() {
     // return Math.pow(-rightJoyStick.getX(), 3.0);
-    return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
+    return rightJoyStick.getX();
   }
-//Boolean sets the control mode
-  public boolean setShooterStateButton(){
-    return shooterControlStateSwitch.toggleWhenPressed(ShooterSubsystem.controlShooterModeSet());
+
+
+
+  public boolean spoolShooterMotorManual(){
+    return gamePad.getRawButtonPressed(7);
   }
 
   public boolean shooterManualFire(){
