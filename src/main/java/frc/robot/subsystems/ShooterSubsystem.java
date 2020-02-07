@@ -22,9 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public VictorSPX[] victorsShooterMotors;
   public double setShooterSpeed;
   private PIDController controllerShooterSpeed;
-  public boolean shooterModeImput = true;
+  public boolean shooterModeImput = false;
   public double verticalAngle;
-  public boolean isPIDCorrect;
 
   //Sets motors 
   public ShooterSubsystem() {
@@ -108,4 +107,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
     }
   
+    public boolean manualISAtSpeed(){
+      if(shooterModeImput == false && getCurrentShooterSpeed() == 1600){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
 }
