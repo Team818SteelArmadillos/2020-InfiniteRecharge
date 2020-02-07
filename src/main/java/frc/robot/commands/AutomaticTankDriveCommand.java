@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class TankDriveCommand extends CommandBase {
+public class AutomaticTankDriveCommand extends CommandBase {
   /**
    * Creates a new TankDriveCommand.
    */
-  public TankDriveCommand() {
+  public AutomaticTankDriveCommand() {
     addRequirements(Robot.m_driveSubsystem);
   }
 
