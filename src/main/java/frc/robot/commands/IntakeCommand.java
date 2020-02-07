@@ -28,7 +28,7 @@ public class IntakeCommand extends CommandBase {
       Robot.m_intakeSubsystem.setIntakePistons(0.5);
       intakePistonTimer.start();
       if (intakePistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_intakeSubsystem.setIntakeMotor(.7);
+        Robot.m_intakeSubsystem.setIntakeMotor(1);
         intakePistonTimer.stop();
         intakePistonTimer.reset();
           while (Robot.m_oi.getIntake()){
