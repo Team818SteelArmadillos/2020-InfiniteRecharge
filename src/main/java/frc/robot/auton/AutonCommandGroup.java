@@ -10,8 +10,8 @@ public class AutonCommandGroup extends SequentialCommandGroup {
 
   public AutonCommandGroup(double autonPosition) {
     // Auton 1 = Do nothing
-    // Auton 2 = 
-    // Auton 3 = 
+    // Auton 2 = Drive a few feet off of the line and then do nothing
+    // Auton 3 = Shoot three balls and drive off of the line
     // Auton 4 = Start facing the trench run. Deploy intake and drive forward to get first two balls. Turn around and drive in front of the Power Port.
     // Shoot all five balls.
 
