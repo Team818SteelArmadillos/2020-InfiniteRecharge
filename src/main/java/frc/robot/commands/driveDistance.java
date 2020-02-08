@@ -10,9 +10,9 @@ public cla drew driveDistance.
    */
   public driveDistance(double distance){
     ////dRequirementhere to declare subsystem dependencies.
-    addRequirements(Robot.drive);
-    Robot.drive.resetEncoders();
-    Robot.drive.setDistanceSetPoint(distance);
+    addRequirements(Robot.m_driveSubsystem);
+    Robot.m_driveSubsystem.resetEncoders();
+    Robot.m_driveSubsystem.setDistanceSetPoint(distance);
   }
 
   // Called when the command is initially scheduled.
@@ -23,18 +23,18 @@ public cla drew driveDistance.
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.drive.setBothMotors(Robot.drive.getDistancePIDOutput(Robot.drive.getLeftPosition()), Robot.drive.getDistancePIDOutput(Robot.drive.getRightPosition()));
+    Robot.m_driveSubsystem.setBothMotors(Robot.m_driveSubsystem.getDistancePIDOutput(Robot.m_driveSubsystem.getLeftPosition()), Robot.m_driveSubsystem.getDistancePIDOutput(Robot.m_driveSubsystem.getRightPosition()));
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.drive.setBothMotors(0);
+    Robot.m_driveSubsystem.setBothMotors(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.drive.distanceOnSetpoint();
+    return Robot.m_driveSubsystem.distanceOnSetpoint();
   }
 }
