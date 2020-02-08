@@ -41,10 +41,6 @@ def VisionCode(frame):
     return datadict
     pass
 
-<<<<<<< HEAD:python vision code/VisionHighGoal.py
-
-=======
->>>>>>> feature-vision:python vision code/VisionHighGoal.py
 if __name__ == '__main__':
     global cap
     try:
