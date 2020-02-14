@@ -35,6 +35,7 @@ public class VisionSubsystem extends SubsystemBase {
 
   public void setPowerCell(boolean powerCellMode) {
     mode.setBoolean(powerCellMode);
+    
   }
 
   public void logData() {

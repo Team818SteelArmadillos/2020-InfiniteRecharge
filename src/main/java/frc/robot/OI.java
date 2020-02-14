@@ -92,13 +92,25 @@ public class OI {
 
   public double getleftYAxis() {
     // return Math.pow(-leftJoyStick.getY(), 3.0);
-    return -leftJoyStick.getY() * Math.abs(leftJoyStick.getY());
+    return leftJoyStick.getY() ;
   }
 
+  public double getrightYAxis() {
+    // return Math.pow(rightJoyStick.getY(), 3.0);
+    return rightJoyStick.getY() ;
+  }
+
+  public double getleftXAxis() {
+    // return Math.pow(-rightJoyStick.getX(), 3.0);
+    return leftJoyStick.getX();
+  }
+  
   public double getrightXAxis() {
     // return Math.pow(-rightJoyStick.getX(), 3.0);
-    return -rightJoyStick.getX() * Math.abs(rightJoyStick.getX());
+    return rightJoyStick.getX();
   }
+
+
 
   public boolean spoolShooterMotorManual(){
     return gamePad.getRawButtonPressed(7);

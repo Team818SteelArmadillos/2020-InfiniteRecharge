@@ -11,15 +11,16 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import static frc.robot.Constants.motorPorts.*;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IndexSubsystem extends SubsystemBase {
   private DigitalInput input1, input2, input3;
-  private VictorSPX indexMotor;
+  private TalonFX indexMotor;
 
   public IndexSubsystem() {
-    indexMotor = new VictorSPX(indexMotorPort);
+    indexMotor = new TalonFX(indexMotorPort);
     indexMotor.configFactoryDefault();
     indexMotor.setNeutralMode(NeutralMode.Brake);
     indexMotor.setInverted(inverseIndex);

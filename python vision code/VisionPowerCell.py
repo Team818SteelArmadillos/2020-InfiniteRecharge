@@ -34,6 +34,7 @@ def VisionCode(frame):
             "Horizontal Angle": angleHoriz,
             "Vertical Angle": angleVert,
             "Has Target": hasTarget
+            "Power Cell Mode"
         }
         frame = cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 2)
     else:

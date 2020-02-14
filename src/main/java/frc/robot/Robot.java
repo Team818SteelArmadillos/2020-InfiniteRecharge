@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
   static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   static public VisionSubsystem m_visionSubsystem = new VisionSubsystem();
-  static public DriveTrain drive;
+  static public DriveTrain m_driveSubsystem = new DriveTrain();
   static public IndexSubsystem m_indexSubsystem = new IndexSubsystem();
   
   /**
