@@ -183,9 +183,10 @@ public void shift(int[] shiftPistonPorts){
   public double getRightVelocity() {
     if(isHighGear){
     return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * high);
-  } else {
+    } else {
     return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * low);
   }
+}
 
   public double getVelocity() {
     return (getLeftVelocity() + getRightVelocity()) * 0.5;
