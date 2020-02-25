@@ -48,7 +48,7 @@ double high = 8.41;
 
   PIDController controllerDistance;
 
-  private final double distancePerPulse = ENCODER_PULSES_PER_REVOLUTION;
+
 
   private AnalogGyro gyro;
 
