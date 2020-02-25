@@ -90,7 +90,7 @@ public final class Constants {
     
         public static final double kD = .25;
 
-        public static final double kShooterToleranceRPS = .003;
+        public static final double kShooterToleranceRPM = .003;
 
         //ShooterConversionFactors
         public static final double encoderPulsesPerRevolution = 4096;

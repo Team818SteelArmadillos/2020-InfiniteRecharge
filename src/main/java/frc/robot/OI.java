@@ -24,7 +24,7 @@ public class OI {
   JoystickButton dynamicBraking;
   // Shooter Buttons
   JoystickButton shooterControlStateSwitch;
-  JoystickButton shooterManualFireButton;
+  JoystickButton shooterFireButton;
   JoystickButton spoolShooterManual;
 
   JoystickButton shiftGear;
@@ -47,9 +47,9 @@ public class OI {
     driveStraightButton = new JoystickButton(rightJoyStick, 1);
     shiftGear = new JoystickButton(gamePad, 8);
 
-    // Shooter Method Set and Manual Fire Mode
+    // Shooter Method Set and shoot ball
     shooterControlStateSwitch = new JoystickButton(gamePad, 6);
-    shooterManualFireButton = new JoystickButton(gamePad, 8);
+    shooterFireButton = new JoystickButton(gamePad, 8);
     jogindexUp = new Trigger();
   }
 
@@ -116,7 +116,7 @@ public class OI {
     return gamePad.getRawButtonPressed(7);
   }
 
-  public boolean shooterManualFire(){
+  public boolean shooterFire(){
     return gamePad.getRawButtonPressed(8);
   }
 
