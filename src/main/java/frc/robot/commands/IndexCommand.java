@@ -13,7 +13,7 @@ public class IndexCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    Robot.m_indexSubsystem.setIndexMotor(1);
+    Robot.m_indexSubsystem.setIndexMotor(0);
     jogindexUp = false;
   }
 
@@ -33,6 +33,7 @@ public class IndexCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
+    jogindexUp = false;
     return Robot.m_indexSubsystem.indexSensor();
   }
 }
