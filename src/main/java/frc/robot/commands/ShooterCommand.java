@@ -31,46 +31,46 @@ public class ShooterCommand extends CommandBase {
 
   @Override
   public void execute() {
-    double verticalAngle = Robot.m_visionSubsystem.getY();
-    boolean isVerticalPIDRight = Robot.m_shooterSubsystem.isVerticalPIDRight();
-    boolean isManualShooterSpooled = Robot.m_shooterSubsystem.manualISAtSpeed();
+    //double verticalAngle = Robot.m_visionSubsystem.getY();
+    boolean isAtSpeed = Robot.m_shooterSubsystem.shooterAtSpeed();
+    
     // Setting automatic or manual shooter; automatic = true, manual = false
     if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle
       
       //automatic mode
      
-     Robot.m_shooterSubsystem.shooterSpeed(Robot.m_shooterSubsystem.autoShooterPower());
+    // Robot.m_shooterSubsystem.shooterSpeed(Robot.m_shooterSubsystem.autoShooterPower());
 
      //auto fire if conditions met
-     if(isVerticalPIDRight = true && horizontalPIDAdjustFutureThing < .5){
+     //if(isAtSpeed = true && horizontalPIDAdjustFutureThing < .5 && Robot.m_oi.shooterFire()){
 
-      timer.reset();
-      timer.start();
-      Robot.m_indexSubsystem.setIndexMotor(1.0);
+     // timer.reset();
+     // timer.start();
+     // Robot.m_indexSubsystem.setIndexMotor(1.0);
 
-     }
+    // }
 
-     if(timer.hasPeriodPassed(1)){
+    // if(timer.hasPeriodPassed(1)){
 
-      Robot.m_indexSubsystem.setIndexMotor(0);
-      timer.stop();
-      timer.reset();
+    //  Robot.m_indexSubsystem.setIndexMotor(0);
+    //  timer.stop();
+     // timer.reset();
   
-    }
+    //}
 
   }else{
 
       //manual mode
      if(Robot.m_oi.spoolShooterMotorManual()){
      Robot.m_shooterSubsystem.shooterSpeed(1600);
-     }else if(Robot.m_oi.shooterManualFire()){
+     }else if(Robot.m_oi.shooterFire()){
       Robot.m_shooterSubsystem.shooterSpeed(1600);
      }else{
       Robot.m_shooterSubsystem.shooterSpeed(0);
      }
 
-    if(Robot.m_oi.shooterManualFire() && isManualShooterSpooled == true){
+    if(Robot.m_oi.shooterFire() && isAtSpeed == true){
 
     timer.reset();
     timer.start();
