@@ -69,9 +69,7 @@ public class OI {
    */
 
   public boolean shiftGear(){
-
     return (gamePad.getRawButtonPressed(8));
-
   }
 
   public boolean getElevatorUp() {

@@ -106,29 +106,6 @@ double high = 8.41;
     return isHighGear;
   }
 
-static DoubleSolenoid shiftPiston;
-
-public void shift(int[] shiftPistonPorts){
-
-  shiftPiston = new DoubleSolenoid(shiftPistonPorts[2], shiftPistonPorts[3]);
-  
-  
-  if(Robot.m_oi.shiftGear()){
-
-    if(highGear){
-
-      highGear = false;
-      shiftPiston.set(DoubleSolenoid.Value.kForward);
-
-    }else{
-
-      highGear = true;
-      shiftPiston.set(DoubleSolenoid.Value.kReverse);
-      
-    }
-  }
-}
-
   public void setBothMotors(double speedLeft, double speedRight) {
     setLeftMotors(speedLeft);
     setRightMotors(speedRight);
