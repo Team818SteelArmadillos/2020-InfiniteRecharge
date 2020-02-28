@@ -7,26 +7,25 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.Constants.ShooterConstants.*;
 import frc.robot.subsystems.ShooterSubsystem.*;
 import frc.robot.subsystems.VisionSubsystem.*;
 
-public class ShooterCommand extends CommandBase {
-  
-  Timer timer;
+public class ManualShootCommand extends CommandBase {
 
-  public ShooterCommand() {
+  public ManualShootCommand() {
     addRequirements(Robot.m_shooterSubsystem);
     addRequirements(Robot.m_visionSubsystem);
     addRequirements(Robot.m_indexSubsystem);
-    timer = new Timer();
+    
   }
 
   @Override
   public void initialize() {
+    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_shooterSubsystem.shooterSpeed(1600);
   }
 
   @Override
@@ -35,7 +34,7 @@ public class ShooterCommand extends CommandBase {
     boolean isAtSpeed = Robot.m_shooterSubsystem.shooterAtSpeed();
     
     // Setting automatic or manual shooter; automatic = true, manual = false
-    if(Robot.m_shooterSubsystem.shooterModeImput = true){
+    //if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle
       
       //automatic mode
@@ -59,40 +58,28 @@ public class ShooterCommand extends CommandBase {
   
     //}
 
-  }else{
+  //}else{
 
-      //manual mode
-     if(Robot.m_oi.spoolShooterMotorManual()){
-     Robot.m_shooterSubsystem.shooterSpeed(1600);
-     }else if(Robot.m_oi.shooterFire()){
-      Robot.m_shooterSubsystem.shooterSpeed(1600);
-     }else{
-      Robot.m_shooterSubsystem.shooterSpeed(0);
-     }
 
-    if(Robot.m_oi.shooterFire() && isAtSpeed == true){
+    if(isAtSpeed == true){
 
-    timer.reset();
-    timer.start();
+    
     Robot.m_indexSubsystem.setIndexMotor(1);
 
     }else{
-      Robot.m_shooterSubsystem.shooterSpeed(1600);
-  }
 
-  if(timer.hasPeriodPassed(1)){
     Robot.m_indexSubsystem.setIndexMotor(0);
-    timer.stop();
-    timer.reset();
-
+    
   }
   
   }
 
-  }
+  //}
 
   @Override
   public void end(boolean interrupted) {
+    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_shooterSubsystem.shooterSpeed(0);
   }
 
   @Override
