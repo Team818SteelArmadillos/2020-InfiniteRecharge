@@ -1,6 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import static frc.robot.Constants.oi.*;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -14,7 +16,7 @@ public class OI {
 
   // Joysticks
   Joystick leftJoyStick, rightJoyStick;
-  Joystick gamePad;
+  XboxController gamePad;
   // Elevator Buttons
   JoystickButton elevatorButton;
   // Intake Buttons
@@ -30,11 +32,14 @@ public class OI {
   JoystickButton shiftGear;
   JoystickButton indexButton;
   Trigger jogindexUp;
+  //StateButtons
+  JoystickButton pushButton;
+  JoystickButton autoPickupButton;
 
   public OI() {
     leftJoyStick = new Joystick(leftJoystickPort);
     rightJoyStick = new Joystick(rightJoystickPort);
-    gamePad = new Joystick(gamePadPort);
+    gamePad = new XboxController(gamePadPort);
 
     // Elevator Buttons
     elevatorButton = new JoystickButton(gamePad, 7);
@@ -48,6 +53,11 @@ public class OI {
     shiftGear = new JoystickButton(gamePad, 8);
 
     // Shooter Method Set and shoot ball
+    // State Buttons
+    pushButton = new JoystickButton(rightJoyStick, 1);
+    autoPickupButton = new JoystickButton(leftJoyStick, 1);
+
+    // Shooter Method Set and Manual Fire Mode
     shooterControlStateSwitch = new JoystickButton(gamePad, 6);
     shooterFireButton = new JoystickButton(gamePad, 8);
     jogindexUp = new Trigger();
@@ -117,5 +127,39 @@ public class OI {
   public boolean shooterFire(){
     return gamePad.getRawButtonPressed(8);
   }
+  public boolean getPushButton() {
+    return pushButton.get();
+  }
+
+  public boolean getAutoPickupButton() {
+    return autoPickupButton.get();
+  }
+
+  public boolean getAutoShootButton() {
+    return gamePad.getAButton();
+  }
+
+  public boolean getManualShootButton() {
+    return gamePad.getTriggerAxis(Hand.kRight) > 0.6;
+  }
+
+  public boolean getSpoolShootButton() {
+    return gamePad.getTriggerAxis(Hand.kLeft) > 0.6;
+  }
+
+  public boolean getSpinWofButton() {
+    return gamePad.getBButton();
+  }
+
+  public boolean getPositionWofButton() {
+    return gamePad.getYButton();
+  }
 
 }
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+

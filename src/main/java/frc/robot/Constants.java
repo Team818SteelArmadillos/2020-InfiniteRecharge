@@ -67,10 +67,11 @@ public final class Constants {
     public static class Numbers{
         public static final boolean inverseIndex = false;
         public static final int SPIN_TIMER = 10;
-        public static final int[][] RED = { { 12, 13, 15 }, { 18, 73, 856 } };
-        public static final int[][] GREEN = { { 12, 13, 15 }, { 18, 73, 856 } };
-        public static final int[][] CYAN = { { 12, 13, 15 }, { 18, 73, 856 } };
-        public static final int[][] YELLOW = { { 12, 13, 15 }, { 18, 73, 856 } };
+        public static final double[][] RED = {{0.472,0.362,0.107},{0.525,0.383,0.125}};
+        public static final double[][] GREEN = {{0.260,0.480,0.210},{0.289,0.500,0.225}};
+        public static final double[][] CYAN = {{0.222,0.426,0.316},{0.245,0.435,0.348}};
+        public static final double[][] YELLOW = {{0.408,0.467,0.096},{0.415,0.490,0.114}};
+    
     }
 
     public static class Pistons{
