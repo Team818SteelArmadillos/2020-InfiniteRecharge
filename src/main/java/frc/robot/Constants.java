@@ -8,7 +8,7 @@ public final class Constants {
         public static final int rightJoystickPort = 1;
         public static final int gamePadPort = 2;
         public static final int shiftGear = 3;
-
+    }
     public static class DriveConstants{
         
     //Drive Motors
@@ -38,6 +38,7 @@ public final class Constants {
         public static final int elevatorMotorPortOne = 1;
         // public static final int elevatorMotorPortTwo = 2;
         public static final int indexMotorPort = 3;
+        public static final int intakeMotorPort = 4;
     }
 
     public static class sensorPorts {
@@ -82,7 +83,6 @@ public final class Constants {
         }
 
         public static final int[] shiftPistonPort = {8, 9, 10, 11};
-    }
 
     //Gear Ratios
 

@@ -7,12 +7,10 @@ import frc.robot.RobotLog;
 
 public class IntakeCommand extends CommandBase {
   Timer intakePistonTimer;
-  private double intakePistonVal;
 
-  public IntakeCommand(double intakePistonVal) {
+  public IntakeCommand() {
     addRequirements(Robot.m_intakeSubsystem);
 
-    this.intakePistonVal = intakePistonVal;
     intakePistonTimer = new Timer();
   }
 
@@ -31,16 +29,9 @@ public class IntakeCommand extends CommandBase {
         Robot.m_intakeSubsystem.setIntakeMotor(1);
         intakePistonTimer.stop();
         intakePistonTimer.reset();
-          while (Robot.m_oi.getIntake()){
-          Robot.m_intakeSubsystem.setIntakePistons(0);
-        }
     }
 
     } else if (!Robot.m_oi.getIntake()) {
-
-        if (intakePistonVal == 0){
-          //Nothing
-        } else {
         Robot.m_intakeSubsystem.setIntakeMotor(0);
         intakePistonTimer.start();
         if (intakePistonTimer.hasPeriodPassed(0.5)) {
@@ -48,15 +39,9 @@ public class IntakeCommand extends CommandBase {
           intakePistonTimer.stop();
           intakePistonTimer.reset();
           intakePistonTimer.start();
-            if (intakePistonTimer.hasPeriodPassed(0.5)){
-              Robot.m_intakeSubsystem.setIntakePistons(0);
-              intakePistonTimer.stop();
-              intakePistonTimer.reset();
-            }
       }
     }
   }
-}
 
   @Override
   public boolean isFinished() {
@@ -67,7 +52,6 @@ public class IntakeCommand extends CommandBase {
   public void end(boolean interrupted) {
     RobotLog.putMessage("Interrupted IntakeCommand");
     Robot.m_intakeSubsystem.setIntakeMotor(0);
-    Robot.m_intakeSubsystem.setIntakePistons(0);
 
   }
 }

@@ -30,11 +30,7 @@ public void setIntakeMotor(double Speed){
 }
 
 public void setIntakePistons(double intakePistonVal) {
-  if (intakePistonVal == 0) {
-    intakePistonOne.set(DoubleSolenoid.Value.kOff);
-    intakePistonTwo.set(DoubleSolenoid.Value.kOff);
-
-  } else if (intakePistonVal == 0.5) {
+  if (intakePistonVal == 0.5) {
     intakePistonOne.set(DoubleSolenoid.Value.kReverse);
     intakePistonTwo.set(DoubleSolenoid.Value.kReverse);
 
@@ -47,10 +43,7 @@ public void setIntakePistons(double intakePistonVal) {
   
   public void logDataElevator() {
     SmartDashboard.putNumber("Intake Power:", intakeMotor.getMotorOutputPercent());
-
-    if (intakePistonVal == 0) {
-      SmartDashboard.putString("Intake Piston Position:", "Off");
-    } else if (intakePistonVal == 0.5) {
+      if (intakePistonVal == 0.5) {
       SmartDashboard.putString("Intake Piston Position:", "In");
     } else if (intakePistonVal == 1) {
       SmartDashboard.putString("Intake Piston Position:", "Out");
