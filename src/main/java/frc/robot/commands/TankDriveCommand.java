@@ -7,20 +7,28 @@ public class TankDriveCommand extends CommandBase {
   /**
    * Creates a new TankDriveCommand.
    */
+  boolean prevGearButton;
+
   public TankDriveCommand() {
     addRequirements(Robot.m_driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
+
   @Override
   public void initialize() {
     Robot.m_driveSubsystem.setBothMotors(0);
+    prevGearButton = false;
+    Robot.m_driveSubsystem.shift(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     Robot.m_driveSubsystem.setBothMotors(Robot.m_oi.getleftYAxis(), Robot.m_oi.getrightYAxis());
+    if(Robot.m_oi.shiftGear() && !prevGearButton){
+      Robot.m_driveSubsystem.shift(!Robot.m_driveSubsystem.currentGear());
+    }
   }
 
   // Called once the command ends or is interrupted.

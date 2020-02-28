@@ -20,10 +20,9 @@ public class ShooterSubsystem extends SubsystemBase {
   
   public TalonSRX talonShooterMotor;
   public VictorSPX[] victorsShooterMotors;
-  public double setShooterSpeed;
+  public double targetShooterSpeed;
   private PIDController controllerShooterSpeed;
   public boolean shooterModeImput = false;
-  public double verticalAngle;
 
   //Sets motors 
   public ShooterSubsystem() {
@@ -39,7 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
       victorsShooterMotors[i - 1].follow(talonShooterMotor);
     }
     controllerShooterSpeed = new PIDController(kP, kI, kD);
-    controllerShooterSpeed.setTolerance(kShooterToleranceRPS);
+    controllerShooterSpeed.setTolerance(kShooterToleranceRPM);
   }
 
   //Current shooter speed
@@ -51,39 +50,33 @@ public class ShooterSubsystem extends SubsystemBase {
   //"goal" shooter speed
   public void shooterSpeed(double shooterSpeed) {
     
-    setShooterSpeed = shooterSpeed;
+    targetShooterSpeed = shooterSpeed;
 
   }
 
   public void shootingType() {
 
-    if (setShooterSpeed == 0){ 
+    if (targetShooterSpeed == 0){ 
       
     talonShooterMotor.set(ControlMode.PercentOutput, 0);
 
   }else{
 
-    talonShooterMotor.set(ControlMode.PercentOutput, controllerShooterSpeed.calculate(getCurrentShooterSpeed(), setShooterSpeed));
+    talonShooterMotor.set(ControlMode.PercentOutput, controllerShooterSpeed.calculate(getCurrentShooterSpeed(), targetShooterSpeed));
 
   }
 
   }
 
-  public double getVerticalSin(){
-    return Math.sin(verticalAngle);
-  }
-  //finds distance to target
-  public double getTargetDistance(){
-    return relativeTargetHeight * getVerticalSin();
-  }
+  
 //divides distance by max possible distance to find the destired shooter power
   public double autoShooterPower(){
-    return (getTargetDistance() / maxShooterDistance) * maxShooterMotorSpeed;
+    return (0 / maxShooterDistance) * maxShooterMotorSpeed;
   }
 
   public void logData(){
     SmartDashboard.putNumber("shooter speed", getCurrentShooterSpeed());
-    SmartDashboard.putNumber("target shooter speed", setShooterSpeed);
+    SmartDashboard.putNumber("target shooter speed", targetShooterSpeed);
     SmartDashboard.putNumber("shooter power", talonShooterMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("shooter 0 motor current", talonShooterMotor.getSupplyCurrent());
     //for (int i = 1; i < ShooterMotorArray.length; i++){
@@ -91,28 +84,20 @@ public class ShooterSubsystem extends SubsystemBase {
    // }
   }
 
-  public void controlShooterModeSet(){
+  //public void controlShooterModeSet(){
     
-    shooterModeImput = !shooterModeImput;
+   // shooterModeImput = !shooterModeImput;
 
-  }
+ // }
 
-  public boolean isVerticalPIDRight(){
+  public boolean shooterAtSpeed(){
 
-    if(controllerShooterSpeed.atSetpoint()){
+    if(controllerShooterSpeed.atSetpoint() && targetShooterSpeed > 0){
       return true;
     }else{
       return false;
     }
 
-    }
-  
-    public boolean manualISAtSpeed(){
-      if(shooterModeImput == false && getCurrentShooterSpeed() == 1600){
-        return true;
-      }else{
-        return false;
-      }
     }
 
 }

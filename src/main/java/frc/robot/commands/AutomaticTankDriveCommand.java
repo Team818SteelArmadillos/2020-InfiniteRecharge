@@ -15,6 +15,7 @@ public class AutomaticTankDriveCommand extends CommandBase {
   @Override
   public void initialize() {
     Robot.m_driveSubsystem.setBothMotors(0);
+    Robot.m_driveSubsystem.shift(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
