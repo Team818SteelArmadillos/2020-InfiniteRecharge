@@ -10,10 +10,9 @@ public class IntakeCommand extends CommandBase {
   private double intakePistonVal;
   boolean sampleBool;
 
-  public IntakeCommand(double intakePistonVal) {
+  public IntakeCommand() {
     addRequirements(Robot.m_intakeSubsystem);
 
-    this.intakePistonVal = intakePistonVal;
     intakePistonTimer = new Timer();
     sampleBool = false;
   }
@@ -26,14 +25,17 @@ public class IntakeCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if (sampleBool) {
-      Robot.m_intakeSubsystem.setIntakePistons(0);
-      if (!Robot.m_oi.getIntake())
-        sampleBool = false;
+    if (Robot.m_oi.getIntake()) {
+      Robot.m_intakeSubsystem.setIntakePistons(0.5);
+      intakePistonTimer.start();
+      if (intakePistonTimer.hasPeriodPassed(0.5)) {
+        Robot.m_intakeSubsystem.setIntakeMotor(1);
+        intakePistonTimer.stop();
+        intakePistonTimer.reset();
+    }
 
-    } else {
-      if (Robot.m_oi.getIntake()) {
-        Robot.m_intakeSubsystem.setIntakePistons(0.5);
+    } else if (!Robot.m_oi.getIntake()) {
+        Robot.m_intakeSubsystem.setIntakeMotor(0);
         intakePistonTimer.start();
         if (intakePistonTimer.hasPeriodPassed(0.5)) {
           Robot.m_intakeSubsystem.setIntakeMotor(1);
@@ -49,18 +51,6 @@ public class IntakeCommand extends CommandBase {
         } else {
           Robot.m_intakeSubsystem.setIntakeMotor(0);
           intakePistonTimer.start();
-          if (intakePistonTimer.hasPeriodPassed(0.5)) {
-            Robot.m_intakeSubsystem.setIntakePistons(1);
-            intakePistonTimer.stop();
-            intakePistonTimer.reset();
-            intakePistonTimer.start();
-            if (intakePistonTimer.hasPeriodPassed(0.5)) {
-              Robot.m_intakeSubsystem.setIntakePistons(0);
-              intakePistonTimer.stop();
-              intakePistonTimer.reset();
-            }
-          }
-        }
       }
     }
   }
@@ -74,7 +64,6 @@ public class IntakeCommand extends CommandBase {
   public void end(boolean interrupted) {
     RobotLog.putMessage("Interrupted IntakeCommand");
     Robot.m_intakeSubsystem.setIntakeMotor(0);
-    Robot.m_intakeSubsystem.setIntakePistons(0);
 
   }
 }
