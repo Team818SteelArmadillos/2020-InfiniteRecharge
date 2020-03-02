@@ -13,6 +13,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.commands.ElevatorCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -39,14 +40,12 @@ public class Robot extends TimedRobot {
   public static DriveTrain drive;
   private RobotContainer m_robotContainer;
   static public OI m_oi = new OI();
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
+  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
   static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   static public VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   static public DriveTrain m_driveSubsystem = new DriveTrain();
   static public IndexSubsystem m_indexSubsystem = new IndexSubsystem();
-  
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.motorPorts.elevatorMotorPort, Constants.actuatorPistonPort);
   static RobotState Rstate = RobotState.DEFAULT;
 
   /**
@@ -95,7 +94,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {

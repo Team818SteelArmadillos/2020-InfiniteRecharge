@@ -34,7 +34,7 @@ public class DriveTrain extends SubsystemBase {
   // private FalconFX talonLeft, talonRight;
   private TalonFX[] talonsLeft, talonsRight;
   private TalonFX talonLeft, talonRight;
-  private DoubleSolenoid shiftPistonLeft, shiftPistonRight;
+  private DoubleSolenoid shiftPistonLeft;
 
   private int leftOffset = 0;
   private int rightOffset = 0;
@@ -82,7 +82,6 @@ double high = 8.41;
     }
     
     shiftPistonLeft = new DoubleSolenoid(shiftPistonPorts[0], shiftPistonPorts[1]);
-    shiftPistonRight = new DoubleSolenoid(shiftPistonPorts[0], shiftPistonPorts[1]);
 
   }
 
@@ -95,10 +94,8 @@ double high = 8.41;
     isHighGear = highGear;
     if(highGear){
       shiftPistonLeft.set(DoubleSolenoid.Value.kForward);
-      shiftPistonRight.set(DoubleSolenoid.Value.kForward);
     }else{
       shiftPistonLeft.set(DoubleSolenoid.Value.kReverse);
-      shiftPistonRight.set(DoubleSolenoid.Value.kReverse);
     }
   }
 

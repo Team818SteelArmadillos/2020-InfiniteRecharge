@@ -5,6 +5,7 @@ import static frc.robot.Constants.sensorPorts.*;
 import static frc.robot.Constants.Numbers.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -24,15 +25,14 @@ public class IndexSubsystem extends SubsystemBase {
     indexMotor.configFactoryDefault();
     indexMotor.setNeutralMode(NeutralMode.Brake);
     indexMotor.setInverted(inverseIndex);
-    input1 = new DigitalInput(indexSensor1);
-    input2 = new DigitalInput(indexSensor2);
-    input3 = new DigitalInput(indexSensor3);
+    //input1 = new DigitalInput(indexSensor1);
+    //input2 = new DigitalInput(indexSensor2);
+    //input3 = new DigitalInput(indexSensor3);
   }
 
   public void setindexMotor(double Speed) {
-    if (indexEnabled){
-    indexMotor.set(Speed);
-    }
+    indexMotor.set(TalonFXControlMode.PercentOutput, Speed);
+  }
   public void setIndexMotor(double Speed) {
     indexMotor.set(ControlMode.PercentOutput, Speed);
   }

@@ -20,7 +20,7 @@ public class IndexCommand extends CommandBase {
   @Override
   public void execute() {
     if (Robot.m_indexSubsystem.indexSensor()) {
-      Robot.m_indexSubsystem.setIndexMotor(1.00);
+      Robot.m_indexSubsystem.setIndexMotor(0.5);
     } else {
       Robot.m_indexSubsystem.setIndexMotor(0);
     }

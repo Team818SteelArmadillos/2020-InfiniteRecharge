@@ -8,8 +8,7 @@ import static frc.robot.Constants.oi.*;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import frc.robot.commands.ElevatorCommand;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.ShooterCommand.*;
+import frc.robot.commands.SpoolShooterCommand.*;
 import frc.robot.subsystems.ShooterSubsystem.*;
 
 public class OI {

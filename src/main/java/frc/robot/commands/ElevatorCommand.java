@@ -10,7 +10,7 @@ public class ElevatorCommand extends CommandBase {
   Timer pistonTimer;
   DriverStation driverStation;
 
-  public ElevatorCommand(int pistonVal) {
+  public ElevatorCommand() {
     addRequirements(Robot.m_elevatorSubsystem);
 
     pistonTimer = new Timer();

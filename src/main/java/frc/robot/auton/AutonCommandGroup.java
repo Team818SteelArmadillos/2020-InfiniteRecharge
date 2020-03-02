@@ -2,7 +2,7 @@ package frc.robot.auton;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotLog;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.SpoolShooterCommand;
 import frc.robot.commands.driveDistance;
 import frc.robot.commands.turnAngle;
 
@@ -23,7 +23,7 @@ public class AutonCommandGroup extends SequentialCommandGroup {
     RobotLog.putMessage("Running Auton Position 2");
 
   } else if(autonPosition == 3) {
-    new ShooterCommand();
+    new SpoolShooterCommand();
     new driveDistance(3);
     RobotLog.putMessage("Running Auton Position 3");
 
@@ -31,7 +31,7 @@ public class AutonCommandGroup extends SequentialCommandGroup {
     new driveDistance(3);
     new turnAngle(180);
     new driveDistance(3);
-    new ShooterCommand();
+    new SpoolShooterCommand();
   }
 
 }

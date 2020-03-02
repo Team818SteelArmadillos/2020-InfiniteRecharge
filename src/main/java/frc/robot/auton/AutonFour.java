@@ -1,7 +1,7 @@
 package frc.robot.auton;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.SpoolShooterCommand;
 import frc.robot.commands.driveDistance;
 import frc.robot.commands.turnAngle;
 
@@ -12,6 +12,6 @@ public class AutonFour extends CommandGroup {
     new driveDistance(3);
     new turnAngle(180);
     new driveDistance(3);
-    new ShooterCommand();
+    new SpoolShooterCommand();
   }
 }

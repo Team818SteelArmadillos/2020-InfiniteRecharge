@@ -13,14 +13,12 @@ import frc.robot.RobotLog;
 public class IntakeSubsystem extends SubsystemBase {
   static VictorSPX intakeMotor;
   static DoubleSolenoid intakePistonOne;
-  static DoubleSolenoid intakePistonTwo;
   double intakePistonVal;
 
 public IntakeSubsystem() {
   intakeMotor = new VictorSPX(intakeMotorPort);
-  intakePistonOne = new DoubleSolenoid(intakePistonPortOne[3], intakePistonPortOne[4]);
-  intakePistonTwo = new DoubleSolenoid(intakePistonPortTwo[1], intakePistonPortTwo[2]);
-
+  intakePistonOne = new DoubleSolenoid(intakePistonPortOne[0], intakePistonPortOne[1]);
+  
   RobotLog.putMessage("Running IntakeSubsystem");
 
 } 
@@ -32,11 +30,9 @@ public void setIntakeMotor(double Speed){
 public void setIntakePistons(double intakePistonVal) {
   if (intakePistonVal == 0.5) {
     intakePistonOne.set(DoubleSolenoid.Value.kReverse);
-    intakePistonTwo.set(DoubleSolenoid.Value.kReverse);
 
   } else if (intakePistonVal == 1) {
     intakePistonOne.set(DoubleSolenoid.Value.kForward);
-    intakePistonTwo.set(DoubleSolenoid.Value.kForward);
   }
 
   }

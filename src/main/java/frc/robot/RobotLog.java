@@ -38,7 +38,7 @@ public abstract class RobotLog {
   public static void putMessage(String message) {
 
     Date date = new Date();
-    log = log.substring(0, log.lastIndexOf('\n'));
+    //log = log.substring(0, log.lastIndexOf('\n'));
     log = timeFormat.format(date) + message + "\n" + log;
 
     updateLog();
