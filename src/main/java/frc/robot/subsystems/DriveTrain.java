@@ -65,14 +65,14 @@ double high = 8.41;
     talonLeft.configOpenloopRamp(RAMP_RATE);
     talonRight.configOpenloopRamp(RAMP_RATE);
 
-    talonsLeft = new TalonFX[MOTOR_PORTS_LEFT.length - 1];
+    talonsLeft = TalonFX[MOTOR_PORTS_LEFT.length - 1];
     for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
       talonsLeft[i - 1] = new TalonFX(MOTOR_PORTS_LEFT[i]);
       talonsLeft[i - 1].configFactoryDefault();
       talonsLeft[i - 1].follow(talonLeft);
       talonsLeft[i - 1].setInverted(LEFT_INVERTED);
     }
-    talonsRight = new TalonFX[MOTOR_PORTS_RIGHT.length - 1];
+    talonsRight = TalonFX[MOTOR_PORTS_RIGHT.length - 1];
     for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
       talonsRight[i - 1] = new TalonFX(MOTOR_PORTS_RIGHT[i]);
       talonsRight[i - 1].configFactoryDefault();

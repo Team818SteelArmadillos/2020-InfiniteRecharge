@@ -24,29 +24,30 @@ public class Robot extends TimedRobot {
   enum RobotState {
     DEFAULT, PUSH, AUTOSHOOT, MANUALSHOOT, SPINWOF, POSITIONWOF, AUTOPICKUP;
   }
+
+
+  //private RobotContainer m_robotContainer;
+  static public OI m_oi;
+  public static wofSubsystem wof;
+  static public ElevatorSubsystem m_elevatorSubsystem;
+  static public IntakeSubsystem m_intakeSubsystem;
+  static public ShooterSubsystem m_shooterSubsystem;
+  static public VisionSubsystem m_visionSubsystem;
+  static public DriveTrain m_driveSubsystem;
+  static public IndexSubsystem m_indexSubsystem;
   private Command m_autonomousCommand;
-  private Command m_elevatorCommand = new ElevatorCommand();
-  private Command m_IndexCommand = new IndexCommand();
-  private Command m_WOFCommandPosition = new WOFCommandPosition();
-  private Command m_WOFCommandSpin = new WOFCommandSpin();
+  private Command m_elevatorCommand;
+  private Command m_IndexCommand;
+  private Command m_WOFCommandPosition;
+  private Command m_WOFCommandSpin;
+  private Command m_TankDrive;
   //private Command m_IntakeCommand;
   //private Command m_SpoolShooterCommand;
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
   //private Command m_ManualShootCommand;
   //private Command m_DriveCommand;
-  public static wofSubsystem wof;
-  public static DriveTrain drive;
-  private RobotContainer m_robotContainer;
-  static public OI m_oi = new OI();
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.elevatorMotorPortOne, Constants.elevatorMotorPortTwo, Constants.actuatorPistonPort);
-  static public IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  static public ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  static public VisionSubsystem m_visionSubsystem = new VisionSubsystem();
-  static public DriveTrain m_driveSubsystem = new DriveTrain();
-  static public IndexSubsystem m_indexSubsystem = new IndexSubsystem();
   
-  static public ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem(Constants.motorPorts.elevatorMotorPort, Constants.actuatorPistonPort);
   static RobotState Rstate = RobotState.DEFAULT;
 
   /**
@@ -58,9 +59,23 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    wof = new wofSubsystem();
-    m_robotContainer = new RobotContainer();
-    drive = new DriveTrain();
+
+
+  //private RobotContainer m_robotContainer;
+  m_oi = new OI();
+  wof = new wofSubsystem();
+  m_elevatorSubsystem = new ElevatorSubsystem();
+  m_intakeSubsystem = new IntakeSubsystem();
+  m_shooterSubsystem = new ShooterSubsystem();
+  m_visionSubsystem = new VisionSubsystem();
+  m_driveSubsystem = new DriveTrain();
+  m_indexSubsystem = new IndexSubsystem();
+  //m_elevatorCommand = new ElevatorCommand();
+  m_IndexCommand = new IndexCommand();
+  m_WOFCommandPosition = new WOFCommandPosition();
+  m_WOFCommandSpin = new WOFCommandSpin();
+  m_TankDrive = new TankDriveCommand();
+    
   }
 
   /**
@@ -95,7 +110,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+   // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
