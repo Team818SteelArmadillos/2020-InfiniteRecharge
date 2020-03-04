@@ -32,7 +32,7 @@ import static frc.robot.Constants.Pistons.*;
 
 public class DriveTrain extends SubsystemBase {
   // private FalconFX talonLeft, talonRight;
-  private TalonFX[] talonsLeft, talonsRight;
+  private TalonFX talonsLeft, talonsRight;
   private TalonFX talonLeft, talonRight;
   private DoubleSolenoid shiftPistonLeft;
 
@@ -65,23 +65,21 @@ double high = 8.41;
     talonLeft.configOpenloopRamp(RAMP_RATE);
     talonRight.configOpenloopRamp(RAMP_RATE);
 
-    talonsLeft = TalonFX[MOTOR_PORTS_LEFT.length - 1];
-    for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
-      talonsLeft[i - 1] = new TalonFX(MOTOR_PORTS_LEFT[i]);
-      talonsLeft[i - 1].configFactoryDefault();
-      talonsLeft[i - 1].follow(talonLeft);
-      talonsLeft[i - 1].setInverted(LEFT_INVERTED);
-    }
-    talonsRight = TalonFX[MOTOR_PORTS_RIGHT.length - 1];
-    for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
-      talonsRight[i - 1] = new TalonFX(MOTOR_PORTS_RIGHT[i]);
-      talonsRight[i - 1].configFactoryDefault();
-      talonsRight[i - 1].follow(talonRight);
-      talonsRight[i - 1].setInverted(!LEFT_INVERTED);
-      // Should the inverted be Left
-    }
+  
+      talonsLeft = new TalonFX(MOTOR_PORTS_LEFT[1]);
+      talonsLeft.configFactoryDefault();
+      talonsLeft.follow(talonLeft);
+      talonsLeft.setInverted(LEFT_INVERTED);
     
-    shiftPistonLeft = new DoubleSolenoid(shiftPistonPorts[0], shiftPistonPorts[1]);
+ 
+      talonsRight = new TalonFX(MOTOR_PORTS_RIGHT[1]);
+      talonsRight.configFactoryDefault();
+      talonsRight.follow(talonRight);
+      talonsRight.setInverted(!LEFT_INVERTED);
+      // Should the inverted be Left
+    
+    
+    shiftPistonLeft = new DoubleSolenoid(13, shiftPistonPorts[0], shiftPistonPorts[1]);
 
   }
 
@@ -178,7 +176,7 @@ double high = 8.41;
     if (leftTemp == 0) {
       return talonLeft.getTemperature();
     } else if (leftTemp > 0 && MOTOR_PORTS_LEFT.length > leftTemp) {
-      return talonsLeft[leftTemp].getTemperature();
+      return talonsLeft.getTemperature();
     } else {
       return 0;
     }
@@ -186,11 +184,11 @@ double high = 8.41;
   }
   public double getMaxLeftTemp() {
     double maxLeftTemp = talonLeft.getTemperature();
-    for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++){
-      if(talonsLeft[i].getTemperature()>maxLeftTemp) {
-        maxLeftTemp = talonsLeft[i].getTemperature();
+  
+      if(talonsLeft.getTemperature()>maxLeftTemp) {
+        maxLeftTemp = talonsLeft.getTemperature();
       }
-    }
+    
     return maxLeftTemp;
   }
 
@@ -198,7 +196,7 @@ double high = 8.41;
     if (rightTemp == 0) {
       return talonRight.getTemperature();
     } else if (rightTemp > 0 && MOTOR_PORTS_RIGHT.length > rightTemp) {
-      return talonsRight[rightTemp].getTemperature();
+      return talonsRight.getTemperature();
     } else {
       return 0;
     }
@@ -206,11 +204,11 @@ double high = 8.41;
 
   public double getMaxRightTemp() {
     double maxRightTemp = talonRight.getTemperature();
-    for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++){
-      if(talonsRight[i].getTemperature()>maxRightTemp) {
-        maxRightTemp = talonsRight[i].getTemperature();
+    
+      if(talonsRight.getTemperature()>maxRightTemp) {
+        maxRightTemp = talonsRight.getTemperature();
+  
       }
-    }
     return maxRightTemp;
   }
   public double getAngle(){
@@ -260,26 +258,26 @@ double high = 8.41;
       talonRight.setNeutralMode(NeutralMode.Brake);
       talonLeft.setNeutralMode(NeutralMode.Brake);
 
-      for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
-        talonsLeft[i - 1].setNeutralMode(NeutralMode.Brake);
-      }
+      
+        talonsLeft.setNeutralMode(NeutralMode.Brake);
+      
 
-      for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
-        talonsRight[i - 1].setNeutralMode(NeutralMode.Brake);
-      }
+     
+        talonsRight.setNeutralMode(NeutralMode.Brake);
+      
 
     } else {
 
       talonRight.setNeutralMode(NeutralMode.Coast);
       talonLeft.setNeutralMode(NeutralMode.Coast);
 
-      for (int i = 1; i < MOTOR_PORTS_LEFT.length; i++) {
-        talonsLeft[i - 1].setNeutralMode(NeutralMode.Coast);
-      }
+      
+        talonsLeft.setNeutralMode(NeutralMode.Coast);
+      
 
-      for (int i = 1; i < MOTOR_PORTS_RIGHT.length; i++) {
-        talonsRight[i - 1].setNeutralMode(NeutralMode.Coast);
-      }
+     
+        talonsRight.setNeutralMode(NeutralMode.Coast);
+      
     }
   }
 }

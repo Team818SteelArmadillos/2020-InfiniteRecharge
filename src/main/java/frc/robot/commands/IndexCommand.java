@@ -19,11 +19,15 @@ public class IndexCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if (Robot.m_indexSubsystem.indexSensor()) {
-      Robot.m_indexSubsystem.setIndexMotor(0.5);
-    } else {
-      Robot.m_indexSubsystem.setIndexMotor(0);
-    }
+
+  Robot.m_indexSubsystem.setIndexMotor(Robot.m_oi.getIndex());
+
+    // if (Robot.m_indexSubsystem.indexSensor()) {
+    //   Robot.m_indexSubsystem.setIndexMotor(0.5);
+    // } else {
+    //   Robot.m_indexSubsystem.setIndexMotor(0);
+    // }
+
   }
 
   @Override
@@ -34,6 +38,7 @@ public class IndexCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     jogindexUp = false;
-    return Robot.m_indexSubsystem.indexSensor();
+    //return Robot.m_indexSubsystem.indexSensor();
+  return false;
   }
 }

@@ -70,12 +70,18 @@ public class OI {
     return (gamePad.getPOV() == 0);
   }
 
+  public double getIndex() {
+    return gamePad.getRawAxis(0) ;
+  }
+
+
   /*
    * manualOverrideButton.whileHeld(new ManualCommand());
    * zeroEncoderTrigger.whenActive(new ZeroEncoderCommand());
    * driveStraightButton.whileHeld(new DriveStraight());
    * dynamicBraking.whileHeld(new DynamicBrakingCommand());
    */
+
 
   public boolean shiftGear(){
     return (gamePad.getRawButtonPressed(8));
@@ -90,11 +96,11 @@ public class OI {
   }
     //I don't know what number I'm meant to use
   public boolean shiftGears(){
-    return (gamePad.getRawButtonPressed(8));
+    return (rightJoyStick.getRawButtonPressed(11));
   }
 
   public boolean getIntake(){
-    return (gamePad.getRawButtonPressed(6));
+    return (gamePad.getRawButton(6));
   }
 
   public double getleftYAxis() {

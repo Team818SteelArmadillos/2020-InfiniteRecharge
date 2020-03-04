@@ -7,52 +7,56 @@ import frc.robot.RobotLog;
 
 public class IntakeCommand extends CommandBase {
   Timer intakePistonTimer;
-  private double intakePistonVal;
-  boolean sampleBool;
-
+  boolean Spin;
   public IntakeCommand() {
     addRequirements(Robot.m_intakeSubsystem);
 
     intakePistonTimer = new Timer();
-    sampleBool = false;
   }
 
   @Override
   public void initialize() {
     Robot.m_intakeSubsystem.setIntakePistons(0);
     RobotLog.putMessage("Running IntakeCommand");
+    Spin = false;
   }
 
   @Override
   public void execute() {
+    // if (Robot.m_oi.getIntake()) {
+    //   Robot.m_intakeSubsystem.setIntakePistons(1);
+    //   if(intakePistonTimer.get()==0)
+    //   intakePistonTimer.start();
+    //   if (intakePistonTimer.hasPeriodPassed(0.5)) {
+    //     Spin = true;
+    //     intakePistonTimer.stop();
+    //     intakePistonTimer.reset();
+    // }
+
+    // } else if (!Robot.m_oi.getIntake()) {
+    //     Spin = false;
+    //     if(intakePistonTimer.get()==0)
+    //     intakePistonTimer.start();
+    //     if (intakePistonTimer.hasPeriodPassed(0.5)) {
+    //       Robot.m_intakeSubsystem.setIntakePistons(0.5);
+    //       intakePistonTimer.stop();
+    //       intakePistonTimer.reset();
+    //     }
+    //   } 
+    //  if(Spin)
+    //   Robot.m_intakeSubsystem.setIntakeMotor(1);
+    //   else
+    //   Robot.m_intakeSubsystem.setIntakeMotor(0);
+
     if (Robot.m_oi.getIntake()) {
+      Robot.m_intakeSubsystem.setIntakePistons(1);
+      Robot.m_intakeSubsystem.setIntakeMotor(1);
+    }else{
       Robot.m_intakeSubsystem.setIntakePistons(0.5);
-      intakePistonTimer.start();
-      if (intakePistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_intakeSubsystem.setIntakeMotor(1);
-        intakePistonTimer.stop();
-        intakePistonTimer.reset();
+      Robot.m_intakeSubsystem.setIntakeMotor(0);
+      
     }
 
-    } else if (!Robot.m_oi.getIntake()) {
-        Robot.m_intakeSubsystem.setIntakeMotor(0);
-        intakePistonTimer.start();
-        if (intakePistonTimer.hasPeriodPassed(0.5)) {
-          Robot.m_intakeSubsystem.setIntakeMotor(1);
-          intakePistonTimer.stop();
-          intakePistonTimer.reset();
-          sampleBool = true;
-        }
-
-      } else if (!Robot.m_oi.getIntake()) {
-
-        if (intakePistonVal == 0) {
-          // Nothing
-        } else {
-          Robot.m_intakeSubsystem.setIntakeMotor(0);
-          intakePistonTimer.start();
-      }
-    }
   }
 
   @Override

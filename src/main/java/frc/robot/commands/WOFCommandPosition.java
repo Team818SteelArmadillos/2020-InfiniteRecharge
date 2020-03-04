@@ -16,15 +16,15 @@ public class WOFCommandPosition extends CommandBase {
    */
   public WOFCommandPosition() {
     addRequirements(Robot.wof);
-    addRequirements(Robot.drive);
+    addRequirements(Robot.m_driveSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     if(Robot.wof.getWofColor() != Robot.wof.getGameData()){
-      Robot.drive.setBothMotors(0);
-      Robot.drive.setBrakeMode(true);
+      Robot.m_driveSubsystem.setBothMotors(0);
+      Robot.m_driveSubsystem.setBrakeMode(true);
       Robot.wof.doSpin();
     }
   }
@@ -37,7 +37,7 @@ public class WOFCommandPosition extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.drive.setBrakeMode(false);
+    Robot.m_driveSubsystem.setBrakeMode(false);
     Robot.wof.notSpin();
   }
 

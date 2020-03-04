@@ -20,7 +20,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   public ElevatorSubsystem() {
     elevatorMotorOne = new TalonFX(elevatorMotorPortOne);
     // elevatorMotorTwo = new TalonFX(elevatorMotorPortTwo);
-    actuatorPiston = new DoubleSolenoid(actuatorPistonPort[0], actuatorPistonPort[1]);
+    actuatorPiston = new DoubleSolenoid(13, actuatorPistonPort[0], actuatorPistonPort[1]);
 
     elevatorMotorOne.configFactoryDefault();
     elevatorMotorOne.setNeutralMode(NeutralMode.Brake);

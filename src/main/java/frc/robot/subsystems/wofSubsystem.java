@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class wofSubsystem extends SubsystemBase {
   private VictorSPX wofSPX; 
-  private final ColorSensorV3 wofColor;
+ // private final ColorSensorV3 wofColor;
   private final I2C.Port i2cPort;
   Color currentColor;
 
@@ -33,8 +33,8 @@ public class wofSubsystem extends SubsystemBase {
   public wofSubsystem() {
     i2cPort = I2C.Port.kOnboard;
     wofSPX = new VictorSPX(WOF_MOTOR_PORT);
-    wofColor = new ColorSensorV3(i2cPort);
-    currentColor = wofColor.getColor();
+  //  wofColor = new ColorSensorV3(i2cPort);
+   // currentColor = wofColor.getColor();
   }
 
   public void doSpin(){

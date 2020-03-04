@@ -30,16 +30,15 @@ public class IndexSubsystem extends SubsystemBase {
     //input3 = new DigitalInput(indexSensor3);
   }
 
-  public void setindexMotor(double Speed) {
-    indexMotor.set(TalonFXControlMode.PercentOutput, Speed);
-  }
   public void setIndexMotor(double Speed) {
-    indexMotor.set(ControlMode.PercentOutput, Speed);
+    indexMotor.set(TalonFXControlMode.PercentOutput, -Speed);
   }
 
-  public boolean indexSensor() {
+
+ /* public boolean indexSensor() {
     return (!input1.get() && !input2.get()) || input3.get();
   }
+*/
 
   public void doIndex() {
     indexMotor.set(ControlMode.PercentOutput, 1);

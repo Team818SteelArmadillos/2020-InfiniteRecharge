@@ -17,9 +17,9 @@ public class turnAngle extends CommandBase {
   public turnAngle(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    addRequirements(Robot.drive);
-    Robot.drive.resetGyro();
-    Robot.drive.setDistanceSetPoint(angle);
+    addRequirements(Robot.m_driveSubsystem);
+    Robot.m_driveSubsystem.resetGyro();
+    Robot.m_driveSubsystem.setDistanceSetPoint(angle);
   }
   
   // Called when the command is initially scheduled.
@@ -30,19 +30,19 @@ public class turnAngle extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = Robot.drive.getDistancePIDOutput(Robot.drive.getAngle());
-    Robot.drive.setBothMotors(-speed, speed);
+    double speed = Robot.m_driveSubsystem.getDistancePIDOutput(Robot.m_driveSubsystem.getAngle());
+    Robot.m_driveSubsystem.setBothMotors(-speed, speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.drive.setBothMotors(0);
+    Robot.m_driveSubsystem.setBothMotors(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.drive.distanceOnSetpoint();
+    return Robot.m_driveSubsystem.distanceOnSetpoint();
   }
 }

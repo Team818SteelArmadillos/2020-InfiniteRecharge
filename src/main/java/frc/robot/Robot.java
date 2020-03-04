@@ -13,7 +13,6 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.commands.ElevatorCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -36,14 +35,14 @@ public class Robot extends TimedRobot {
   static public VisionSubsystem m_visionSubsystem;
   static public DriveTrain m_driveSubsystem;
   static public IndexSubsystem m_indexSubsystem;
-  private Command m_autonomousCommand;
-  private Command m_elevatorCommand;
+  // private Command m_autonomousCommand;
+  // private Command m_elevatorCommand;
   private Command m_IndexCommand;
-  private Command m_WOFCommandPosition;
-  private Command m_WOFCommandSpin;
+  // private Command m_WOFCommandPosition;
+  // private Command m_WOFCommandSpin;
   private Command m_TankDrive;
-  //private Command m_IntakeCommand;
-  //private Command m_SpoolShooterCommand;
+  private Command m_IntakeCommand;
+  private Command m_SpoolShooterCommand;
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
   //private Command m_ManualShootCommand;
@@ -73,9 +72,11 @@ public class Robot extends TimedRobot {
   m_indexSubsystem = new IndexSubsystem();
   //m_elevatorCommand = new ElevatorCommand();
   m_IndexCommand = new IndexCommand();
-  m_WOFCommandPosition = new WOFCommandPosition();
-  m_WOFCommandSpin = new WOFCommandSpin();
   m_TankDrive = new TankDriveCommand();
+  // m_WOFCommandPosition = new WOFCommandPosition();
+  // m_WOFCommandSpin = new WOFCommandSpin();
+  m_IntakeCommand = new IntakeCommand();
+  m_SpoolShooterCommand = new SpoolShooterCommand();
     
   }
 
@@ -113,10 +114,10 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+    // // schedule the autonomous command (example)
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.schedule();
+    // }
   }
 
   /**
@@ -128,9 +129,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
-    }
+    // if (m_autonomousCommand != null) {
+    //   m_autonomousCommand.cancel();
+    // }
     Rstate = RobotState.DEFAULT;
     startDefault();
   }
@@ -232,17 +233,21 @@ public class Robot extends TimedRobot {
   private void startDefault() {
     //TankDriveCommand
     //IntakeCommand
-    //SpoolShooterCommand
+    m_SpoolShooterCommand.schedule();
+    m_TankDrive.schedule();
+    m_IntakeCommand.schedule();
     m_IndexCommand.schedule();
-    m_elevatorCommand.schedule();
+  //   m_elevatorCommand.schedule();
   }
 
   private void endDefault() {
     //TankDriveCommand
     //IntakeCommand
-    //SpoolShooterCommand
+    m_SpoolShooterCommand.cancel();
+    m_TankDrive.cancel();
+    m_IntakeCommand.cancel();
     m_IndexCommand.cancel();
-    m_elevatorCommand.cancel();
+    // m_elevatorCommand.cancel();
   }
 
   private void startPush() {
@@ -272,19 +277,19 @@ public class Robot extends TimedRobot {
   }
 
   private void startPositionWof() {
-    m_WOFCommandPosition.schedule();
+    // m_WOFCommandPosition.schedule();
   }
 
   private void endPositionWof() {
-    m_WOFCommandPosition.cancel();
+    // m_WOFCommandPosition.cancel();
   }
 
   private void startSpinWof() {
-    m_WOFCommandSpin.schedule();
+    // m_WOFCommandSpin.schedule();
   }
 
   private void endSpinWof() {
-    m_WOFCommandPosition.cancel();
+    // m_WOFCommandPosition.cancel();
   }
 
   private void startAutoPickup() {

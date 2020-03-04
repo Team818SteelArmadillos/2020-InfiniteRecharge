@@ -17,14 +17,14 @@ public class IntakeSubsystem extends SubsystemBase {
 
 public IntakeSubsystem() {
   intakeMotor = new VictorSPX(intakeMotorPort);
-  intakePistonOne = new DoubleSolenoid(intakePistonPortOne[0], intakePistonPortOne[1]);
+  intakePistonOne = new DoubleSolenoid(13, intakePistonPortOne[0], intakePistonPortOne[1]);
   
   RobotLog.putMessage("Running IntakeSubsystem");
 
 } 
 
 public void setIntakeMotor(double Speed){
-  intakeMotor.set(ControlMode.PercentOutput, Speed);
+  intakeMotor.set(ControlMode.PercentOutput, -Speed);
 }
 
 public void setIntakePistons(double intakePistonVal) {
