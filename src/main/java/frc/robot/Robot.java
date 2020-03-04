@@ -38,8 +38,8 @@ public class Robot extends TimedRobot {
   // private Command m_autonomousCommand;
   // private Command m_elevatorCommand;
   private Command m_IndexCommand;
-  // private Command m_WOFCommandPosition;
-  // private Command m_WOFCommandSpin;
+  private Command m_WOFCommandPosition;
+  private Command m_WOFCommandSpin;
   private Command m_TankDrive;
   private Command m_IntakeCommand;
   private Command m_SpoolShooterCommand;
@@ -73,8 +73,8 @@ public class Robot extends TimedRobot {
   //m_elevatorCommand = new ElevatorCommand();
   m_IndexCommand = new IndexCommand();
   m_TankDrive = new TankDriveCommand();
-  // m_WOFCommandPosition = new WOFCommandPosition();
-  // m_WOFCommandSpin = new WOFCommandSpin();
+  m_WOFCommandPosition = new WOFCommandPosition();
+  m_WOFCommandSpin = new WOFCommandSpin();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
     
@@ -237,6 +237,8 @@ public class Robot extends TimedRobot {
     m_TankDrive.schedule();
     m_IntakeCommand.schedule();
     m_IndexCommand.schedule();
+    m_WOFCommandSpin.schedule();
+    // m_WOFCommandPosition.schedule();
   //   m_elevatorCommand.schedule();
   }
 
@@ -247,6 +249,8 @@ public class Robot extends TimedRobot {
     m_TankDrive.cancel();
     m_IntakeCommand.cancel();
     m_IndexCommand.cancel();
+    // m_WOFCommandPosition.cancel();
+    m_WOFCommandSpin.cancel();
     // m_elevatorCommand.cancel();
   }
 

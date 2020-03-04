@@ -24,6 +24,7 @@ public class SpoolShooterCommand extends CommandBase {
     Robot.m_shooterSubsystem.shooterSpeed(16000);
     }else{
     Robot.m_shooterSubsystem.shooterSpeed(0);
+    Robot.m_shooterSubsystem.logData();
     }
   }
 
