@@ -83,9 +83,6 @@ public class OI {
    */
 
 
-  public boolean shiftGear(){
-    return (gamePad.getRawButtonPressed(8));
-  }
 
   public boolean getElevatorUp() {
     return (gamePad.getPOV() == 0);
@@ -96,11 +93,11 @@ public class OI {
   }
     //I don't know what number I'm meant to use
   public boolean shiftGears(){
-    return (rightJoyStick.getRawButtonPressed(11));
+    return (rightJoyStick.getRawButtonPressed(2));
   }
 
   public boolean getIntake(){
-    return (gamePad.getRawButton(6));
+    return (gamePad.getXButton());
   }
 
   public double getleftYAxis() {
@@ -124,20 +121,15 @@ public class OI {
   }
 
 
-
-  public boolean spoolShooterMotorManual(){
-    return gamePad.getRawButtonPressed(7);
-  }
-
   public boolean shooterFire(){
     return gamePad.getRawButtonPressed(8);
   }
   public boolean getPushButton() {
-    return pushButton.get();
+    return (rightJoyStick.getRawButtonPressed(1));
   }
 
   public boolean getAutoPickupButton() {
-    return autoPickupButton.get();
+    return (leftJoyStick.getRawButtonPressed(1));
   }
 
   public boolean getAutoShootButton() {

@@ -26,7 +26,7 @@ public class TankDriveCommand extends CommandBase {
   @Override
   public void execute() {
     Robot.m_driveSubsystem.setBothMotors(Robot.m_oi.getleftYAxis(), Robot.m_oi.getrightYAxis());
-    if(Robot.m_oi.shiftGear() && !prevGearButton){
+    if(Robot.m_oi.shiftGears() && !prevGearButton){
       Robot.m_driveSubsystem.shift(!Robot.m_driveSubsystem.currentGear());
     }
   }
