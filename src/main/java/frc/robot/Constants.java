@@ -27,7 +27,7 @@ public final class Constants {
     public static final int[] MOTOR_PORTS_LEFT = {1, 2};
     public static final int[] MOTOR_PORTS_RIGHT = {3, 4};
     public static final boolean LEFT_INVERTED = false;
-    public static final double RAMP_RATE = 0;
+    public static final double RAMP_RATE = 3;
     public static final double wheelCircumference = 6*Math.PI;
     public static final int[] COOLING_PORTS = {5, 6};
     
