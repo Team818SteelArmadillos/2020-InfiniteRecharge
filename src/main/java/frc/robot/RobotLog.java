@@ -47,7 +47,7 @@ public abstract class RobotLog {
 
   private static void updateLog() {
     try {
-      SmartDashboard.putString("RobotLog", log);
+      System.out.println( log);
     } catch (IllegalArgumentException iae) {
       System.out.println(iae.getMessage());
     }

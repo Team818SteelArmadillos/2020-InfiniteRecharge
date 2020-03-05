@@ -50,7 +50,7 @@ public class IntakeCommand extends CommandBase {
 
     if (Robot.m_oi.getIntake()) {
       Robot.m_intakeSubsystem.setIntakePistons(1);
-      Robot.m_intakeSubsystem.setIntakeMotor(1);
+      Robot.m_intakeSubsystem.setIntakeMotor(0.75);
     }else{
       Robot.m_intakeSubsystem.setIntakePistons(0.5);
       Robot.m_intakeSubsystem.setIntakeMotor(0);

@@ -32,6 +32,10 @@ public class WOFCommandSpin extends CommandBase{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (Robot.m_oi.getSpinWofButton()){
+      Robot.wof.doSpin();
+    }
+  
     Robot.wof.logData();
   }
 

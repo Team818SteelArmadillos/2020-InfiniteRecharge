@@ -52,6 +52,7 @@ public final class Constants {
         //public static final int indexSensor2 = 3;
         //public static final int indexSensor3 = 4;
         //public static final int DRIVE_GYRO = 2;
+        public static final int digitalInputPort = 3;
     }
     public static class Numbers{
         public static final boolean inverseIndex = false;

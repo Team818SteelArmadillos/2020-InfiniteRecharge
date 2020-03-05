@@ -238,7 +238,7 @@ public class Robot extends TimedRobot {
     m_IntakeCommand.schedule();
     m_IndexCommand.schedule();
     m_WOFCommandSpin.schedule();
-    // m_WOFCommandPosition.schedule();
+    m_WOFCommandPosition.schedule();
   //   m_elevatorCommand.schedule();
   }
 
@@ -249,7 +249,7 @@ public class Robot extends TimedRobot {
     m_TankDrive.cancel();
     m_IntakeCommand.cancel();
     m_IndexCommand.cancel();
-    // m_WOFCommandPosition.cancel();
+    m_WOFCommandPosition.cancel();
     m_WOFCommandSpin.cancel();
     // m_elevatorCommand.cancel();
   }
