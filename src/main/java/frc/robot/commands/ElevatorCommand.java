@@ -4,6 +4,7 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotLog;
 
 public class ElevatorCommand extends CommandBase {
@@ -18,43 +19,53 @@ public class ElevatorCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    Robot.m_elevatorSubsystem.setPiston(0);
+    Robot.m_elevatorSubsystem.setPiston(0.5);
     RobotLog.putMessage("Running ElevatorCommand");
   }
 
   @Override
   public void execute() {
     if (Robot.m_oi.getElevatorUp()) {
-      Robot.m_elevatorSubsystem.setPiston(0.5);
-      pistonTimer.start();
-      if (pistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_elevatorSubsystem.setElevatorMotor(.7);
+      Robot.m_elevatorSubsystem.setPiston(1);
+      if(pistonTimer.get() == 0){
+        pistonTimer.start();
+      }
+      if (pistonTimer.hasPeriodPassed(0.1)) {
+        Robot.m_elevatorSubsystem.setElevatorMotor(.2);
+        SmartDashboard.putNumber("time", .2);
         pistonTimer.stop();
         pistonTimer.reset();
       }
     } else if (Robot.m_oi.getElevatorDown()) {
-      Robot.m_elevatorSubsystem.setPiston(0.5);
-      pistonTimer.start();
-      if (pistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_elevatorSubsystem.setElevatorMotor(-.7);
+      Robot.m_elevatorSubsystem.setPiston(1);
+      if(pistonTimer.get() == 0){
+        pistonTimer.start();
+      }
+      if (pistonTimer.hasPeriodPassed(0.1)) {
+        Robot.m_elevatorSubsystem.setElevatorMotor(-.2);
+        SmartDashboard.putNumber("time", -.2);
         pistonTimer.stop();
         pistonTimer.reset();
       }
 
-    } else if (driverStation.getMatchTime() <= 1.5) {
-      Robot.m_elevatorSubsystem.setElevatorMotor(0);
-      pistonTimer.start();
-      if (pistonTimer.hasPeriodPassed(0.5)) {
-        Robot.m_elevatorSubsystem.setPiston(1);
-        pistonTimer.stop();
-        pistonTimer.reset();
-      }
+    // } else if (driverStation.getMatchTime() <= 1.5) {
+    //  // Robot.m_elevatorSubsystem.setElevatorMotor(0);
+    //  SmartDashboard.putNumber("time", 0);
+    //   pistonTimer.start();
+    //   if (pistonTimer.hasPeriodPassed(0.5)) {
+    //     Robot.m_elevatorSubsystem.setPiston(1);
+    //     pistonTimer.stop();
+    //     pistonTimer.reset();
+    //   }
       
     } else {
       Robot.m_elevatorSubsystem.setElevatorMotor(0);
-      pistonTimer.start();
-      if (pistonTimer.hasPeriodPassed(0.5))
-        Robot.m_elevatorSubsystem.setPiston(1);
+      SmartDashboard.putNumber("time", 0);
+      if(pistonTimer.get() == 0){
+        pistonTimer.start();
+      }
+      if (pistonTimer.hasPeriodPassed(0.1))
+        Robot.m_elevatorSubsystem.setPiston(0.5);
         pistonTimer.stop();
         pistonTimer.reset();
     }

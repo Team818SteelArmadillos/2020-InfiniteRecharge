@@ -251,7 +251,7 @@ public class Robot extends TimedRobot {
     m_IndexCommand.cancel();
     m_WOFCommandPosition.cancel();
     m_WOFCommandSpin.cancel();
-   m_elevatorCommand.cancel();
+    m_elevatorCommand.cancel();
   }
 
   private void startPush() {
@@ -290,10 +290,11 @@ public class Robot extends TimedRobot {
 
   private void startSpinWof() {
     // m_WOFCommandSpin.schedule();
+    m_WOFCommandSpin.schedule();
   }
 
   private void endSpinWof() {
-    // m_WOFCommandPosition.cancel();
+    m_WOFCommandPosition.cancel();
   }
 
   private void startAutoPickup() {
