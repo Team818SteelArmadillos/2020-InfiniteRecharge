@@ -25,7 +25,6 @@ public class WOFCommandPosition extends CommandBase {
     if(Robot.wof.getWofColor() != Robot.wof.getGameData()){
       Robot.m_driveSubsystem.setBothMotors(0);
       Robot.m_driveSubsystem.setBrakeMode(true);
-      Robot.wof.doSpin();
     }
   }
 

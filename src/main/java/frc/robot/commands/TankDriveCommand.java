@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
@@ -20,6 +21,7 @@ public class TankDriveCommand extends CommandBase {
     Robot.m_driveSubsystem.setBothMotors(0);
     prevGearButton = false;
     Robot.m_driveSubsystem.shift(false);
+    SmartDashboard.putString("thingy", "start tank");
   }
 
   // Called every time the scheduler runs while the command is scheduled.

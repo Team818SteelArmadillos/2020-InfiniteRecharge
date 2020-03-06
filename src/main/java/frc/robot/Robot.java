@@ -3,14 +3,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.wofSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.wofSubsystem;
 import frc.robot.commands.*;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 
@@ -33,7 +34,7 @@ public class Robot extends TimedRobot {
   static public IntakeSubsystem m_intakeSubsystem;
   static public ShooterSubsystem m_shooterSubsystem;
   static public VisionSubsystem m_visionSubsystem;
-  static public DriveTrain m_driveSubsystem;
+  static public DriveSubsystem m_driveSubsystem;
   static public IndexSubsystem m_indexSubsystem;
   // private Command m_autonomousCommand;
   private Command m_elevatorCommand;
@@ -68,7 +69,7 @@ public class Robot extends TimedRobot {
   m_intakeSubsystem = new IntakeSubsystem();
   m_shooterSubsystem = new ShooterSubsystem();
   m_visionSubsystem = new VisionSubsystem();
-  m_driveSubsystem = new DriveTrain();
+  m_driveSubsystem = new DriveSubsystem();
   m_indexSubsystem = new IndexSubsystem();
   m_elevatorCommand = new ElevatorCommand();
   m_IndexCommand = new IndexCommand();
@@ -237,9 +238,7 @@ public class Robot extends TimedRobot {
     m_TankDrive.schedule();
     m_IntakeCommand.schedule();
     m_IndexCommand.schedule();
-    m_WOFCommandSpin.schedule();
-    m_WOFCommandPosition.schedule();
-    m_elevatorCommand.schedule();
+    // m_elevatorCommand.schedule();
   }
 
   private void endDefault() {
@@ -249,9 +248,7 @@ public class Robot extends TimedRobot {
     m_TankDrive.cancel();
     m_IntakeCommand.cancel();
     m_IndexCommand.cancel();
-    m_WOFCommandPosition.cancel();
-    m_WOFCommandSpin.cancel();
-    m_elevatorCommand.cancel();
+    // m_elevatorCommand.cancel();
   }
 
   private void startPush() {
@@ -281,15 +278,14 @@ public class Robot extends TimedRobot {
   }
 
   private void startPositionWof() {
-    // m_WOFCommandPosition.schedule();
+    m_WOFCommandPosition.schedule();
   }
 
   private void endPositionWof() {
-    // m_WOFCommandPosition.cancel();
+    m_WOFCommandPosition.cancel();
   }
 
   private void startSpinWof() {
-    // m_WOFCommandSpin.schedule();
     m_WOFCommandSpin.schedule();
   }
 
