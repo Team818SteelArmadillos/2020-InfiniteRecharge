@@ -30,10 +30,10 @@ import static frc.robot.Constants.Pistons.*;
 
 
 
-public class DriveTrain extends SubsystemBase {
-  // private FalconFX talonLeft, talonRight;
-  private TalonFX talonsLeft, talonsRight;
-  private TalonFX talonLeft, talonRight;
+public class DriveSubsystem extends SubsystemBase {
+  // private FalconFX talonLeft, talonRight1;
+  private TalonFX talonLeft2, talonRight2;
+  private TalonFX talonLeft1, talonRight1;
   private DoubleSolenoid shiftPistonLeft;
 
   private int leftOffset = 0;
@@ -52,32 +52,29 @@ double high = 8.41;
 
   private AnalogGyro gyro;
 
-  public DriveTrain() {
-    talonLeft = new TalonFX(MOTOR_PORTS_LEFT[0]);
-    talonRight = new TalonFX(MOTOR_PORTS_RIGHT[0]);
+  public DriveSubsystem() {
+    talonLeft1 = new TalonFX(MOTOR_PORTS_LEFT[0]);
+    talonRight1 = new TalonFX(MOTOR_PORTS_RIGHT[0]);
+    talonLeft2 = new TalonFX(MOTOR_PORTS_LEFT[1]);
+    talonRight2 = new TalonFX(MOTOR_PORTS_RIGHT[1]);
 
-    talonLeft.configFactoryDefault();
-    talonRight.configFactoryDefault();
+    talonLeft1.configFactoryDefault();
+    talonLeft1.setInverted(LEFT_INVERTED);
+    talonLeft1.configOpenloopRamp(RAMP_RATE);
 
-    talonLeft.setInverted(LEFT_INVERTED);
-    talonRight.setInverted(!LEFT_INVERTED);
+    talonRight1.configFactoryDefault();
+    talonRight1.setInverted(!LEFT_INVERTED);
+    talonRight1.configOpenloopRamp(RAMP_RATE);
 
-    talonLeft.configOpenloopRamp(RAMP_RATE);
-    talonRight.configOpenloopRamp(RAMP_RATE);
-
-  
-      talonsLeft = new TalonFX(MOTOR_PORTS_LEFT[1]);
-      talonsLeft.configFactoryDefault();
-      talonsLeft.follow(talonLeft);
-      talonsLeft.setInverted(LEFT_INVERTED);
-    
- 
-      talonsRight = new TalonFX(MOTOR_PORTS_RIGHT[1]);
-      talonsRight.configFactoryDefault();
-      talonsRight.follow(talonRight);
-      talonsRight.setInverted(!LEFT_INVERTED);
-      // Should the inverted be Left
-    
+    talonLeft2.configFactoryDefault();
+    talonLeft2.setInverted(LEFT_INVERTED);
+    talonLeft2.follow(talonLeft1);
+    talonLeft2.setInverted(LEFT_INVERTED);
+      
+    talonRight2.configFactoryDefault();
+    talonRight2.setInverted(!LEFT_INVERTED);
+    talonRight2.follow(talonRight1);
+    talonRight2.setInverted(!LEFT_INVERTED);
     
     shiftPistonLeft = new DoubleSolenoid(13, shiftPistonPorts[0], shiftPistonPorts[1]);
 
@@ -115,11 +112,11 @@ double high = 8.41;
   }
 
   public void setLeftMotors(double speed) {
-    talonLeft.set(ControlMode.PercentOutput, speed);
+    talonLeft1.set(ControlMode.PercentOutput, speed);
   }
 
   public void setRightMotors(double speed) {
-    talonRight.set(ControlMode.PercentOutput, speed);
+    talonRight1.set(ControlMode.PercentOutput, speed);
   }
 
   public void setBothMotors(double speed) {
@@ -128,16 +125,16 @@ double high = 8.41;
   }
 
   public void resetEncoders() {
-    talonLeft.setSelectedSensorPosition(0);
-    talonRight.setSelectedSensorPosition(0);
+    talonLeft1.setSelectedSensorPosition(0);
+    talonRight1.setSelectedSensorPosition(0);
   }
 
   public double getLeftPosition() {
-    return (talonLeft.getSelectedSensorPosition() - leftOffset) * distancePerPulse;
+    return (talonLeft1.getSelectedSensorPosition() - leftOffset) * distancePerPulse;
   }
 
   public double getRightPosition() {
-    return (talonRight.getSelectedSensorPosition() - rightOffset) * distancePerPulse;
+    return (talonRight1.getSelectedSensorPosition() - rightOffset) * distancePerPulse;
   }
 
   public double getPosition() {
@@ -146,17 +143,17 @@ double high = 8.41;
 
   public double getLeftVelocity() {
     if(isHighGear){
-    return talonLeft.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * high);
+    return talonLeft1.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * high);
     } else {
-      return talonLeft.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * low);
+      return talonLeft1.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * low);
     }
   }
 
   public double getRightVelocity() {
     if(isHighGear){
-    return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * high);
+    return talonRight1.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * high);
     } else {
-    return talonRight.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * low);
+    return talonRight1.getSelectedSensorVelocity() * distancePerPulse * Constants.VELOCITY_CALCULATIONS_PER_SECOND * Math.PI / (12 * low);
   }
 }
 
@@ -165,7 +162,7 @@ double high = 8.41;
   }
 
   public double getRightTemp() {
-    return talonRight.getTemperature();
+    return talonRight1.getTemperature();
   }
 
   public boolean distanceOnSetpoint() {
@@ -174,19 +171,19 @@ double high = 8.41;
   
   public double getLeftTemp(int leftTemp) {
     if (leftTemp == 0) {
-      return talonLeft.getTemperature();
+      return talonLeft1.getTemperature();
     } else if (leftTemp > 0 && MOTOR_PORTS_LEFT.length > leftTemp) {
-      return talonsLeft.getTemperature();
+      return talonLeft2.getTemperature();
     } else {
       return 0;
     }
 
   }
   public double getMaxLeftTemp() {
-    double maxLeftTemp = talonLeft.getTemperature();
+    double maxLeftTemp = talonLeft1.getTemperature();
   
-      if(talonsLeft.getTemperature()>maxLeftTemp) {
-        maxLeftTemp = talonsLeft.getTemperature();
+      if(talonLeft2.getTemperature()>maxLeftTemp) {
+        maxLeftTemp = talonLeft2.getTemperature();
       }
     
     return maxLeftTemp;
@@ -194,19 +191,19 @@ double high = 8.41;
 
   public double getRightTemp(int rightTemp) {
     if (rightTemp == 0) {
-      return talonRight.getTemperature();
+      return talonRight1.getTemperature();
     } else if (rightTemp > 0 && MOTOR_PORTS_RIGHT.length > rightTemp) {
-      return talonsRight.getTemperature();
+      return talonRight2.getTemperature();
     } else {
       return 0;
     }
   }
 
   public double getMaxRightTemp() {
-    double maxRightTemp = talonRight.getTemperature();
+    double maxRightTemp = talonRight1.getTemperature();
     
-      if(talonsRight.getTemperature()>maxRightTemp) {
-        maxRightTemp = talonsRight.getTemperature();
+      if(talonRight2.getTemperature()>maxRightTemp) {
+        maxRightTemp = talonRight2.getTemperature();
   
       }
     return maxRightTemp;
@@ -241,8 +238,8 @@ double high = 8.41;
 
     }
 
-    SmartDashboard.putNumber("Left Power", talonLeft.getMotorOutputPercent());
-    SmartDashboard.putNumber("Right Power", talonRight.getMotorOutputPercent());
+    SmartDashboard.putNumber("Left Power", talonLeft1.getMotorOutputPercent());
+    SmartDashboard.putNumber("Right Power", talonRight1.getMotorOutputPercent());
 
     SmartDashboard.putNumber("Gyro Angle", getAngle());
     
@@ -255,28 +252,28 @@ double high = 8.41;
 
     if (brakeMode) {
 
-      talonRight.setNeutralMode(NeutralMode.Brake);
-      talonLeft.setNeutralMode(NeutralMode.Brake);
+      talonRight1.setNeutralMode(NeutralMode.Brake);
+      talonLeft1.setNeutralMode(NeutralMode.Brake);
 
       
-        talonsLeft.setNeutralMode(NeutralMode.Brake);
+        talonLeft2.setNeutralMode(NeutralMode.Brake);
       
 
      
-        talonsRight.setNeutralMode(NeutralMode.Brake);
+        talonRight2.setNeutralMode(NeutralMode.Brake);
       
 
     } else {
 
-      talonRight.setNeutralMode(NeutralMode.Coast);
-      talonLeft.setNeutralMode(NeutralMode.Coast);
+      talonRight1.setNeutralMode(NeutralMode.Coast);
+      talonLeft1.setNeutralMode(NeutralMode.Coast);
 
       
-        talonsLeft.setNeutralMode(NeutralMode.Coast);
+        talonLeft2.setNeutralMode(NeutralMode.Coast);
       
 
      
-        talonsRight.setNeutralMode(NeutralMode.Coast);
+        talonRight2.setNeutralMode(NeutralMode.Coast);
       
     }
   }

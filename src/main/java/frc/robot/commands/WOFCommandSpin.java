@@ -26,12 +26,18 @@ public class WOFCommandSpin extends CommandBase{
     timer.start();
     Robot.m_driveSubsystem.setBothMotors(0);
     Robot.m_driveSubsystem.setBrakeMode(true);
-    Robot.wof.doSpin();
+    Robot.wof.notSpin();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (Robot.m_oi.getSpinWofButton()){
+      Robot.wof.doSpin();
+    }else{
+      Robot.wof.notSpin();
+    }
+  
     Robot.wof.logData();
   }
 
@@ -45,6 +51,7 @@ public class WOFCommandSpin extends CommandBase{
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasPeriodPassed(SPIN_TIMER);
+    //return timer.hasPeriodPassed(SPIN_TIMER);
+    return false;
   }
 }

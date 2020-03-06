@@ -44,7 +44,7 @@ public class ShooterSubsystem extends SubsystemBase {
   //Current shooter speed
   public double getCurrentShooterSpeed(){
 
-    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond / encoderPulsesPerRevolution / 60;
+    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond * 60 / encoderPulsesPerRevolution;
 
   }
   //"goal" shooter speed

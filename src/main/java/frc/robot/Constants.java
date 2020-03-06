@@ -16,7 +16,7 @@ public final class Constants {
     public static final int[] MOTOR_PORTS_LEFT = {1, 2};
     public static final int[] MOTOR_PORTS_RIGHT = {3, 4};
     public static final boolean LEFT_INVERTED = true;
-    public static final double RAMP_RATE = 0;
+    public static final double RAMP_RATE = 0.7;
     public static final double wheelCircumference = 6*Math.PI;
     //public static final int[] COOLING_PORTS = {5, 6};
     
@@ -52,6 +52,7 @@ public final class Constants {
         //public static final int indexSensor2 = 3;
         //public static final int indexSensor3 = 4;
         //public static final int DRIVE_GYRO = 2;
+        public static final int digitalInputPort = 3;
     }
     public static class Numbers{
         public static final boolean inverseIndex = false;
