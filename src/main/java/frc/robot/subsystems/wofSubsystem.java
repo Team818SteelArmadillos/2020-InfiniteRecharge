@@ -7,24 +7,25 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import static frc.robot.Constants.motorPorts.*;
-import static frc.robot.Constants.sensorPorts.*;
-import static frc.robot.Constants.Numbers.*;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import static frc.robot.Constants.Numbers.CYAN;
+import static frc.robot.Constants.Numbers.GREEN;
+import static frc.robot.Constants.Numbers.RED;
+import static frc.robot.Constants.Numbers.YELLOW;
+import static frc.robot.Constants.motorPorts.WOF_MOTOR_PORT;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.ColorSensorV3;
 
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class wofSubsystem extends SubsystemBase {
-  private VictorSPX wofSPX; 
+  private TalonSRX wofSRX; 
  private final ColorSensorV3 wofColor;
   private final I2C.Port i2cPort;
   Color currentColor;
@@ -32,17 +33,17 @@ public class wofSubsystem extends SubsystemBase {
 
   public wofSubsystem() {
     i2cPort = I2C.Port.kOnboard;
-    wofSPX = new VictorSPX(WOF_MOTOR_PORT);
+    wofSRX = new TalonSRX(WOF_MOTOR_PORT);
    wofColor = new ColorSensorV3(i2cPort);
    currentColor = wofColor.getColor();
   }
 
   public void doSpin(){
-    wofSPX.set(ControlMode.PercentOutput, 0.75);
+    wofSRX.set(ControlMode.PercentOutput, 0.75);
   }
 
   public void notSpin(){
-    wofSPX.set(ControlMode.PercentOutput, 0);
+    wofSRX.set(ControlMode.PercentOutput, 0);
   }
   
   public char getWofColor(){

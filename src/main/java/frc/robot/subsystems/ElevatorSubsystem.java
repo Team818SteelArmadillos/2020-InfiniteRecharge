@@ -35,7 +35,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     elevatorMotorOne.configFactoryDefault();
     elevatorMotorOne.setNeutralMode(NeutralMode.Brake);
-    elevatorMotorOne.configOpenloopRamp(0.2, 30);
+    elevatorMotorOne.configOpenloopRamp(10, 30);
 
     RobotLog.putMessage("Running ElevatorSubsystem");
   }
