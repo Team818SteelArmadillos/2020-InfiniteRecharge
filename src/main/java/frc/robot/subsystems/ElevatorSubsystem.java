@@ -41,7 +41,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void setElevatorMotor(double Speed) {
-    double elevatorSpeed = Speed;
+    double elevatorSpeed = 0;
+    elevatorSpeed = Speed;
     if(limitSwitch.get() && elevatorSpeed < 0)
     setElevatorMotor(Speed = 0);
     elevatorMotorOne.set(ControlMode.PercentOutput, elevatorSpeed);
