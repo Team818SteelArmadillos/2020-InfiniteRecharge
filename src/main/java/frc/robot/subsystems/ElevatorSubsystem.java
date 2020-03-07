@@ -23,7 +23,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   static TalonFX elevatorMotorOne;
   // static TalonFX elevatorMotorTwo;
   static DoubleSolenoid actuatorPiston;
-  static DigitalInput limitSwitch;
+  // static DigitalInput limitSwitch;
   double pistonVal;
 
   public ElevatorSubsystem() {
@@ -31,11 +31,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     // elevatorMotorTwo = new TalonFX(elevatorMotorPortTwo);
     actuatorPiston = new DoubleSolenoid(13, actuatorPistonPort[0], actuatorPistonPort[1]);
 
-    limitSwitch = new DigitalInput(digitalInputPort);
+    // limitSwitch = new DigitalInput(digitalInputPort);
 
     elevatorMotorOne.configFactoryDefault();
     elevatorMotorOne.setNeutralMode(NeutralMode.Brake);
-    elevatorMotorOne.configOpenloopRamp(10, 30);
+    // elevatorMotorOne.configOpenloopRamp(10, 30);
 
     RobotLog.putMessage("Running ElevatorSubsystem");
   }
@@ -43,11 +43,15 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void setElevatorMotor(double Speed) {
     double elevatorSpeed = 0;
     elevatorSpeed = Speed;
-    if(limitSwitch.get() && elevatorSpeed < 0)
-    setElevatorMotor(Speed = 0);
+    // if(limitSwitch.get() && elevatorSpeed < 0)
+    // setElevatorMotor(Speed = 0);
     elevatorMotorOne.set(ControlMode.PercentOutput, elevatorSpeed);
     // elevatorMotorTwo.set(ControlMode.PercentOutput, -Speed);
-    
+     if(elevatorSpeed == 0){
+        elevatorMotorOne.configOpenloopRamp(0, 30);
+      }else{
+       elevatorMotorOne.configOpenloopRamp(10, 30);
+   }
   }
 
   public void setPiston(double pistonVal) {
