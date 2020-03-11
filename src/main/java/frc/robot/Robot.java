@@ -14,6 +14,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.LEDVisionLightSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
   static public VisionSubsystem m_visionSubsystem;
   static public DriveSubsystem m_driveSubsystem;
   static public IndexSubsystem m_indexSubsystem;
+  static public LEDVisionLightSubsystem m_ledvisionlightSubsystem;
   // private Command m_autonomousCommand;
   private Command m_elevatorCommand;
   private Command m_IndexCommand;
@@ -71,6 +73,7 @@ public class Robot extends TimedRobot {
   m_visionSubsystem = new VisionSubsystem();
   m_driveSubsystem = new DriveSubsystem();
   m_indexSubsystem = new IndexSubsystem();
+  m_ledvisionlightSubsystem = new LEDVisionLightSubsystem();
   m_elevatorCommand = new ElevatorCommand();
   m_IndexCommand = new IndexCommand();
   m_TankDrive = new TankDriveCommand();
@@ -78,7 +81,7 @@ public class Robot extends TimedRobot {
   m_WOFCommandSpin = new WOFCommandSpin();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
-    
+
   }
 
   /**
