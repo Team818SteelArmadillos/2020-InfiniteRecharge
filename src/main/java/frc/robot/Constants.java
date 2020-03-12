@@ -23,7 +23,7 @@ public final class Constants {
     //Chassis constants
     public static final double WHEEL_DIAMETER = 6;
     public static final double ENCODER_GEAR_RATIO = 1;
-    public static final int ENCODER_PULSES_PER_REVOLUTION = 4096;
+    public static final int ENCODER_PULSES_PER_REVOLUTION = 2048;
     public static final int VELOCITY_CALCULATION_PER_SECOND = 10;
     public static final double distancePerPulse = wheelCircumference/(double) ENCODER_PULSES_PER_REVOLUTION;
     }

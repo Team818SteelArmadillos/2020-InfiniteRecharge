@@ -8,7 +8,7 @@ public class LEDVisionLightSubsystem extends SubsystemBase {
   static Solenoid LEDLight;
 
   public LEDVisionLightSubsystem() {
-    LEDLight = new Solenoid(Constants.LEDLight);
+    LEDLight = new Solenoid(13, Constants.LEDLight);
     LEDLight.set(true);
   }
 

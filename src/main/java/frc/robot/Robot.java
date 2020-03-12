@@ -83,6 +83,9 @@ public class Robot extends TimedRobot {
   m_WOFCommandSpin = new WOFCommandSpin();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
+  m_AutoShiftTankDrive = new AutomaticTankDriveCommand();
+  m_ManualShootCommand = new ManualShootCommand();
+
   }
 
   /**

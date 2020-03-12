@@ -41,7 +41,7 @@ public class IndexCommand extends CommandBase {
       }
     } else */
     if (Robot.m_indexSubsystem.indexSensor()) {
-      Robot.m_indexSubsystem.setIndexMotor(0.6);
+      Robot.m_indexSubsystem.setIndexMotor(0.5);
       indexTimer.reset();
     } else {
       Robot.m_indexSubsystem.setIndexMotor(0);
