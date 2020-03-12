@@ -25,14 +25,14 @@ public class ManualShootCommand extends CommandBase {
   @Override
   public void initialize() {
     Robot.m_indexSubsystem.setIndexMotor(0);
-    Robot.m_shooterSubsystem.shooterSpeed(1600);
+    Robot.m_shooterSubsystem.shooterSpeed(1);
   }
 
   @Override
   public void execute() {
     //double verticalAngle = Robot.m_visionSubsystem.getY();
     boolean isAtSpeed = Robot.m_shooterSubsystem.shooterAtSpeed();
-    
+    Robot.m_shooterSubsystem.shootingType();
     // Setting automatic or manual shooter; automatic = true, manual = false
     //if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle
@@ -60,11 +60,12 @@ public class ManualShootCommand extends CommandBase {
 
   //}else{
 
+    Robot.m_shooterSubsystem.logData();
 
-    if(isAtSpeed == true){
+    if(Robot.m_shooterSubsystem.getCurrentShooterSpeed() > 2700){
 
     
-    Robot.m_indexSubsystem.setIndexMotor(1);
+    Robot.m_indexSubsystem.setIndexMotor(.5);
 
     }else{
 

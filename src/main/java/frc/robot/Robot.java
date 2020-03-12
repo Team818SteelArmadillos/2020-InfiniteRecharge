@@ -42,8 +42,10 @@ public class Robot extends TimedRobot {
   private Command m_WOFCommandPosition;
   private Command m_WOFCommandSpin;
   private Command m_TankDrive;
+  private Command m_AutoShiftTankDrive;
   private Command m_IntakeCommand;
   private Command m_SpoolShooterCommand;
+  private Command m_ManualShootCommand;
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
   //private Command m_ManualShootCommand;
@@ -78,7 +80,8 @@ public class Robot extends TimedRobot {
   m_WOFCommandSpin = new WOFCommandSpin();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
-    
+  m_ManualShootCommand = new ManualShootCommand();
+  m_AutoShiftTankDrive = new AutomaticTankDriveCommand();
   }
 
   /**
@@ -235,20 +238,22 @@ public class Robot extends TimedRobot {
     //TankDriveCommand
     //IntakeCommand
     m_SpoolShooterCommand.schedule();
-    m_TankDrive.schedule();
-    m_IntakeCommand.schedule();
+    //m_TankDrive.schedule();
+    m_AutoShiftTankDrive.schedule();
+    //m_IntakeCommand.schedule();
     m_IndexCommand.schedule();
-    // m_elevatorCommand.schedule();
+     m_elevatorCommand.schedule();
   }
 
   private void endDefault() {
     //TankDriveCommand
     //IntakeCommand
     m_SpoolShooterCommand.cancel();
-    m_TankDrive.cancel();
-    m_IntakeCommand.cancel();
+    //m_TankDrive.cancel();
+    m_AutoShiftTankDrive.cancel();
+   // m_IntakeCommand.cancel();
     m_IndexCommand.cancel();
-    // m_elevatorCommand.cancel();
+     m_elevatorCommand.cancel();
   }
 
   private void startPush() {
@@ -268,13 +273,15 @@ public class Robot extends TimedRobot {
   }
 
   private void startManualShoot() {
-    //ManualShootCommand
-    //TankDriveCommand
+    m_ManualShootCommand.schedule();
+    //m_TankDrive.schedule();
+    m_AutoShiftTankDrive.schedule();
   }
 
   private void endManualShoot() {
-    //ManualShootCommand
-    //TankDriveCommand
+    m_ManualShootCommand.cancel();
+    //m_TankDrive.cancel();
+    m_AutoShiftTankDrive.cancel();
   }
 
   private void startPositionWof() {

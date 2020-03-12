@@ -31,7 +31,7 @@ public class ElevatorCommand extends CommandBase {
         pistonTimer.start();
       }
       if (pistonTimer.hasPeriodPassed(0.1)) {
-        Robot.m_elevatorSubsystem.setElevatorMotor(.2);
+        Robot.m_elevatorSubsystem.setElevatorMotor(.7);
         SmartDashboard.putNumber("time", .2);
         pistonTimer.stop();
         pistonTimer.reset();
@@ -42,7 +42,7 @@ public class ElevatorCommand extends CommandBase {
         pistonTimer.start();
       }
       if (pistonTimer.hasPeriodPassed(0.1)) {
-        Robot.m_elevatorSubsystem.setElevatorMotor(-.2);
+        Robot.m_elevatorSubsystem.setElevatorMotor(-.7);
         SmartDashboard.putNumber("time", -.2);
         pistonTimer.stop();
         pistonTimer.reset();
@@ -64,11 +64,12 @@ public class ElevatorCommand extends CommandBase {
       if(pistonTimer.get() == 0){
         pistonTimer.start();
       }
-      if (pistonTimer.hasPeriodPassed(0.1))
+      if (pistonTimer.hasPeriodPassed(0.1)){
         Robot.m_elevatorSubsystem.setPiston(0.5);
         pistonTimer.stop();
         pistonTimer.reset();
     }
+  }
   }
 
   // idk if it goes in finished or not but we need to get timer in feild so it

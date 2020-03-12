@@ -50,7 +50,7 @@ public class ElevatorSubsystem extends SubsystemBase {
      if(elevatorSpeed == 0){
         elevatorMotorOne.configOpenloopRamp(0, 30);
       }else{
-       elevatorMotorOne.configOpenloopRamp(10, 30);
+       elevatorMotorOne.configOpenloopRamp(1.5, 30);
    }
   }
 
