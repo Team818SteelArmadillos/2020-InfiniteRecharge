@@ -52,7 +52,7 @@ public class IntakeCommand extends CommandBase {
       Robot.m_intakeSubsystem.setIntakePistons(1);
       Robot.m_intakeSubsystem.setIntakeMotor(0.75);
     }else{
-      Robot.m_intakeSubsystem.setIntakePistons(0.5);
+     /* Robot.m_intakeSubsystem.setIntakePistons(0.5); */
       Robot.m_intakeSubsystem.setIntakeMotor(0);
       
     }

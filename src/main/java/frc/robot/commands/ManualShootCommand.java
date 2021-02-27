@@ -51,7 +51,7 @@ public class ManualShootCommand extends CommandBase {
     // }
 
     // if(timer.hasPeriodPassed(1)){
-
+      
     //  Robot.m_indexSubsystem.setIndexMotor(0);
     //  timer.stop();
      // timer.reset();

@@ -12,7 +12,7 @@ public class AutonTwo extends CommandGroup {
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
     // arm.
-    new driveDistance(3);
+    new driveDistance(60);
     RobotLog.putMessage("Running Auton Position 2");
   }
 }

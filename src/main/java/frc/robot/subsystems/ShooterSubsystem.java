@@ -44,7 +44,8 @@ public class ShooterSubsystem extends SubsystemBase {
   //Current shooter speed
   public double getCurrentShooterSpeed(){
 
-    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond * -60 / encoderPulsesPerRevolution;
+    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond * -1 * 60 / encoderPulsesPerRevolution;
+    //Revolutions per mintue. Negative is to account for the change in direction.
 
   }
   //"goal" shooter speed
@@ -64,6 +65,8 @@ public class ShooterSubsystem extends SubsystemBase {
     talonShooterMotor.set(ControlMode.PercentOutput, 1);
     //talonShooterMotor.set(ControlMode.PercentOutput, controllerShooterSpeed.calculate(getCurrentShooterSpeed(), targetShooterSpeed));
 
+    //If target shooter speed is 0, then set talon shooter motor to 0
+    //If target shooter speed is not 0, then set talon shooter motor to 1 
   }
 
   }
@@ -96,6 +99,7 @@ public class ShooterSubsystem extends SubsystemBase {
       return true;
     }else{
       return false;
+      
     }
 
     }

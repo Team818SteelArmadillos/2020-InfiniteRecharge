@@ -14,6 +14,7 @@ public class IntakeSubsystem extends SubsystemBase {
   static VictorSPX intakeMotor;
   static DoubleSolenoid intakePistonOne;
   double intakePistonVal;
+  public boolean isPistonOut = false;
 
 public IntakeSubsystem() {
   intakeMotor = new VictorSPX(intakeMotorPort);
@@ -30,9 +31,10 @@ public void setIntakeMotor(double Speed){
 public void setIntakePistons(double intakePistonVal) {
   if (intakePistonVal == 0.5) {
     intakePistonOne.set(DoubleSolenoid.Value.kReverse);
-
+    isPistonOut = false;
   } else if (intakePistonVal == 1) {
     intakePistonOne.set(DoubleSolenoid.Value.kForward);
+    isPistonOut = true;
   }
 
   }

@@ -47,11 +47,11 @@ public class IndexCommand extends CommandBase {
       Robot.m_indexSubsystem.setIndexMotor(0);
       indexTimer.reset();
     }
-    if (Robot.m_oi.getIntake() && !Robot.m_indexSubsystem.index1Sensor()) {
+    if (Robot.m_oi.getIntake() /*&& !Robot.m_indexSubsystem.index1Sensor()*/) {
       Robot.m_intakeSubsystem.setIntakePistons(1);
-      Robot.m_intakeSubsystem.setIntakeMotor(0.75);
+      Robot.m_intakeSubsystem.setIntakeMotor(0.85);
     } else {
-      Robot.m_intakeSubsystem.setIntakePistons(0.5);
+      /* Robot.m_intakeSubsystem.setIntakePistons(0.5); */
       Robot.m_intakeSubsystem.setIntakeMotor(0);
     }
   }
