@@ -5,11 +5,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
+
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.wofSubsystem;
+
 import frc.robot.subsystems.IndexSubsystem;
-import frc.robot.subsystems.wofSubsystem;
+
+import frc.robot.auton.AutonTwo;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -30,8 +31,6 @@ public class Robot extends TimedRobot {
 
   //private RobotContainer m_robotContainer;
   static public OI m_oi;
-  public static wofSubsystem wof;
-  static public ElevatorSubsystem m_elevatorSubsystem;
   static public IntakeSubsystem m_intakeSubsystem;
   static public ShooterSubsystem m_shooterSubsystem;
   static public VisionSubsystem m_visionSubsystem;
@@ -68,19 +67,15 @@ public class Robot extends TimedRobot {
 
   //private RobotContainer m_robotContainer;
   m_oi = new OI();
-  wof = new wofSubsystem();
-  m_elevatorSubsystem = new ElevatorSubsystem();
+ 
   m_intakeSubsystem = new IntakeSubsystem();
   m_shooterSubsystem = new ShooterSubsystem();
   m_visionSubsystem = new VisionSubsystem();
   m_driveSubsystem = new DriveSubsystem();
   m_indexSubsystem = new IndexSubsystem();
   m_ledvisionlightSubsystem = new LEDVisionLightSubsystem();
-  m_elevatorCommand = new ElevatorCommand();
   m_IndexCommand = new IndexCommand();
   m_TankDrive = new TankDriveCommand();
-  m_WOFCommandPosition = new WOFCommandPosition();
-  m_WOFCommandSpin = new WOFCommandSpin();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
   m_AutoShiftTankDrive = new AutomaticTankDriveCommand();
@@ -120,7 +115,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-   // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+  
+   //driveDistance auton = new driveDistance(60);
+   //TimeDrive auton = new TimeDrive();
+   //if (auton != null) {
+   //   auton.schedule();
+   //}
+   
+   
+    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // // schedule the autonomous command (example)
     // if (m_autonomousCommand != null) {
@@ -142,6 +145,7 @@ public class Robot extends TimedRobot {
     // }
     Rstate = RobotState.DEFAULT;
     startDefault();
+
   }
 
   /**
@@ -167,18 +171,6 @@ public class Robot extends TimedRobot {
           endDefault();
           startManualShoot();
           Rstate = RobotState.MANUALSHOOT;
-        }
-
-        if(m_oi.getSpinWofButton()) {
-          endDefault();
-          startSpinWof();
-          Rstate = RobotState.SPINWOF;
-        }
-
-        if(m_oi.getPositionWofButton()) {
-          endDefault();
-          startPositionWof();
-          Rstate = RobotState.POSITIONWOF;
         }
 
         if(m_oi.getAutoPickupButton()) {
@@ -212,22 +204,6 @@ public class Robot extends TimedRobot {
         }
         break;
 
-      case SPINWOF:
-        if(!m_oi.getSpinWofButton()) {
-          endSpinWof();
-          startDefault();
-          Rstate = RobotState.DEFAULT;
-        }
-        break;
-
-      case POSITIONWOF:
-        if(!m_oi.getPositionWofButton()) {
-          endPositionWof();
-          startDefault();
-          Rstate = RobotState.DEFAULT;
-        }
-        break;
-
       case AUTOPICKUP:
         if(!m_oi.getAutoPickupButton()) {
           endAutoPickup();
@@ -245,8 +221,7 @@ public class Robot extends TimedRobot {
     //m_TankDrive.schedule();
     m_AutoShiftTankDrive.schedule();
     //m_IntakeCommand.schedule();
-    m_IndexCommand.schedule();
-     m_elevatorCommand.schedule();
+    //m_IndexCommand.schedule();
   }
 
   private void endDefault() {
@@ -256,8 +231,7 @@ public class Robot extends TimedRobot {
     //m_TankDrive.cancel();
     m_AutoShiftTankDrive.cancel();
    // m_IntakeCommand.cancel();
-    m_IndexCommand.cancel();
-     m_elevatorCommand.cancel();
+    //m_IndexCommand.cancel();
   }
 
   private void startPush() {
@@ -288,21 +262,6 @@ public class Robot extends TimedRobot {
     m_AutoShiftTankDrive.cancel();
   }
 
-  private void startPositionWof() {
-    m_WOFCommandPosition.schedule();
-  }
-
-  private void endPositionWof() {
-    m_WOFCommandPosition.cancel();
-  }
-
-  private void startSpinWof() {
-    m_WOFCommandSpin.schedule();
-  }
-
-  private void endSpinWof() {
-    m_WOFCommandPosition.cancel();
-  }
 
   private void startAutoPickup() {
     //AutoPickupCommand

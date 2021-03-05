@@ -31,7 +31,7 @@ public class IndexCommand extends CommandBase {
 
     // Robot.m_indexSubsystem.setIndexMotor(Robot.m_oi.getIndex());
     Robot.m_indexSubsystem.logData();
-    Robot.wof.logData();
+    
 
     /*if (Robot.m_oi.getSpoolShootButton()) {
       if (indexTimer.get() < 0.5) {
@@ -41,18 +41,18 @@ public class IndexCommand extends CommandBase {
       }
     } else */
     if (Robot.m_indexSubsystem.indexSensor()) {
-      Robot.m_indexSubsystem.setIndexMotor(0.5);
+//Robot.m_indexSubsystem.setIndexMotor(0.5);
       indexTimer.reset();
     } else {
-      Robot.m_indexSubsystem.setIndexMotor(0);
+      //Robot.m_indexSubsystem.setIndexMotor(0);
       indexTimer.reset();
     }
     if (Robot.m_oi.getIntake() /*&& !Robot.m_indexSubsystem.index1Sensor()*/) {
       Robot.m_intakeSubsystem.setIntakePistons(1);
-      Robot.m_intakeSubsystem.setIntakeMotor(0.85);
+      //Robot.m_intakeSubsystem.setIntakeMotor(0.85);
     } else {
       /* Robot.m_intakeSubsystem.setIntakePistons(0.5); */
-      Robot.m_intakeSubsystem.setIntakeMotor(0);
+      //Robot.m_intakeSubsystem.setIntakeMotor(0);
     }
   }
 

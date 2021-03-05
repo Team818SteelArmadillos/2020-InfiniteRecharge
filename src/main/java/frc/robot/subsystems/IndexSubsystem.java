@@ -28,8 +28,8 @@ public class IndexSubsystem extends SubsystemBase {
     indexMotor.configFactoryDefault();
     indexMotor.setNeutralMode(NeutralMode.Brake);
     indexMotor.setInverted(inverseIndex);
-    input1 = new DigitalInput(indexSensor1);
-    input2 = new DigitalInput(indexSensor2);
+   input1 = new DigitalInput(indexSensor1);
+   input2 = new DigitalInput(indexSensor2);
     input3 = new DigitalInput(indexSensor3);
   }
 
