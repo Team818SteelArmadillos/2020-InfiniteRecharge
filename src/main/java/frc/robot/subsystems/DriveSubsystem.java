@@ -130,11 +130,21 @@ double high = 8.41;
   }
 
   public double getLeftPosition() {
-    return (talonLeft1.getSelectedSensorPosition() - leftOffset) * distancePerPulse;
+    if (isHighGear){
+      return (talonLeft1.getSelectedSensorPosition() - leftOffset) * distancePerPulse / high;
+    } else {
+      return (talonLeft1.getSelectedSensorPosition() - leftOffset) * distancePerPulse / low;
+    }
+
   }
 
   public double getRightPosition() {
-    return (talonRight1.getSelectedSensorPosition() - rightOffset) * distancePerPulse;
+    if (isHighGear){
+      return (talonRight1.getSelectedSensorPosition() - rightOffset) * distancePerPulse / high;
+    } else {
+      return (talonRight1.getSelectedSensorPosition() - rightOffset) * distancePerPulse / low;
+    }
+  
   }
 
   public double getPosition() {

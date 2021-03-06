@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class driveDistance extends CommandBase{
   PIDController PIDLeft;
@@ -18,7 +19,8 @@ public cla drew driveDistance.
     ////dRequirementhere to declare subsystem dependencies.
     PIDLeft = new PIDController(0.05, 0, 0);
     PIDRight = new PIDController(0.05, 0, 0);
-    PIDLeft.setTolerance(0.5);
+    PIDLeft.setTolerance(0.1);
+    PIDRight.setTolerance(0.1);
     addRequirements(Robot.m_driveSubsystem);
     distance = dist;
   }
@@ -28,14 +30,18 @@ public cla drew driveDistance.
   public void initialize() {
     Robot.m_driveSubsystem.setBothMotors(0);
     Robot.m_driveSubsystem.resetEncoders();
+    Robot.m_driveSubsystem.shift(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    PIDLeftOutput = MathUtil.clamp(PIDLeft.calculate(distance - Robot.m_driveSubsystem.getLeftPosition()), -0.3, 0.3);
+    PIDLeftOutput = MathUtil.clamp(PIDLeft.calculate(distance + Robot.m_driveSubsystem.getLeftPosition()), -0.3, 0.3);
     Robot.m_driveSubsystem.setLeftMotors(PIDLeftOutput);
-    Robot.m_driveSubsystem.setRightMotors(PIDLeftOutput + MathUtil.clamp(PIDRight.calculate(Robot.m_driveSubsystem.getLeftPosition() - Robot.m_driveSubsystem.getRightPosition()), -0.3, 0.3));
+    Robot.m_driveSubsystem.setRightMotors(MathUtil.clamp(PIDRight.calculate(distance + Robot.m_driveSubsystem.getRightPosition()), -0.3, 0.3));
+    SmartDashboard.putNumber("Right Distance Traveled (in)",Robot.m_driveSubsystem.getRightPosition());
+    SmartDashboard.putNumber("Left Distance Traveled (in)",Robot.m_driveSubsystem.getLeftPosition());
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -47,6 +53,7 @@ public cla drew driveDistance.
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return PIDLeft.atSetpoint();
+    return PIDLeft.atSetpoint() && PIDRight.atSetpoint();
+  
   }
 }

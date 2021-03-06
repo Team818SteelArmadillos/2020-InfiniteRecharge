@@ -43,7 +43,6 @@ public class Robot extends TimedRobot {
   private Command m_WOFCommandPosition;
   private Command m_WOFCommandSpin;
   private Command m_TankDrive;
-  private Command m_AutoShiftTankDrive;
   private Command m_IntakeCommand;
   private Command m_SpoolShooterCommand;
   private Command m_ManualShootCommand;
@@ -78,7 +77,6 @@ public class Robot extends TimedRobot {
   m_TankDrive = new TankDriveCommand();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
-  m_AutoShiftTankDrive = new AutomaticTankDriveCommand();
   m_ManualShootCommand = new ManualShootCommand();
 
   }
@@ -116,11 +114,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
   
-   //driveDistance auton = new driveDistance(60);
+   driveDistance auton = new driveDistance(60);
    //TimeDrive auton = new TimeDrive();
-   //if (auton != null) {
-   //   auton.schedule();
-   //}
+   if (auton != null) {
+      auton.schedule();
+   }
    
    
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -218,8 +216,8 @@ public class Robot extends TimedRobot {
     //TankDriveCommand
     //IntakeCommand
     m_SpoolShooterCommand.schedule();
-    //m_TankDrive.schedule();
-    m_AutoShiftTankDrive.schedule();
+    m_TankDrive.schedule();
+    //m_AutoShiftTankDrive.schedule();
     //m_IntakeCommand.schedule();
     //m_IndexCommand.schedule();
   }
@@ -228,8 +226,8 @@ public class Robot extends TimedRobot {
     //TankDriveCommand
     //IntakeCommand
     m_SpoolShooterCommand.cancel();
-    //m_TankDrive.cancel();
-    m_AutoShiftTankDrive.cancel();
+    m_TankDrive.cancel();
+    //m_AutoShiftTankDrive.cancel();
    // m_IntakeCommand.cancel();
     //m_IndexCommand.cancel();
   }
@@ -252,14 +250,14 @@ public class Robot extends TimedRobot {
 
   private void startManualShoot() {
     m_ManualShootCommand.schedule();
-    //m_TankDrive.schedule();
-    m_AutoShiftTankDrive.schedule();
+    m_TankDrive.schedule();
+    //m_AutoShiftTankDrive.schedule();
   }
 
   private void endManualShoot() {
     m_ManualShootCommand.cancel();
-    //m_TankDrive.cancel();
-    m_AutoShiftTankDrive.cancel();
+    m_TankDrive.cancel();
+    //m_AutoShiftTankDrive.cancel();
   }
 
 
