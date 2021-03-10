@@ -30,12 +30,12 @@ public cla drew driveDistance.
   public void initialize() {
     Robot.m_driveSubsystem.setBothMotors(0);
     Robot.m_driveSubsystem.resetEncoders();
-    Robot.m_driveSubsystem.shift(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    Robot.m_driveSubsystem.shift(true);
     PIDLeftOutput = MathUtil.clamp(PIDLeft.calculate(distance + Robot.m_driveSubsystem.getLeftPosition()), -0.3, 0.3);
     Robot.m_driveSubsystem.setLeftMotors(PIDLeftOutput);
     Robot.m_driveSubsystem.setRightMotors(MathUtil.clamp(PIDRight.calculate(distance + Robot.m_driveSubsystem.getRightPosition()), -0.3, 0.3));

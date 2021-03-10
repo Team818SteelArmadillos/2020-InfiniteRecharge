@@ -15,14 +15,13 @@ public class IndexCommand extends CommandBase {
 
   public IndexCommand() {
     indexTimer = new Timer();
-    addRequirements(Robot.m_indexSubsystem);
-    addRequirements(Robot.m_intakeSubsystem);
+    addRequirements(Robot.m_newintakesubsystem);
   }
 
   @Override
   public void initialize() {
     indexTimer.start();
-    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_newintakesubsystem.setIndexMotor(0);
     jogindexUp = false;
   }
 
@@ -30,7 +29,7 @@ public class IndexCommand extends CommandBase {
   public void execute() {
 
     // Robot.m_indexSubsystem.setIndexMotor(Robot.m_oi.getIndex());
-    Robot.m_indexSubsystem.logData();
+    Robot.m_newintakesubsystem.logData();
     
 
     /*if (Robot.m_oi.getSpoolShootButton()) {
@@ -40,25 +39,38 @@ public class IndexCommand extends CommandBase {
         Robot.m_indexSubsystem.doIndex(0.6);
       }
     } else */
-    if (Robot.m_indexSubsystem.indexSensor()) {
-//Robot.m_indexSubsystem.setIndexMotor(0.5);
-      indexTimer.reset();
+
+    if (Robot.m_oi.getIntake()){
+      Robot.m_newintakesubsystem.setIntakePistons(1);
+      Robot.m_newintakesubsystem.setIntakeMotor(0.85);
     } else {
-      //Robot.m_indexSubsystem.setIndexMotor(0);
-      indexTimer.reset();
+       Robot.m_newintakesubsystem.setIntakePistons(0.5);
+      Robot.m_newintakesubsystem.setIntakeMotor(0);
     }
-    if (Robot.m_oi.getIntake() /*&& !Robot.m_indexSubsystem.index1Sensor()*/) {
-      Robot.m_intakeSubsystem.setIntakePistons(1);
-      //Robot.m_intakeSubsystem.setIntakeMotor(0.85);
+    if (Robot.m_newintakesubsystem.indexSensor1() && Robot.m_oi.getIntake()) {
+      Robot.m_newintakesubsystem.setIndexMotor(0.5);
     } else {
-      /* Robot.m_intakeSubsystem.setIntakePistons(0.5); */
-      //Robot.m_intakeSubsystem.setIntakeMotor(0);
+      Robot.m_newintakesubsystem.setIndexMotor(0);
+    } 
+    if (!Robot.m_newintakesubsystem.indexSensor2() && !Robot.m_newintakesubsystem.indexSensor1()){
+      Robot.m_newintakesubsystem.setIndexMotor(0);
     }
+    if (Robot.m_newintakesubsystem.indexSensor3()){
+      Robot.m_newintakesubsystem.setIndexMotor(0);
+    }
+    /* if (Robot.m_oi.getIntake() && !Robot.m_newintakesubsystem.indexSensor1()) {
+      Robot.m_newintakesubsystem.setIntakePistons(1);
+      Robot.m_newintakesubsystem.setIntakeMotor(0.85);
+    } else {
+       Robot.m_newintakesubsystem.setIntakePistons(0.5);
+      Robot.m_newintakesubsystem.setIntakeMotor(0);
+    }
+    */
   }
 
   @Override
   public void end(boolean interrupted) {
-    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_newintakesubsystem.setIndexMotor(0);
   }
 
   @Override

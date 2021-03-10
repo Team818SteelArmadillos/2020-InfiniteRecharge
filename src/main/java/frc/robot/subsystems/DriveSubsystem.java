@@ -43,8 +43,8 @@ boolean brake = false;
 boolean highGear = false;
 boolean isHighGear = false;
 
+double high =8.41;
 double low = 21.67;
-double high = 8.41;
 
   PIDController controllerDistance;
 
@@ -88,9 +88,9 @@ double high = 8.41;
   public void shift(boolean highGear){
     isHighGear = highGear;
     if(highGear){
-      shiftPistonLeft.set(DoubleSolenoid.Value.kForward);
-    }else{
       shiftPistonLeft.set(DoubleSolenoid.Value.kReverse);
+    }else{
+      shiftPistonLeft.set(DoubleSolenoid.Value.kForward);
     }
   }
 

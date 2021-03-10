@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.Constants.ShooterConstants.*;
@@ -18,18 +19,19 @@ public class ManualShootCommand extends CommandBase {
   public ManualShootCommand() {
     addRequirements(Robot.m_shooterSubsystem);
     addRequirements(Robot.m_visionSubsystem);
-    addRequirements(Robot.m_indexSubsystem);
+    addRequirements(Robot.m_newintakesubsystem);
     
   }
 
   @Override
   public void initialize() {
-    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_newintakesubsystem.setIndexMotor(0);
     Robot.m_shooterSubsystem.shooterSpeed(1);
   }
 
   @Override
   public void execute() {
+    SmartDashboard.putNumber("shooter speed", Robot.m_shooterSubsystem.getCurrentShooterSpeed());
     //double verticalAngle = Robot.m_visionSubsystem.getY();
     boolean isAtSpeed = Robot.m_shooterSubsystem.shooterAtSpeed();
     Robot.m_shooterSubsystem.shootingType();
@@ -62,14 +64,14 @@ public class ManualShootCommand extends CommandBase {
 
     Robot.m_shooterSubsystem.logData();
 
-    if(Robot.m_shooterSubsystem.getCurrentShooterSpeed() > 2700){
+    if(Robot.m_shooterSubsystem.getCurrentShooterSpeed() > 4000){
 
     
-    Robot.m_indexSubsystem.setIndexMotor(.5);
+    Robot.m_newintakesubsystem.setIndexMotor(0.5);
 
     }else{
 
-    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_newintakesubsystem.setIndexMotor(0);
     
   }
   
@@ -79,7 +81,7 @@ public class ManualShootCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    Robot.m_indexSubsystem.setIndexMotor(0);
+    Robot.m_newintakesubsystem.setIndexMotor(0);
     Robot.m_shooterSubsystem.shooterSpeed(0);
   }
 

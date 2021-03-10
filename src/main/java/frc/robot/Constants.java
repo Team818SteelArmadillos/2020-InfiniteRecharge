@@ -83,7 +83,7 @@ public final class Constants {
         public static final double kShooterToleranceRPM = 100;
 
         //ShooterConversionFactors
-        public static final double encoderPulsesPerRevolution = 4096;
+        public static final double encoderPulsesPerRevolution = 2048;
     
         public static final double velocityCalculationsPerSecond = 10;
         //ShooterSpecs

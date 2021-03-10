@@ -18,7 +18,7 @@ public class GroupDrive extends SequentialCommandGroup {
     Robot.m_driveSubsystem.resetEncoders();
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new driveDistance(2));
+    addCommands(new driveDistance(60));
     //addCommands(new );
 
   }

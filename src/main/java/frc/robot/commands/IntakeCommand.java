@@ -9,14 +9,14 @@ public class IntakeCommand extends CommandBase {
   Timer intakePistonTimer;
   boolean Spin;
   public IntakeCommand() {
-    addRequirements(Robot.m_intakeSubsystem);
+    addRequirements(Robot.m_newintakesubsystem);
 
     intakePistonTimer = new Timer();
   }
 
   @Override
   public void initialize() {
-    Robot.m_intakeSubsystem.setIntakePistons(0);
+    Robot.m_newintakesubsystem.setIntakePistons(0);
     RobotLog.putMessage("Running IntakeCommand");
     Spin = false;
   }
@@ -49,11 +49,11 @@ public class IntakeCommand extends CommandBase {
     //   Robot.m_intakeSubsystem.setIntakeMotor(0);
 
     if (Robot.m_oi.getIntake()) {
-      Robot.m_intakeSubsystem.setIntakePistons(1);
-      Robot.m_intakeSubsystem.setIntakeMotor(0.75);
+      Robot.m_newintakesubsystem.setIntakePistons(1);
+      Robot.m_newintakesubsystem.setIntakeMotor(0.75);
     }else{
      /* Robot.m_intakeSubsystem.setIntakePistons(0.5); */
-      Robot.m_intakeSubsystem.setIntakeMotor(0);
+      Robot.m_newintakesubsystem.setIntakeMotor(0);
       
     }
 
@@ -67,7 +67,7 @@ public class IntakeCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     RobotLog.putMessage("Interrupted IntakeCommand");
-    Robot.m_intakeSubsystem.setIntakeMotor(0);
+    Robot.m_newintakesubsystem.setIntakeMotor(0);
 
   }
 }

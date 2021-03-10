@@ -36,9 +36,9 @@ public class NewIntakeSubsystem extends SubsystemBase {
     indexMotor.configFactoryDefault();
     indexMotor.setNeutralMode(NeutralMode.Brake);
     indexMotor.setInverted(Constants.Numbers.inverseIndex);
-    inputhigh = new DigitalInput(Constants.sensorPorts.indexSensor1);
-    inputmid = new DigitalInput(Constants.sensorPorts.indexSensor2);
-    inputlow = new DigitalInput(Constants.sensorPorts.indexSensor3);
+    inputhigh = new DigitalInput(Constants.sensorPorts.indexSensor3);
+    inputmid = new DigitalInput(Constants.sensorPorts.indexSensor1);
+    inputlow = new DigitalInput(Constants.sensorPorts.indexSensor2);
   
     RobotLog.putMessage("Running IntakeSubsystem");  
   }
@@ -73,14 +73,18 @@ public class NewIntakeSubsystem extends SubsystemBase {
       indexMotor.set(TalonFXControlMode.PercentOutput, -Speed);
     }
   
-    public boolean indexSensor() {
-      return !((inputmid.get()) || !inputlow.get());
+    public boolean indexSensor1() {
+      return !inputlow.get();
+    }
+
+    public boolean indexSensor2() {
+      return !inputmid.get();
     }
   
-    public boolean index1Sensor() {
+    public boolean indexSensor3() {
       return !inputhigh.get();
     }
-  
+
     public void doIndex(double Speed) {
       indexMotor.set(ControlMode.PercentOutput, -Speed);
     }

@@ -16,6 +16,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.LEDVisionLightSubsystem;
+import frc.robot.subsystems.NewIntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -31,12 +32,13 @@ public class Robot extends TimedRobot {
 
   //private RobotContainer m_robotContainer;
   static public OI m_oi;
-  static public IntakeSubsystem m_intakeSubsystem;
+  //static public IntakeSubsystem m_intakeSubsystem;
   static public ShooterSubsystem m_shooterSubsystem;
   static public VisionSubsystem m_visionSubsystem;
   static public DriveSubsystem m_driveSubsystem;
-  static public IndexSubsystem m_indexSubsystem;
+  //static public IndexSubsystem m_indexSubsystem;
   static public LEDVisionLightSubsystem m_ledvisionlightSubsystem;
+  static public NewIntakeSubsystem m_newintakesubsystem;
   // private Command m_autonomousCommand;
   private Command m_elevatorCommand;
   private Command m_IndexCommand;
@@ -67,11 +69,12 @@ public class Robot extends TimedRobot {
   //private RobotContainer m_robotContainer;
   m_oi = new OI();
  
-  m_intakeSubsystem = new IntakeSubsystem();
+ // m_intakeSubsystem = new IntakeSubsystem();
   m_shooterSubsystem = new ShooterSubsystem();
   m_visionSubsystem = new VisionSubsystem();
   m_driveSubsystem = new DriveSubsystem();
-  m_indexSubsystem = new IndexSubsystem();
+ // m_indexSubsystem = new IndexSubsystem();
+  m_newintakesubsystem = new NewIntakeSubsystem();
   m_ledvisionlightSubsystem = new LEDVisionLightSubsystem();
   m_IndexCommand = new IndexCommand();
   m_TankDrive = new TankDriveCommand();
@@ -219,7 +222,7 @@ public class Robot extends TimedRobot {
     m_TankDrive.schedule();
     //m_AutoShiftTankDrive.schedule();
     //m_IntakeCommand.schedule();
-    //m_IndexCommand.schedule();
+    m_IndexCommand.schedule();
   }
 
   private void endDefault() {
@@ -229,7 +232,7 @@ public class Robot extends TimedRobot {
     m_TankDrive.cancel();
     //m_AutoShiftTankDrive.cancel();
    // m_IntakeCommand.cancel();
-    //m_IndexCommand.cancel();
+    m_IndexCommand.cancel();
   }
 
   private void startPush() {
