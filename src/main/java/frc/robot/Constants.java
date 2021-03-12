@@ -13,6 +13,7 @@ public final class Constants {
         
         
     //Drive Motors
+    public static final int GYRO_PORT = 0;
     public static final int[] MOTOR_PORTS_LEFT = {1, 2};
     public static final int[] MOTOR_PORTS_RIGHT = {3, 4};
     public static final boolean LEFT_INVERTED = true;

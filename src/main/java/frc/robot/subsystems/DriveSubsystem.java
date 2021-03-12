@@ -10,10 +10,14 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
+
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -53,6 +57,7 @@ double low = 21.67;
   private AnalogGyro gyro;
 
   public DriveSubsystem() {
+    gyro = new AnalogGyro(new AnalogInput(GYRO_PORT));
     talonLeft1 = new TalonFX(MOTOR_PORTS_LEFT[0]);
     talonRight1 = new TalonFX(MOTOR_PORTS_RIGHT[0]);
     talonLeft2 = new TalonFX(MOTOR_PORTS_LEFT[1]);
@@ -233,7 +238,7 @@ double low = 21.67;
 
     SmartDashboard.putNumber("Left Wheel Velocity(rpm)", getLeftVelocity());
     SmartDashboard.putNumber("Right Wheel Velocity(rpm)", getRightVelocity());
-
+    SmartDashboard.putNumber("Angle", getAngle());
     SmartDashboard.putBoolean("Brake Mode", brake);
 
     for (int i = 0; i < MOTOR_PORTS_LEFT.length; i++) {

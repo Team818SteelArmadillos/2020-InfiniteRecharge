@@ -19,8 +19,8 @@ public cla drew driveDistance.
     ////dRequirementhere to declare subsystem dependencies.
     PIDLeft = new PIDController(0.05, 0, 0);
     PIDRight = new PIDController(0.05, 0, 0);
-    PIDLeft.setTolerance(0.1);
-    PIDRight.setTolerance(0.1);
+    PIDLeft.setTolerance(2);
+    PIDRight.setTolerance(2);
     addRequirements(Robot.m_driveSubsystem);
     distance = dist;
   }
@@ -35,12 +35,13 @@ public cla drew driveDistance.
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_driveSubsystem.shift(true);
-    PIDLeftOutput = MathUtil.clamp(PIDLeft.calculate(distance + Robot.m_driveSubsystem.getLeftPosition()), -0.3, 0.3);
+    Robot.m_driveSubsystem.shift(false);
+    PIDLeftOutput = MathUtil.clamp(PIDLeft.calculate(distance + Robot.m_driveSubsystem.getLeftPosition()), -0.5, 0.5);
     Robot.m_driveSubsystem.setLeftMotors(PIDLeftOutput);
-    Robot.m_driveSubsystem.setRightMotors(MathUtil.clamp(PIDRight.calculate(distance + Robot.m_driveSubsystem.getRightPosition()), -0.3, 0.3));
+    Robot.m_driveSubsystem.setRightMotors(MathUtil.clamp(PIDRight.calculate(distance + Robot.m_driveSubsystem.getRightPosition()), -0.5, 0.5));
     SmartDashboard.putNumber("Right Distance Traveled (in)",Robot.m_driveSubsystem.getRightPosition());
     SmartDashboard.putNumber("Left Distance Traveled (in)",Robot.m_driveSubsystem.getLeftPosition());
+    
     
   }
 

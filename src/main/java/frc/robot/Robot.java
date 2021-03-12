@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveSubsystem;
@@ -117,7 +118,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
   
-   driveDistance auton = new driveDistance(60);
+    TestSquareDrive auton = new TestSquareDrive();
    //TimeDrive auton = new TimeDrive();
    if (auton != null) {
       auton.schedule();
@@ -137,6 +138,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    SmartDashboard.putNumber("Auton Angle", m_driveSubsystem.getAngle());
   }
 
   @Override
@@ -154,6 +156,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    SmartDashboard.putNumber("Angle", m_driveSubsystem.getAngle());
+  
     switch (Rstate) {
       case DEFAULT:
         if(m_oi.getPushButton()) {

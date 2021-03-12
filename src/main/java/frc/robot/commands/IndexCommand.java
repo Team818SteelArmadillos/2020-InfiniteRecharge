@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class IndexCommand extends CommandBase {
 
   private Timer indexTimer;
-  boolean jogindexUp, buttonReleased;
+  boolean jogindexUp, toggle, buttonIsHeld;
 
   public IndexCommand() {
     indexTimer = new Timer();
     addRequirements(Robot.m_newintakesubsystem);
+    toggle = false;
+    buttonIsHeld = false;
   }
 
   @Override
@@ -40,14 +42,20 @@ public class IndexCommand extends CommandBase {
       }
     } else */
 
-    if (Robot.m_oi.getIntake()){
+    if (Robot.m_oi.getIntake() && !buttonIsHeld){
+      toggle = !toggle;
+      buttonIsHeld = true;
+    } else if (!Robot.m_oi.getIntake()){
+      buttonIsHeld = false;
+    }
+    if (toggle){
       Robot.m_newintakesubsystem.setIntakePistons(1);
       Robot.m_newintakesubsystem.setIntakeMotor(0.85);
     } else {
        Robot.m_newintakesubsystem.setIntakePistons(0.5);
       Robot.m_newintakesubsystem.setIntakeMotor(0);
     }
-    if (Robot.m_newintakesubsystem.indexSensor1() && Robot.m_oi.getIntake()) {
+    if (Robot.m_newintakesubsystem.indexSensor1() && toggle) {
       Robot.m_newintakesubsystem.setIndexMotor(0.5);
     } else {
       Robot.m_newintakesubsystem.setIndexMotor(0);
