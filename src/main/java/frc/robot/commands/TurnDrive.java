@@ -47,6 +47,6 @@ public class TurnDrive extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(turnAngle) - 20 < Math.abs(Robot.m_driveSubsystem.getAngle());
+    return Math.abs(turnAngle) - 15 < Math.abs(Robot.m_driveSubsystem.getAngle());
   }
 }

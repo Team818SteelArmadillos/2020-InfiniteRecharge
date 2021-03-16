@@ -8,24 +8,24 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IndexCommand extends CommandBase {
+public class AutonIntakeCommand extends CommandBase {
 
   private Timer indexTimer;
-  boolean jogindexUp, toggle, buttonIsHeld;
+  boolean jogindexUp, toggle;
+  double intakeValue;
 
-  public IndexCommand() {
+  public AutonIntakeCommand(double intakeValue) {
     indexTimer = new Timer();
     addRequirements(Robot.m_newintakesubsystem);
+    this.intakeValue = intakeValue;
+    toggle = false;
   }
 
   @Override
   public void initialize() {
+    indexTimer.start();
     Robot.m_newintakesubsystem.setIndexMotor(0);
-    Robot.m_newintakesubsystem.setIntakePistons(0.5);
-    Robot.m_newintakesubsystem.setIntakeMotor(0);
     jogindexUp = false;
-    toggle = true;
-    buttonIsHeld = false;
   }
 
   @Override
@@ -34,34 +34,24 @@ public class IndexCommand extends CommandBase {
     // Robot.m_indexSubsystem.setIndexMotor(Robot.m_oi.getIndex());
     Robot.m_newintakesubsystem.logData();
     
-
-    if (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1()){
-      toggle = false;
-    }  
-
-    if (Robot.m_newintakesubsystem.indexSensor2()){
-      toggle = true;
-    }
-
-    if ( (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1() && Robot.m_newintakesubsystem.indexSensor2()) || (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor2())) {
-      Robot.m_newintakesubsystem.setIndexMotor(0.5);
-    } else {
-      Robot.m_newintakesubsystem.setIndexMotor(0);
-    }
-
-    if (!Robot.m_oi.getIntake()){
-      toggle = false;
-    }
-
-    if (toggle){
+    if (intakeValue == 1){
       Robot.m_newintakesubsystem.setIntakePistons(1);
       Robot.m_newintakesubsystem.setIntakeMotor(0.85);
     } else {
-      Robot.m_newintakesubsystem.setIntakePistons(0.5);
+       Robot.m_newintakesubsystem.setIntakePistons(0.5);
       Robot.m_newintakesubsystem.setIntakeMotor(0);
     }
-  
-
+    if (Robot.m_newintakesubsystem.indexSensor1() && indexTimer.get() > 0.5) {
+      Robot.m_newintakesubsystem.setIndexMotor(0.5);
+    } else {
+      Robot.m_newintakesubsystem.setIndexMotor(0);
+    } 
+    if (!Robot.m_newintakesubsystem.indexSensor2() && !Robot.m_newintakesubsystem.indexSensor1()){
+      Robot.m_newintakesubsystem.setIndexMotor(0);
+    }
+    if (Robot.m_newintakesubsystem.indexSensor3()){
+      Robot.m_newintakesubsystem.setIndexMotor(0);
+    }
 
     /*if (Robot.m_oi.getSpoolShootButton()) {
       if (indexTimer.get() < 0.5) {
@@ -85,8 +75,6 @@ public class IndexCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.m_newintakesubsystem.setIndexMotor(0);
-    Robot.m_newintakesubsystem.setIntakeMotor(0);
-    Robot.m_newintakesubsystem.setIntakePistons(0.5);
   }
 
   @Override

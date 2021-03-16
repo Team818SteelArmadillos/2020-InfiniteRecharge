@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
   
-    TestSquareDrive auton = new TestSquareDrive();
+    AutonGalacticSearch auton = new AutonGalacticSearch();
    //TimeDrive auton = new TimeDrive();
    if (auton != null) {
       auton.schedule();
