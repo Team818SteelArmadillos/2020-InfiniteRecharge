@@ -33,33 +33,37 @@ public class IndexCommand extends CommandBase {
 
     // Robot.m_indexSubsystem.setIndexMotor(Robot.m_oi.getIndex());
     Robot.m_newintakesubsystem.logData();
+
     
-
-    if (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1()){
-      toggle = false;
-    }  
-
-    if (Robot.m_newintakesubsystem.indexSensor2()){
-      toggle = true;
-    }
-
-    if ( (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1() && Robot.m_newintakesubsystem.indexSensor2()) || (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor2())) {
-      Robot.m_newintakesubsystem.setIndexMotor(0.5);
-    } else {
-      Robot.m_newintakesubsystem.setIndexMotor(0);
-    }
-
-    if (!Robot.m_oi.getIntake()){
-      toggle = false;
-    }
-
-    if (toggle){
+    if (toggle && Robot.m_oi.getIntake()){
       Robot.m_newintakesubsystem.setIntakePistons(1);
       Robot.m_newintakesubsystem.setIntakeMotor(0.85);
     } else {
       Robot.m_newintakesubsystem.setIntakePistons(0.5);
       Robot.m_newintakesubsystem.setIntakeMotor(0);
     }
+    
+
+    if (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1()){
+      toggle = false;
+    }  
+
+    
+    if ( (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1() && Robot.m_newintakesubsystem.indexSensor2()) || (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor2())) {
+      Robot.m_newintakesubsystem.setIndexMotor(0.5);
+    } else {
+      Robot.m_newintakesubsystem.setIndexMotor(0);
+    }
+
+    if (Robot.m_newintakesubsystem.indexSensor2()){
+      toggle = true;
+    }
+
+
+    //if (!Robot.m_oi.getIntake()){
+      //toggle = false;
+    //}
+
   
 
 
@@ -88,8 +92,7 @@ public class IndexCommand extends CommandBase {
     Robot.m_newintakesubsystem.setIntakeMotor(0);
     Robot.m_newintakesubsystem.setIntakePistons(0.5);
   }
-
-  @Override
+    @Override
   public boolean isFinished() {
     jogindexUp = false;
     // return Robot.m_indexSubsystem.indexSensor();

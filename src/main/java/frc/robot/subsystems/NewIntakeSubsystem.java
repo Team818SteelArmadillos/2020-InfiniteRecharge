@@ -27,7 +27,9 @@ public class NewIntakeSubsystem extends SubsystemBase {
   public boolean isPistonOut = false;
   public DigitalInput inputlow, inputmid, inputhigh;
   public TalonFX indexMotor;
-  
+  public int sensor1counter = 0;
+  public int sensor2counter = 0;
+  public int sensor3counter = 0;
 
   public NewIntakeSubsystem(){
     intakemotor = new VictorSPX(intakeMotorPort);
@@ -74,7 +76,16 @@ public class NewIntakeSubsystem extends SubsystemBase {
     }
   
     public boolean indexSensor1() {
-      return !inputlow.get();
+      if(!inputlow.get() && !(sensor1counter >= 20)){
+        sensor1counter++;
+      }
+      else if(inputlow.get() && !(sensor1counter <= 0)) {
+        sensor1counter--;
+        
+      }
+
+      return sensor1counter == 20;
+
     }
 
     public boolean indexSensor2() {
