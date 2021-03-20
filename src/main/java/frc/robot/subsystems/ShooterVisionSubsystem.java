@@ -1,41 +1,43 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class VisionSubsystem extends SubsystemBase {
-  
+public class ShooterVisionSubsystem extends SubsystemBase {
+  static Solenoid LEDLight;
   NetworkTable table;
-  NetworkTableEntry tx, ty, ta, mode;
   
-  public VisionSubsystem() {
+  public ShooterVisionSubsystem() {
 
+  LEDLight = new Solenoid(13, Constants.LEDLight);
   table = NetworkTableInstance.getDefault().getTable("Vision");
-  tx = table.getEntry("Horizontal Angle");
-  ty = table.getEntry("Vertical Angle");
-  ta = table.getEntry("Has Target");
-  mode = table.getEntry("Camera Mode");
+
+  }
+   
+  public void LightOn() {
+    LEDLight.set(true);
+  }
+
+  public void LightOff() {
+    LEDLight.set(false);
   }
 
   public double getX() {
-    return tx.getDouble(0.0);
+    return table.getEntry("Horizontal Angle").getDouble(0.0);
   }
 
   public double getY() {
-    return ty.getDouble(0.0);
+    return table.getEntry("Vertical Angle").getDouble(0.0);
   }
 
   public Boolean getTarget() {
-    return ta.getBoolean(false);
+    return table.getEntry("Has Target").getDouble(0.0) > 0.0;
 
-  }
-
-  public void setPowerCell(boolean powerCellMode) {
-    mode.setBoolean(powerCellMode);
-    
   }
 
   public void logData() {

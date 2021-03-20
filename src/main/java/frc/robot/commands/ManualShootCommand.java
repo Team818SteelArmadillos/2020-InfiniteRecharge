@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.Constants.ShooterConstants.*;
 import frc.robot.subsystems.ShooterSubsystem.*;
-import frc.robot.subsystems.VisionSubsystem.*;
+import frc.robot.subsystems.ShooterVisionSubsystem.*;
 
 public class ManualShootCommand extends CommandBase {
 
   public ManualShootCommand() {
     addRequirements(Robot.m_shooterSubsystem);
-    addRequirements(Robot.m_visionSubsystem);
+    addRequirements(Robot.m_shootervisionSubsystem);
     addRequirements(Robot.m_newintakesubsystem);
     
   }

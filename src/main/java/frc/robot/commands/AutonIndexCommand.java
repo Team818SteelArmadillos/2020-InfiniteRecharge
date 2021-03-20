@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class IndexCommand extends CommandBase {
+public class AutonIndexCommand extends CommandBase {
 
   private Timer indexTimer;
   boolean jogindexUp, toggle, buttonIsHeld, runIndex;
 
-  public IndexCommand() {
+  public AutonIndexCommand() {
     indexTimer = new Timer();
     addRequirements(Robot.m_newintakesubsystem);
   }
@@ -35,21 +35,23 @@ public class IndexCommand extends CommandBase {
     // Robot.m_indexSubsystem.setIndexMotor(Robot.m_oi.getIndex());
     Robot.m_newintakesubsystem.logData();
 
-    if (toggle && Robot.m_oi.getIntake()){
+    
+     if (toggle) {
       Robot.m_newintakesubsystem.setIntakePistons(1);
       Robot.m_newintakesubsystem.setIntakeMotor(0.85);
-    } else {
-      Robot.m_newintakesubsystem.setIntakePistons(0.5);
-      Robot.m_newintakesubsystem.setIntakeMotor(0);
-    }
+  } else { 
+    Robot.m_newintakesubsystem.setIntakeMotor(0);
+    Robot.m_newintakesubsystem.setIntakePistons(0.5);
+  }
+      
     
 
-    if (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1()){
+    if (Robot.m_newintakesubsystem.indexSensor1()){
       toggle = false;
     }  
 
     
-    if ( (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor1() && Robot.m_newintakesubsystem.indexSensor2()) || (Robot.m_oi.getIntake() && Robot.m_newintakesubsystem.indexSensor2())) {
+    if ( (Robot.m_newintakesubsystem.indexSensor1() && Robot.m_newintakesubsystem.indexSensor2()) || (Robot.m_newintakesubsystem.indexSensor2())) {
       Robot.m_newintakesubsystem.setIndexMotor(0.5);
     } else {
       Robot.m_newintakesubsystem.setIndexMotor(0);
@@ -57,10 +59,10 @@ public class IndexCommand extends CommandBase {
 
     if (Robot.m_newintakesubsystem.indexSensor2()){
       toggle = true;
-    } 
+    }
+
     if (Robot.m_newintakesubsystem.indexSensor3()) {
       runIndex = false;
-    }
     }
 
 
@@ -88,7 +90,7 @@ public class IndexCommand extends CommandBase {
       Robot.m_newintakesubsystem.setIntakeMotor(0);
     }
     */
-  
+  }
 
   @Override
   public void end(boolean interrupted) {
@@ -98,8 +100,6 @@ public class IndexCommand extends CommandBase {
   }
     @Override
   public boolean isFinished() {
-    
-    
     return !runIndex;
   }
 }

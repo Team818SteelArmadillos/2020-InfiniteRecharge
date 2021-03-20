@@ -13,7 +13,7 @@ public class AutoAllign extends CommandBase {
 
     addRequirements(Robot.m_driveSubsystem);
     addRequirements(Robot.m_newintakesubsystem);
-    addRequirements(Robot.m_visionSubsystem);
+    addRequirements(Robot.m_shootervisionSubsystem);
     addRequirements(Robot.m_shooterSubsystem);
 
   }
@@ -26,16 +26,18 @@ public class AutoAllign extends CommandBase {
 
   @Override
   public void execute() {
-    if (Robot.m_visionSubsystem.getTarget()) {
+    if (Robot.m_shootervisionSubsystem.getTarget()) {
       hasTarget = true;
-      if (Robot.m_visionSubsystem.getX() - Robot.m_driveSubsystem.getAngle() < 0) {
+      if (Robot.m_shootervisionSubsystem.getX() - Robot.m_driveSubsystem.getAngle() < 0) {
         Robot.m_driveSubsystem.setRightMotors(0.3);
         Robot.m_driveSubsystem.setLeftMotors(-0.3);
       }
-      else if (Robot.m_visionSubsystem.getX() - Robot.m_driveSubsystem.getAngle() > 0) {
+      else if (Robot.m_shootervisionSubsystem.getX() - Robot.m_driveSubsystem.getAngle() > 0) {
         Robot.m_driveSubsystem.setRightMotors(-0.3);
         Robot.m_driveSubsystem.setLeftMotors(0.3);
     } else reachedTarget = true;
+
+
     
   } else hasTarget = false;
 
@@ -43,7 +45,9 @@ public class AutoAllign extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    Robot.m_driveSubsystem.setBothMotors(0);
+  }
 
   @Override
   public boolean isFinished() {

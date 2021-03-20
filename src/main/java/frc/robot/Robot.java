@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.DriveVisionSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 import frc.robot.subsystems.IntakeSubsystem;
@@ -15,8 +16,7 @@ import frc.robot.auton.AutonTwo;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.subsystems.LEDVisionLightSubsystem;
+import frc.robot.subsystems.ShooterVisionSubsystem;
 import frc.robot.subsystems.NewIntakeSubsystem;
 
 /**
@@ -35,10 +35,10 @@ public class Robot extends TimedRobot {
   static public OI m_oi;
   //static public IntakeSubsystem m_intakeSubsystem;
   static public ShooterSubsystem m_shooterSubsystem;
-  static public VisionSubsystem m_visionSubsystem;
+  static public ShooterVisionSubsystem m_shootervisionSubsystem;
   static public DriveSubsystem m_driveSubsystem;
+  static public DriveVisionSubsystem m_drivevision;
   //static public IndexSubsystem m_indexSubsystem;
-  static public LEDVisionLightSubsystem m_ledvisionlightSubsystem;
   static public NewIntakeSubsystem m_newintakesubsystem;
   // private Command m_autonomousCommand;
   private Command m_elevatorCommand;
@@ -49,6 +49,8 @@ public class Robot extends TimedRobot {
   private Command m_IntakeCommand;
   private Command m_SpoolShooterCommand;
   private Command m_ManualShootCommand;
+  private Command m_AutoShoot;
+  
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
   //private Command m_ManualShootCommand;
@@ -72,16 +74,17 @@ public class Robot extends TimedRobot {
  
  // m_intakeSubsystem = new IntakeSubsystem();
   m_shooterSubsystem = new ShooterSubsystem();
-  m_visionSubsystem = new VisionSubsystem();
+  m_shootervisionSubsystem = new ShooterVisionSubsystem();
   m_driveSubsystem = new DriveSubsystem();
  // m_indexSubsystem = new IndexSubsystem();
   m_newintakesubsystem = new NewIntakeSubsystem();
-  m_ledvisionlightSubsystem = new LEDVisionLightSubsystem();
   m_IndexCommand = new IndexCommand();
   m_TankDrive = new TankDriveCommand();
   m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
   m_ManualShootCommand = new ManualShootCommand();
+  m_AutoShoot = new AutoAllign();
+  m_drivevision = new DriveVisionSubsystem();
 
   }
 
@@ -118,7 +121,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
   
-    AutonGalacticSearch auton = new AutonGalacticSearch();
+    PathBRed auton = new PathBRed();
    //TimeDrive auton = new TimeDrive();
    if (auton != null) {
       auton.schedule();
@@ -248,10 +251,12 @@ public class Robot extends TimedRobot {
   }
 
   private void startAutoShoot() {
+    m_AutoShoot.schedule();
     //AutoShootCommand
   }
 
   private void endAutoShoot() {
+    m_AutoShoot.cancel();
     //AutoShootCommand
   }
 

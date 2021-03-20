@@ -4,27 +4,16 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PathBRed extends SequentialCommandGroup {
-  /** Creates a new PathBRed. */
-  public PathBRed() {
-    
-    
-    addCommands(new AutoBallTrackCommand(),
-    new DualAutoDriveIntake(),
-    new AutoBallTrackCommand(),
-    new DualAutoDriveIntake(),
-    new AutoBallTrackCommand());
-  //  new dri
-    
-    
-  
-
-    
+public class DualAutoDriveIntake extends ParallelCommandGroup {
+  /** Creates a new DualAutoDriveIntake. */
+  public DualAutoDriveIntake() {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new DrivetoBallCommand(), new AutonIndexCommand());
   }
 }
