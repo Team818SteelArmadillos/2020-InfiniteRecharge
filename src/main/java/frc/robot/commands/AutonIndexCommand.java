@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class AutonIndexCommand extends CommandBase {
 
   private Timer indexTimer;
-  boolean jogindexUp, toggle, buttonIsHeld, runIndex;
+  boolean jogindexUp, toggle, buttonIsHeld, runIndex, exitToggle;
 
   public AutonIndexCommand() {
     indexTimer = new Timer();
@@ -27,6 +27,8 @@ public class AutonIndexCommand extends CommandBase {
     toggle = true;
     buttonIsHeld = false;
     runIndex = true;
+    exitToggle = false; 
+    
   }
 
   @Override
@@ -57,9 +59,11 @@ public class AutonIndexCommand extends CommandBase {
       Robot.m_newintakesubsystem.setIndexMotor(0);
     }
 
-    if (Robot.m_newintakesubsystem.indexSensor2()){
-      toggle = true;
+    if(Robot.m_newintakesubsystem.indexSensor2()) {
+      exitToggle = true;
+      indexTimer.start();
     }
+
 
     if (Robot.m_newintakesubsystem.indexSensor3()) {
       runIndex = false;
@@ -100,6 +104,6 @@ public class AutonIndexCommand extends CommandBase {
   }
     @Override
   public boolean isFinished() {
-    return !runIndex;
+    return exitToggle && !Robot.m_newintakesubsystem.indexSensor2() && indexTimer.get() > 0.5;
   }
 }

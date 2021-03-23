@@ -47,7 +47,7 @@ public class DrivetoBallCommand extends CommandBase {
     Robot.m_driveSubsystem.shift(false);
 
       err = Robot.m_drivevision.getX() - (Math.PI/2);
-      motorpower = MathUtil.clamp(AnglePID.calculate(err), -0.02, 0.02);
+      motorpower = MathUtil.clamp(AnglePID.calculate(err), -0.05, 0.05);
       
       if(!Robot.m_drivevision.getTarget()){
         if(!timerStarted) {
@@ -57,8 +57,8 @@ public class DrivetoBallCommand extends CommandBase {
         Robot.m_driveSubsystem.setRightMotors(0);
         Robot.m_driveSubsystem.setLeftMotors(0);
       } else {
-        Robot.m_driveSubsystem.setRightMotors(-0.1 - motorpower);
-        Robot.m_driveSubsystem.setLeftMotors(-0.1 + motorpower);
+        Robot.m_driveSubsystem.setRightMotors(-0.4 - motorpower);
+        Robot.m_driveSubsystem.setLeftMotors(-0.4 + motorpower);
       }
 
   }
@@ -75,7 +75,7 @@ public class DrivetoBallCommand extends CommandBase {
    // Returns true when the command should end.
    @Override
    public boolean isFinished() {
-     return timer.get() > 0.5;
+     return !Robot.m_drivevision.getTarget() && timer.get() > 2;
    
    }
  }

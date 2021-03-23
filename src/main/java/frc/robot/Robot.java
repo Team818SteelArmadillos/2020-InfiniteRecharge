@@ -120,8 +120,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-  
-    PathBRed auton = new PathBRed();
+    
+    //AutonIndexCommand auton = new AutonIndexCommand();
+    PathBBlue auton = new PathBBlue();
    //TimeDrive auton = new TimeDrive();
    if (auton != null) {
       auton.schedule();

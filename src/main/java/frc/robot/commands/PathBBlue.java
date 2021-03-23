@@ -6,31 +6,23 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PathBRed extends SequentialCommandGroup {
-  /** Creates a new PathBRed. */
-  public PathBRed() {
-    
-    
+public class PathBBlue extends SequentialCommandGroup {
+  /** Creates a new PathBBlue. */
+  public PathBBlue() {
+
     addCommands(
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(60),
+    new TurnDrive(-80),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(-140),
+    new TurnDrive(80),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(60), 
-    new driveDistance(120)
+    new TurnDrive(-30),
+    new driveDistance(35)
     );
-  //  new dri
-    
-    
-  
-
-    
   }
 }
