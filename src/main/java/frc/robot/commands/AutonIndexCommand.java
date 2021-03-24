@@ -1,11 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-
-import org.ejml.equation.ManagerFunctions.Input1;
-
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class AutonIndexCommand extends CommandBase {

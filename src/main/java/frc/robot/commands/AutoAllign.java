@@ -14,14 +14,12 @@ public class AutoAllign extends CommandBase {
     addRequirements(Robot.m_driveSubsystem);
     addRequirements(Robot.m_newintakesubsystem);
     addRequirements(Robot.m_shootervisionSubsystem);
-    addRequirements(Robot.m_shooterSubsystem);
 
   }
 
   @Override
   public void initialize() {
     Robot.m_driveSubsystem.setBothMotors(0);
-    Robot.m_shooterSubsystem.shooterSpeed(0);
   }
 
   @Override

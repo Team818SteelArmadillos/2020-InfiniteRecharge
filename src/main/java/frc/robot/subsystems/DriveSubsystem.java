@@ -17,12 +17,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
+
 
 import static frc.robot.Constants.DriveConstants.*;
 import static frc.robot.Constants.Pistons.*;

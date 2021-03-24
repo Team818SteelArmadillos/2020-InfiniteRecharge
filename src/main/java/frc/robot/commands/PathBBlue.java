@@ -15,7 +15,7 @@ public class PathBBlue extends SequentialCommandGroup {
 
     addCommands(
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(-80),
+    new TurnDrive(-100),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
     new TurnDrive(80),

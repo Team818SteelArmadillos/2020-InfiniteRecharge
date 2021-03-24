@@ -3,8 +3,6 @@ package frc.robot;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * Matthew P. Team 818 The Steel Armadillos
  * 

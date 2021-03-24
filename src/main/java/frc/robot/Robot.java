@@ -1,20 +1,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.DriveVisionSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-
-import frc.robot.subsystems.IntakeSubsystem;
-
-import frc.robot.subsystems.IndexSubsystem;
-
-import frc.robot.auton.AutonTwo;
 import frc.robot.commands.*;
-import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShooterVisionSubsystem;
 import frc.robot.subsystems.NewIntakeSubsystem;
@@ -27,7 +20,7 @@ import frc.robot.subsystems.NewIntakeSubsystem;
  */
 public class Robot extends TimedRobot {
   enum RobotState {
-    DEFAULT, PUSH, AUTOSHOOT, MANUALSHOOT, SPINWOF, POSITIONWOF, AUTOPICKUP;
+    DEFAULT, PUSH, AUTOSHOOT, MANUALSHOOT, AUTOPICKUP;
   }
 
 
@@ -41,16 +34,17 @@ public class Robot extends TimedRobot {
   //static public IndexSubsystem m_indexSubsystem;
   static public NewIntakeSubsystem m_newintakesubsystem;
   // private Command m_autonomousCommand;
-  private Command m_elevatorCommand;
   private Command m_IndexCommand;
-  private Command m_WOFCommandPosition;
-  private Command m_WOFCommandSpin;
   private Command m_TankDrive;
-  private Command m_IntakeCommand;
   private Command m_SpoolShooterCommand;
   private Command m_ManualShootCommand;
   private Command m_AutoShoot;
-  
+  private Command m_AutonDoNothing;
+  private Command m_PathABlue;
+  private Command m_PathARed;
+  private Command m_PathBBlue;
+  private Command m_PathBRed;
+  SendableChooser<Command> m_chooser;
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
   //private Command m_ManualShootCommand;
@@ -80,12 +74,22 @@ public class Robot extends TimedRobot {
   m_newintakesubsystem = new NewIntakeSubsystem();
   m_IndexCommand = new IndexCommand();
   m_TankDrive = new TankDriveCommand();
-  m_IntakeCommand = new IntakeCommand();
   m_SpoolShooterCommand = new SpoolShooterCommand();
   m_ManualShootCommand = new ManualShootCommand();
-  m_AutoShoot = new AutoAllign();
+  m_AutoShoot = new ShooterPID();
   m_drivevision = new DriveVisionSubsystem();
-
+  m_AutonDoNothing = new AutonDoNothing();
+  m_PathABlue = new PathABlue();
+  m_PathARed = new PathARed();
+  m_PathBBlue = new PathBBlue();
+  m_PathBRed = new PathBRed();
+  m_chooser = new SendableChooser<>();
+  m_chooser.setDefaultOption("Do Nothing", m_AutonDoNothing);
+  m_chooser.addOption("Path A Blue", m_PathABlue);
+  m_chooser.addOption("Path A Red", m_PathARed);
+  m_chooser.addOption("Path B Blue", m_PathBBlue);
+  m_chooser.addOption("Path B Red", m_PathBRed);
+  
   }
 
   /**
@@ -120,12 +124,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    PathARed auton = new PathARed();
-    //AutonIndexCommand auton = new AutonIndexCommand();
-    //PathBBlue auton = new PathBBlue();
-   //TimeDrive auton = new TimeDrive();
-   if (auton != null) {
-      auton.schedule();
+    m_chooser.getSelected().schedule();
    }
    
    
@@ -135,14 +134,12 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.schedule();
     // }
-  }
 
   /**
    * This function is called periodically during autonomous.
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("Auton Angle", m_driveSubsystem.getAngle());
   }
 
   @Override
@@ -184,7 +181,7 @@ public class Robot extends TimedRobot {
 
         if(m_oi.getAutoPickupButton()) {
           endDefault();
-          startAutoShoot();
+          startAutoPickup();
           Rstate = RobotState.AUTOPICKUP;
         }
         break;

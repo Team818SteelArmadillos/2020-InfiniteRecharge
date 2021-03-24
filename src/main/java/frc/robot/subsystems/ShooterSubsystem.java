@@ -7,101 +7,47 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.ShooterConstants.*;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class ShooterSubsystem extends SubsystemBase {
   
-  public TalonSRX talonShooterMotor;
-  public VictorSPX[] victorsShooterMotors;
-  public double targetShooterSpeed;
-  private PIDController controllerShooterSpeed;
-  public boolean shooterModeImput = false;
+  private TalonFX talon1, talon2;
 
   //Sets motors 
   public ShooterSubsystem() {
 
-    talonShooterMotor = new TalonSRX(ShooterMotorArray[0]);
-
-    talonShooterMotor.configFactoryDefault();
-
-    victorsShooterMotors = new VictorSPX[ShooterMotorArray.length - 1];
-    for (int i = 1; i < ShooterMotorArray.length; i++){
-      victorsShooterMotors[i - 1] = new VictorSPX(ShooterMotorArray[i]);
-      victorsShooterMotors[i - 1].configFactoryDefault();
-      victorsShooterMotors[i - 1].follow(talonShooterMotor);
+    talon1 = new TalonFX(ShooterMotorArray[0]);
+    talon2 = new TalonFX(ShooterMotorArray[1]);
+    
+    talon1.configFactoryDefault();
+    talon2.configFactoryDefault();
+    talon2.follow(talon1);
+    
     }
-    controllerShooterSpeed = new PIDController(kP, kI, kD);
-    controllerShooterSpeed.setTolerance(kShooterToleranceRPM);
-  }
 
   //Current shooter speed
   public double getCurrentShooterSpeed(){
 
-    return talonShooterMotor.getSelectedSensorVelocity() * velocityCalculationsPerSecond *-1 * 60 / encoderPulsesPerRevolution;
+    return talon1.getSelectedSensorVelocity() * velocityCalculationsPerSecond *-1 * 60 / encoderPulsesPerRevolution;
     //Revolutions per mintue. Negative is to account for the change in direction.
 
-  }
-  //"goal" shooter speed
-  public void shooterSpeed(double shooterSpeed) {
-    
-    targetShooterSpeed = shooterSpeed;
-
-  }
-
-  public void shootingType() {
-
-    if (targetShooterSpeed == 0){ 
-      
-    talonShooterMotor.set(ControlMode.PercentOutput, 0);
-
-  }else{
-    talonShooterMotor.set(ControlMode.PercentOutput, -1);
-    //talonShooterMotor.set(ControlMode.PercentOutput, controllerShooterSpeed.calculate(getCurrentShooterSpeed(), targetShooterSpeed));
-
-    //If target shooter speed is 0, then set talon shooter motor to 0
-    //If target shooter speed is not 0, then set talon shooter motor to 1 
-  }
-
-  }
-
-  
-//divides distance by max possible distance to find the destired shooter power
-  public double autoShooterPower(){
-    return (0 / maxShooterDistance) * maxShooterMotorSpeed;
   }
 
   public void logData(){
     SmartDashboard.putNumber("shooter speed", getCurrentShooterSpeed());
-    SmartDashboard.putNumber("target shooter speed", targetShooterSpeed);
-    SmartDashboard.putNumber("shooter power", talonShooterMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("shooter 0 motor current", talonShooterMotor.getSupplyCurrent());
-    //for (int i = 1; i < ShooterMotorArray.length; i++){
-      //SmartDashboard.putNumber("shooter " + i + " motor current", victorsShooterMotors[i-1].getSupplyCurrent());
-   // }
+    SmartDashboard.putNumber("shooter power", talon1.getMotorOutputPercent());
+    SmartDashboard.putNumber("shooter 0 motor current", talon1.getSupplyCurrent());
+
   }
 
-  //public void controlShooterModeSet(){
-    
-   // shooterModeImput = !shooterModeImput;
+public void setPower(double power) {
+talon1.set(ControlMode.PercentOutput, power);
+}
 
- // }
-
-  public boolean shooterAtSpeed(){
-
-    if(controllerShooterSpeed.atSetpoint() && targetShooterSpeed > 0){
-      return true;
-    }else{
-      return false;
-      
-    }
-
-    }
 
 }

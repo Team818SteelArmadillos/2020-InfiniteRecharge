@@ -10,9 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
-import frc.robot.Constants.ShooterConstants.*;
-import frc.robot.subsystems.ShooterSubsystem.*;
-import frc.robot.subsystems.ShooterVisionSubsystem.*;
+
 
 public class ManualShootCommand extends CommandBase {
 
@@ -26,15 +24,13 @@ public class ManualShootCommand extends CommandBase {
   @Override
   public void initialize() {
     Robot.m_newintakesubsystem.setIndexMotor(0);
-    Robot.m_shooterSubsystem.shooterSpeed(1);
   }
 
   @Override
   public void execute() {
     SmartDashboard.putNumber("shooter speed", Robot.m_shooterSubsystem.getCurrentShooterSpeed());
     //double verticalAngle = Robot.m_visionSubsystem.getY();
-    boolean isAtSpeed = Robot.m_shooterSubsystem.shooterAtSpeed();
-    Robot.m_shooterSubsystem.shootingType();
+    Robot.m_shooterSubsystem.setPower(1);
     // Setting automatic or manual shooter; automatic = true, manual = false
     //if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle
@@ -82,7 +78,7 @@ public class ManualShootCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Robot.m_newintakesubsystem.setIndexMotor(0);
-    Robot.m_shooterSubsystem.shooterSpeed(0);
+    Robot.m_shooterSubsystem.setPower(0);
   }
 
   @Override

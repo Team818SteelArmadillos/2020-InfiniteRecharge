@@ -6,35 +6,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Robot;
 
-public class AutoBallTrackCommand extends CommandBase {
-
+public class TeleopAutoShoot extends CommandBase {
   PIDController AnglePID;
   double motorpower;
-  double err;//how far off the robot is from the target
-  
+  double err;
 
-  public AutoBallTrackCommand() {
-
+  public TeleopAutoShoot() {
     addRequirements(Robot.m_driveSubsystem);
     addRequirements(Robot.m_newintakesubsystem);
-    addRequirements(Robot.m_drivevision); //rename the drivevison to drivevisionsubsystem
+    addRequirements(Robot.m_shootervisionSubsystem);
     AnglePID = new PIDController(1.5, 0, 0);
     motorpower = 0.0;
     err = 100.0;
-
   }
 
   @Override
   public void initialize() {
-    Robot.m_driveSubsystem.setBothMotors(0);
-
-
+    Robot.m_shootervisionSubsystem.LightOn();
   }
 
   @Override
-  public void execute() {//remeber to reset the tolerance to make it so the robot can actually agnle tot he ball.
-    Robot.m_driveSubsystem.shift(false);
-    
+  public void execute() {
     if(!Robot.m_drivevision.getTarget()){
       Robot.m_driveSubsystem.setRightMotors(0.15);
       Robot.m_driveSubsystem.setLeftMotors(-0.15);
@@ -44,19 +36,15 @@ public class AutoBallTrackCommand extends CommandBase {
       Robot.m_driveSubsystem.setRightMotors(-motorpower);
       Robot.m_driveSubsystem.setLeftMotors(motorpower);
     } 
-
-  
-
-
   }
 
   @Override
   public void end(boolean interrupted) {
-    Robot.m_driveSubsystem.setBothMotors(0);
+    Robot.m_shootervisionSubsystem.LightOff();
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(err) < 0.01 && Math.abs(Robot.m_driveSubsystem.getRightVelocity()) < 0.1 ;
+    return false;
   }
 }

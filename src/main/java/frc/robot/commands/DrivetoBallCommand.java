@@ -12,8 +12,6 @@ import frc.robot.Robot;
 
 public class DrivetoBallCommand extends CommandBase {
 
-  private boolean hasTarget;
-  private boolean reachedTarget;
   PIDController AnglePID;
   double motorpower;
   double err;
@@ -57,8 +55,8 @@ public class DrivetoBallCommand extends CommandBase {
         Robot.m_driveSubsystem.setRightMotors(0);
         Robot.m_driveSubsystem.setLeftMotors(0);
       } else {
-        Robot.m_driveSubsystem.setRightMotors(-0.4 - motorpower);
-        Robot.m_driveSubsystem.setLeftMotors(-0.4 + motorpower);
+        Robot.m_driveSubsystem.setRightMotors(-MathUtil.clamp(0.3+0.539 * Robot.m_drivevision.getY(), 0.3, 0.5) - motorpower);
+        Robot.m_driveSubsystem.setLeftMotors(-MathUtil.clamp(0.3+0.539 * Robot.m_drivevision.getY(), 0.3, 0.5) + motorpower);
       }
 
   }
