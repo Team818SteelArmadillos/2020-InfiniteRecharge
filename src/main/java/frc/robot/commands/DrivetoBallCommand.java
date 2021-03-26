@@ -21,7 +21,7 @@ public class DrivetoBallCommand extends CommandBase {
   public DrivetoBallCommand() {
     addRequirements(Robot.m_driveSubsystem);
     addRequirements(Robot.m_drivevision); //rename the drivevison to drivevisionsubsystem
-    AnglePID = new PIDController(0.5, 0, 0);
+    AnglePID = new PIDController(1, 0, 0);
     motorpower = 0.0;
     err = 100.0;
     timer = new Timer();
@@ -44,8 +44,8 @@ public class DrivetoBallCommand extends CommandBase {
    public void execute() {
     Robot.m_driveSubsystem.shift(false);
 
-      err = Robot.m_drivevision.getX() - (Math.PI/2);
-      motorpower = MathUtil.clamp(AnglePID.calculate(err), -0.05, 0.05);
+      err = Robot.m_drivevision.getX() + 0.05;
+      motorpower = MathUtil.clamp(AnglePID.calculate(err), -0.035, 0.035);
       
       if(!Robot.m_drivevision.getTarget()){
         if(!timerStarted) {
@@ -55,8 +55,8 @@ public class DrivetoBallCommand extends CommandBase {
         Robot.m_driveSubsystem.setRightMotors(0);
         Robot.m_driveSubsystem.setLeftMotors(0);
       } else {
-        Robot.m_driveSubsystem.setRightMotors(-MathUtil.clamp(0.3+0.539 * Robot.m_drivevision.getY(), 0.3, 0.5) - motorpower);
-        Robot.m_driveSubsystem.setLeftMotors(-MathUtil.clamp(0.3+0.539 * Robot.m_drivevision.getY(), 0.3, 0.5) + motorpower);
+        Robot.m_driveSubsystem.setRightMotors(-MathUtil.clamp(0.3 + 1.75 * Robot.m_drivevision.getY(), 0.3, 0.5) - motorpower);
+        Robot.m_driveSubsystem.setLeftMotors(-MathUtil.clamp(0.3 + 1.75 * Robot.m_drivevision.getY(), 0.3, 0.5) + motorpower + 0.04);
       }
 
   }

@@ -30,7 +30,7 @@ public class ManualShootCommand extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("shooter speed", Robot.m_shooterSubsystem.getCurrentShooterSpeed());
     //double verticalAngle = Robot.m_visionSubsystem.getY();
-    Robot.m_shooterSubsystem.setPower(1);
+    Robot.m_shooterSubsystem.setPower(-1);
     // Setting automatic or manual shooter; automatic = true, manual = false
     //if(Robot.m_shooterSubsystem.shooterModeImput = true){
       //Get vertical angle

@@ -18,7 +18,7 @@ public class AutoBallTrackCommand extends CommandBase {
     addRequirements(Robot.m_driveSubsystem);
     addRequirements(Robot.m_newintakesubsystem);
     addRequirements(Robot.m_drivevision); //rename the drivevison to drivevisionsubsystem
-    AnglePID = new PIDController(1.5, 0, 0);
+    AnglePID = new PIDController(3, 0, 0);
     motorpower = 0.0;
     err = 100.0;
 
@@ -39,7 +39,7 @@ public class AutoBallTrackCommand extends CommandBase {
       Robot.m_driveSubsystem.setRightMotors(0.15);
       Robot.m_driveSubsystem.setLeftMotors(-0.15);
     } else {
-      err = Robot.m_drivevision.getX() - (Math.PI/2);
+      err = Robot.m_drivevision.getX();
       motorpower = MathUtil.clamp(AnglePID.calculate(err), -0.075, 0.075);
       Robot.m_driveSubsystem.setRightMotors(-motorpower);
       Robot.m_driveSubsystem.setLeftMotors(motorpower);
@@ -57,6 +57,6 @@ public class AutoBallTrackCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(err) < 0.01 && Math.abs(Robot.m_driveSubsystem.getRightVelocity()) < 0.1 ;
+    return Math.abs(err) < 0.01 && Math.abs(Robot.m_driveSubsystem.getRightVelocity()) < 0.05 && Robot.m_drivevision.getTarget();
   }
 }

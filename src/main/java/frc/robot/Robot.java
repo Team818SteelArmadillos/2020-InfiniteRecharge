@@ -45,6 +45,7 @@ public class Robot extends TimedRobot {
   private Command m_PathBBlue;
   private Command m_PathBRed;
   private Command m_ShooterDistanceCommand;
+  private Command m_PickupBall;
   SendableChooser<Command> m_chooser;
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
@@ -85,12 +86,15 @@ public class Robot extends TimedRobot {
   m_PathBBlue = new PathBBlue();
   m_PathBRed = new PathBRed();
   m_chooser = new SendableChooser<>();
+  m_PickupBall = new TurnAndPickupCommandGroup();
   m_ShooterDistanceCommand = new ShooterDistanceCommand();
   m_chooser.setDefaultOption("Do Nothing", m_AutonDoNothing);
   m_chooser.addOption("Path A Blue", m_PathABlue);
   m_chooser.addOption("Path A Red", m_PathARed);
   m_chooser.addOption("Path B Blue", m_PathBBlue);
   m_chooser.addOption("Path B Red", m_PathBRed);
+  m_chooser.addOption("Pickup Ball", m_PickupBall);
+  SmartDashboard.putData(m_chooser);
   
   }
 

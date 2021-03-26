@@ -9,19 +9,12 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PathARed extends SequentialCommandGroup {
-  /** Creates a new PathARed. */
-  public PathARed() {
-
-    addCommands(new TurnDrive(30),
-    new AutoBallTrackCommand(),
-    new AutoBallPickupCommandGroup(),
-    new AutoBallTrackCommand(),
-    new AutoBallPickupCommandGroup(),
-    new TurnDrive(-120),
-    new AutoBallTrackCommand(),
-    new AutoBallPickupCommandGroup(),
-    new TurnDrive(65),
-    new driveDistance(130));
+public class TurnAndPickupCommandGroup extends SequentialCommandGroup {
+  /** Creates a new TurnAndPickupCommandGroup. */
+  public TurnAndPickupCommandGroup() {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands( new AutoBallTrackCommand(),
+    new AutoBallPickupCommandGroup());
   }
 }
