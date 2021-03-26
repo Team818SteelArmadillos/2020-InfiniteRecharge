@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
   private Command m_PathARed;
   private Command m_PathBBlue;
   private Command m_PathBRed;
+  private Command m_ShooterDistanceCommand;
   SendableChooser<Command> m_chooser;
   //private Command m_PushCommand;
   //private Command m_AutoShootCommand;
@@ -84,6 +85,7 @@ public class Robot extends TimedRobot {
   m_PathBBlue = new PathBBlue();
   m_PathBRed = new PathBRed();
   m_chooser = new SendableChooser<>();
+  m_ShooterDistanceCommand = new ShooterDistanceCommand();
   m_chooser.setDefaultOption("Do Nothing", m_AutonDoNothing);
   m_chooser.addOption("Path A Blue", m_PathABlue);
   m_chooser.addOption("Path A Red", m_PathARed);
@@ -127,7 +129,6 @@ public class Robot extends TimedRobot {
     m_chooser.getSelected().schedule();
    }
    
-   
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // // schedule the autonomous command (example)
@@ -144,6 +145,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+
+    m_ShooterDistanceCommand.schedule();
     // if (m_autonomousCommand != null) {
     //   m_autonomousCommand.cancel();
     // }
