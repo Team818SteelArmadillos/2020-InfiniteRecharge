@@ -13,15 +13,14 @@ public class PathARed extends SequentialCommandGroup {
   /** Creates a new PathARed. */
   public PathARed() {
 
-    addCommands(new TurnDrive(30),
-    new AutoBallTrackCommand(),
+    addCommands(
     new AutoBallPickupCommandGroup(),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(-120),
+    new TurnDrive(-100),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
     new TurnDrive(65),
-    new driveDistance(130));
+    new driveDistance(150));
   }
 }

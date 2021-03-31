@@ -14,16 +14,16 @@ public class PathBRed extends SequentialCommandGroup {
   /** Creates a new PathBRed. */
   public PathBRed() {
     
-    
+    //Robot starts at B1
     addCommands(
     new AutoBallPickupCommandGroup(),
     new TurnDrive(60),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(-140),
+    new TurnDrive(-120),
     new AutoBallTrackCommand(),
     new AutoBallPickupCommandGroup(),
-    new TurnDrive(60), 
+    new TurnDrive(30), 
     new driveDistance(120)
     );
   //  new dri

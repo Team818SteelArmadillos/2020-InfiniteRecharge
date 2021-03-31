@@ -20,7 +20,7 @@ public class ShooterDistanceCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putNumber("distance", 47.25/Math.tan(Robot.m_shootervisionSubsystem.getY()-(6.5*Math.PI/18)));
+    SmartDashboard.putNumber("distance", 47.25/Math.tan(Robot.m_shootervisionSubsystem.getY()+(2*Math.PI/18)));
     SmartDashboard.putNumber("Y Distance", Robot.m_shootervisionSubsystem.getY());
   }
 
